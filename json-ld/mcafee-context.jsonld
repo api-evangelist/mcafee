@@ -1,0 +1,195 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "mcafee": "https://www.mcafee.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "ThreatEvent": {
+      "@id": "mcafee:ThreatEvent",
+      "@context": {
+        "threatName": "mcafee:threatName",
+        "threatType": "mcafee:threatType",
+        "threatSeverity": {
+          "@id": "mcafee:threatSeverity",
+          "@type": "xsd:integer"
+        },
+        "threatActionTaken": "mcafee:threatActionTaken",
+        "detectedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "receivedAt": {
+          "@id": "dcterms:dateSubmitted",
+          "@type": "xsd:dateTime"
+        },
+        "sourceHostName": "mcafee:sourceHostName",
+        "sourceIPv4": "mcafee:sourceIPv4",
+        "targetFileName": "mcafee:targetFileName",
+        "analyzerName": "mcafee:analyzerName",
+        "analyzerVersion": "mcafee:analyzerVersion"
+      }
+    },
+
+    "Endpoint": {
+      "@id": "mcafee:Endpoint",
+      "@context": {
+        "computerName": "schema:name",
+        "ipAddress": "mcafee:ipAddress",
+        "agentGuid": "mcafee:agentGuid",
+        "agentVersion": "mcafee:agentVersion",
+        "agentStatus": "mcafee:agentStatus",
+        "domainName": "mcafee:domainName",
+        "userName": "schema:name",
+        "operatingSystem": "mcafee:operatingSystem",
+        "lastCommunication": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "systemGroupPath": "mcafee:systemGroupPath",
+        "complianceStatus": "mcafee:complianceStatus",
+        "datVersion": "mcafee:datVersion"
+      }
+    },
+
+    "Policy": {
+      "@id": "mcafee:Policy",
+      "@context": {
+        "objectName": "schema:name",
+        "productId": "mcafee:productId",
+        "typeId": "mcafee:typeId",
+        "productName": "mcafee:productName"
+      }
+    },
+
+    "Threat": {
+      "@id": "mcafee:Threat",
+      "@context": {
+        "name": "schema:name",
+        "severity": "mcafee:severity",
+        "status": "mcafee:status",
+        "detectedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "hostName": "mcafee:hostName",
+        "processName": "mcafee:processName",
+        "filePath": "mcafee:filePath",
+        "sha256": "mcafee:sha256",
+        "mitreAttackTechnique": "mcafee:mitreAttackTechnique"
+      }
+    },
+
+    "Detection": {
+      "@id": "mcafee:Detection",
+      "@context": {
+        "ruleName": "mcafee:ruleName",
+        "ruleId": "mcafee:ruleId",
+        "severity": "mcafee:severity",
+        "detectedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "hostName": "mcafee:hostName",
+        "processName": "mcafee:processName",
+        "commandLine": "mcafee:commandLine",
+        "sha256": "mcafee:sha256",
+        "mitreAttackTactic": "mcafee:mitreAttackTactic",
+        "mitreAttackTechnique": "mcafee:mitreAttackTechnique"
+      }
+    },
+
+    "Device": {
+      "@id": "mcafee:Device",
+      "@context": {
+        "hostName": "schema:name",
+        "ipAddress": "mcafee:ipAddress",
+        "os": "mcafee:os",
+        "osVersion": "mcafee:osVersion",
+        "agentVersion": "mcafee:agentVersion",
+        "healthStatus": "mcafee:healthStatus",
+        "lastCheckIn": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Alarm": {
+      "@id": "mcafee:Alarm",
+      "@context": {
+        "alarmName": "schema:name",
+        "triggeredDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "severity": {
+          "@id": "mcafee:severity",
+          "@type": "xsd:integer"
+        },
+        "summary": "schema:description",
+        "assignee": "mcafee:assignee",
+        "acknowledgedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Case": {
+      "@id": "mcafee:Case",
+      "@context": {
+        "summary": "schema:description",
+        "status": "mcafee:status",
+        "severity": {
+          "@id": "mcafee:severity",
+          "@type": "xsd:integer"
+        },
+        "assignee": "mcafee:assignee",
+        "openTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "closeTime": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Investigation": {
+      "@id": "mcafee:Investigation",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "status": "mcafee:status",
+        "priority": "mcafee:priority",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Watchlist": {
+      "@id": "mcafee:Watchlist",
+      "@context": {
+        "name": "schema:name",
+        "type": "mcafee:watchlistType",
+        "valueCount": {
+          "@id": "mcafee:valueCount",
+          "@type": "xsd:integer"
+        },
+        "dynamic": {
+          "@id": "mcafee:dynamic",
+          "@type": "xsd:boolean"
+        }
+      }
+    }
+  }
+}

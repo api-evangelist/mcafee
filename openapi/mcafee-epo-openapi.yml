@@ -1,0 +1,806 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO API
+  description: >-
+    McAfee ePolicy Orchestrator (ePO) REST API for centralized security
+    management, including system management, policy assignment, task scheduling,
+    query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide
+servers:
+  - url: https://{epo-server}:8443/remote
+    description: McAfee ePO Server
+    variables:
+      epo-server:
+        default: your-epo-server
+        description: Hostname or IP of the ePO server
+tags:
+  - name: Systems
+    description: Manage endpoints and systems registered in ePO
+  - name: System Groups
+    description: Manage the ePO System Tree groups
+  - name: Policies
+    description: Manage and assign security policies
+  - name: Tasks
+    description: Manage client tasks and server tasks
+  - name: Queries
+    description: Execute ePO queries and retrieve results
+  - name: Threat Events
+    description: Retrieve threat event data from managed endpoints
+  - name: Software
+    description: Manage software repositories and packages
+  - name: Core
+    description: Core server operations and authentication
+security:
+  - basicAuth: []
+paths:
+  /core.help:
+    get:
+      operationId: coreHelp
+      summary: List available API commands
+      description: >-
+        Returns a list of all available remote API commands on the ePO server
+        with their descriptions and parameters.
+      tags:
+        - Core
+      parameters:
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of available API commands
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiCommand'
+        '401':
+          description: Authentication failed
+  /system.find:
+    get:
+      operationId: systemFind
+      summary: Search for systems
+      description: >-
+        Search for managed systems in the ePO System Tree matching specified
+        criteria such as name, IP address, tags, or custom properties.
+      tags:
+        - Systems
+      parameters:
+        - name: searchText
+          in: query
+          required: true
+          description: Search string to match against system names, IP addresses, or other properties
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching systems
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/System'
+        '401':
+          description: Authentication failed
+  /system.findTag:
+    get:
+      operationId: systemFindTag
+      summary: Find systems by tag
+      description: >-
+        Retrieve a list of systems that have a specific tag applied.
+      tags:
+        - Systems
+      parameters:
+        - name: tagName
+          in: query
+          required: true
+          description: Name of the tag to search for
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of systems with the specified tag
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/System'
+        '401':
+          description: Authentication failed
+  /system.applyTag:
+    post:
+      operationId: systemApplyTag
+      summary: Apply a tag to systems
+      description: >-
+        Apply a tag to one or more systems identified by name or ID.
+      tags:
+        - Systems
+      parameters:
+        - name: names
+          in: query
+          required: true
+          description: Comma-separated list of system names or IDs
+          schema:
+            type: string
+        - name: tagName
+          in: query
+          required: true
+          description: Name of the tag to apply
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Tag applied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /system.clearTag:
+    post:
+      operationId: systemClearTag
+      summary: Remove a tag from systems
+      description: >-
+        Remove a tag from one or more systems identified by name or ID.
+      tags:
+        - Systems
+      parameters:
+        - name: names
+          in: query
+          required: true
+          description: Comma-separated list of system names or IDs
+          schema:
+            type: string
+        - name: tagName
+          in: query
+          required: true
+          description: Name of the tag to remove
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Tag removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /epogroup.find:
+    get:
+      operationId: epogroupFind
+      summary: Find system tree groups
+      description: >-
+        Search for groups in the ePO System Tree by name or other criteria.
+      tags:
+        - System Groups
+      parameters:
+        - name: searchText
+          in: query
+          required: false
+          description: Search string to match against group names
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemGroup'
+        '401':
+          description: Authentication failed
+  /epogroup.moveSystem:
+    post:
+      operationId: epogroupMoveSystem
+      summary: Move a system to a different group
+      description: >-
+        Move one or more systems from their current location in the System Tree
+        to a specified target group.
+      tags:
+        - System Groups
+      parameters:
+        - name: names
+          in: query
+          required: true
+          description: Comma-separated list of system names to move
+          schema:
+            type: string
+        - name: parentGroupId
+          in: query
+          required: true
+          description: ID of the target parent group
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Systems moved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /policy.find:
+    get:
+      operationId: policyFind
+      summary: Search for policies
+      description: >-
+        Search for security policies configured in ePO, optionally filtered by
+        product or policy type.
+      tags:
+        - Policies
+      parameters:
+        - name: searchText
+          in: query
+          required: false
+          description: Search string to match against policy names
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching policies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Policy'
+        '401':
+          description: Authentication failed
+  /policy.assignToSystem:
+    post:
+      operationId: policyAssignToSystem
+      summary: Assign a policy to a system
+      description: >-
+        Assign a specific policy to one or more systems, overriding the
+        inherited group policy.
+      tags:
+        - Policies
+      parameters:
+        - name: names
+          in: query
+          required: true
+          description: Comma-separated list of system names
+          schema:
+            type: string
+        - name: productId
+          in: query
+          required: true
+          description: Product ID for the policy
+          schema:
+            type: string
+        - name: typeId
+          in: query
+          required: true
+          description: Policy type ID
+          schema:
+            type: string
+        - name: objectId
+          in: query
+          required: true
+          description: Policy object ID
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Policy assigned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /policy.assignToGroup:
+    post:
+      operationId: policyAssignToGroup
+      summary: Assign a policy to a group
+      description: >-
+        Assign a specific policy to a System Tree group, which is then inherited
+        by all child systems and sub-groups.
+      tags:
+        - Policies
+      parameters:
+        - name: groupId
+          in: query
+          required: true
+          description: Target group ID
+          schema:
+            type: integer
+        - name: productId
+          in: query
+          required: true
+          description: Product ID for the policy
+          schema:
+            type: string
+        - name: typeId
+          in: query
+          required: true
+          description: Policy type ID
+          schema:
+            type: string
+        - name: objectId
+          in: query
+          required: true
+          description: Policy object ID
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Policy assigned to group successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /clienttask.find:
+    get:
+      operationId: clienttaskFind
+      summary: Search for client tasks
+      description: >-
+        Search for client tasks that can be deployed to managed systems.
+      tags:
+        - Tasks
+      parameters:
+        - name: searchText
+          in: query
+          required: false
+          description: Search string to match against task names
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching client tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientTask'
+        '401':
+          description: Authentication failed
+  /clienttask.run:
+    post:
+      operationId: clienttaskRun
+      summary: Run a client task on systems
+      description: >-
+        Execute a client task immediately on one or more specified systems.
+      tags:
+        - Tasks
+      parameters:
+        - name: names
+          in: query
+          required: true
+          description: Comma-separated list of system names
+          schema:
+            type: string
+        - name: productId
+          in: query
+          required: true
+          description: Product ID for the task
+          schema:
+            type: string
+        - name: taskId
+          in: query
+          required: true
+          description: Client task ID to execute
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Task execution initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /core.executeQuery:
+    get:
+      operationId: coreExecuteQuery
+      summary: Execute a saved query
+      description: >-
+        Execute a previously saved ePO query by ID and return the results. Queries
+        can retrieve data about systems, events, policies, and other ePO objects.
+      tags:
+        - Queries
+      parameters:
+        - name: queryId
+          in: query
+          required: true
+          description: ID of the saved query to execute
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        '401':
+          description: Authentication failed
+        '404':
+          description: Query not found
+  /core.listQueries:
+    get:
+      operationId: coreListQueries
+      summary: List saved queries
+      description: >-
+        Retrieve a list of all saved queries available on the ePO server.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of saved queries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SavedQuery'
+        '401':
+          description: Authentication failed
+  /detectedsystem.find:
+    get:
+      operationId: detectedsystemFind
+      summary: Find threat events
+      description: >-
+        Search for detected threat events across managed systems, returning
+        details about malware detections, intrusion attempts, and other security events.
+      tags:
+        - Threat Events
+      parameters:
+        - name: searchText
+          in: query
+          required: false
+          description: Search text to filter threat events
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of threat events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreatEvent'
+        '401':
+          description: Authentication failed
+  /repository.findPackages:
+    get:
+      operationId: repositoryFindPackages
+      summary: Find software packages
+      description: >-
+        Search for software packages in the ePO master repository, including
+        DAT files, engine updates, and product packages.
+      tags:
+        - Software
+      parameters:
+        - name: searchText
+          in: query
+          required: false
+          description: Search string to filter packages
+          schema:
+            type: string
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching packages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SoftwarePackage'
+        '401':
+          description: Authentication failed
+  /scheduler.listServerTasks:
+    get:
+      operationId: schedulerListServerTasks
+      summary: List server tasks
+      description: >-
+        Retrieve a list of all configured server tasks in ePO, including
+        pull tasks, replication tasks, and custom automation tasks.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of server tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServerTask'
+        '401':
+          description: Authentication failed
+  /scheduler.runServerTask:
+    post:
+      operationId: schedulerRunServerTask
+      summary: Run a server task
+      description: >-
+        Execute a server task immediately by its ID.
+      tags:
+        - Tasks
+      parameters:
+        - name: taskId
+          in: query
+          required: true
+          description: ID of the server task to execute
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Server task execution initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication using ePO administrator credentials.
+        Credentials are transmitted as a Base64-encoded username:password pair.
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: >-
+        Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+          - json
+          - xml
+          - terse
+          - verbose
+        default: json
+  schemas:
+    System:
+      type: object
+      properties:
+        EPOComputerProperties.ParentID:
+          type: integer
+          description: Parent group ID in the System Tree
+        EPOComputerProperties.ComputerName:
+          type: string
+          description: NetBIOS computer name
+        EPOComputerProperties.IPAddress:
+          type: string
+          description: IP address of the system
+        EPOComputerProperties.OSType:
+          type: string
+          description: Operating system type
+        EPOComputerProperties.OSVersion:
+          type: string
+          description: Operating system version
+        EPOComputerProperties.DomainName:
+          type: string
+          description: Domain or workgroup name
+        EPOComputerProperties.UserName:
+          type: string
+          description: Logged-in user name
+        EPOComputerProperties.Tags:
+          type: string
+          description: Comma-separated list of applied tags
+        EPOLeafNode.AgentGUID:
+          type: string
+          description: Unique McAfee Agent GUID
+        EPOLeafNode.AgentVersion:
+          type: string
+          description: Installed McAfee Agent version
+        EPOLeafNode.LastUpdate:
+          type: string
+          format: date-time
+          description: Last agent-server communication time
+        EPOLeafNode.ManagedState:
+          type: string
+          description: Management state of the system
+    SystemGroup:
+      type: object
+      properties:
+        groupId:
+          type: integer
+          description: Unique group ID
+        groupPath:
+          type: string
+          description: Full path in the System Tree
+        groupName:
+          type: string
+          description: Name of the group
+    Policy:
+      type: object
+      properties:
+        objectId:
+          type: integer
+          description: Policy object ID
+        objectName:
+          type: string
+          description: Policy name
+        productId:
+          type: string
+          description: Product ID the policy belongs to
+        typeId:
+          type: string
+          description: Policy type identifier
+        productName:
+          type: string
+          description: Display name of the product
+    ClientTask:
+      type: object
+      properties:
+        objectId:
+          type: integer
+          description: Task object ID
+        objectName:
+          type: string
+          description: Task name
+        productId:
+          type: string
+          description: Product ID the task belongs to
+        typeId:
+          type: string
+          description: Task type identifier
+        productName:
+          type: string
+          description: Display name of the product
+    ServerTask:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Server task ID
+        name:
+          type: string
+          description: Server task name
+        description:
+          type: string
+          description: Server task description
+        enabled:
+          type: boolean
+          description: Whether the task is enabled
+        nextRunTime:
+          type: string
+          format: date-time
+          description: Next scheduled run time
+    SavedQuery:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Query ID
+        name:
+          type: string
+          description: Query name
+        description:
+          type: string
+          description: Query description
+        createdBy:
+          type: string
+          description: User who created the query
+        groupName:
+          type: string
+          description: Query group name
+    ThreatEvent:
+      type: object
+      properties:
+        AutoID:
+          type: integer
+          description: Auto-incremented event ID
+        DetectedUTC:
+          type: string
+          format: date-time
+          description: Detection time in UTC
+        ReceivedUTC:
+          type: string
+          format: date-time
+          description: Time the event was received by ePO
+        ThreatName:
+          type: string
+          description: Name of the detected threat
+        ThreatType:
+          type: string
+          description: Type of threat (e.g., virus, trojan, PUP)
+        ThreatSeverity:
+          type: integer
+          description: Severity level of the threat
+        ThreatActionTaken:
+          type: string
+          description: Action taken on the threat (e.g., cleaned, deleted, quarantined)
+        SourceHostName:
+          type: string
+          description: Hostname of the system where the threat was detected
+        SourceIPV4:
+          type: string
+          description: IPv4 address of the source system
+        TargetFileName:
+          type: string
+          description: File path of the affected file
+        AnalyzerName:
+          type: string
+          description: Name of the product that detected the threat
+        AnalyzerVersion:
+          type: string
+          description: Version of the detecting product
+    SoftwarePackage:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Package product ID
+        packageType:
+          type: string
+          description: Package type (e.g., DAT, Engine, Product)
+        packageVersion:
+          type: string
+          description: Package version string
+        packageName:
+          type: string
+          description: Display name of the package
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
+    ApiCommand:
+      type: object
+      properties:
+        command:
+          type: string
+          description: Command name
+        description:
+          type: string
+          description: Command description
+        parameters:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              required:
+                type: boolean
+              description:
+                type: string

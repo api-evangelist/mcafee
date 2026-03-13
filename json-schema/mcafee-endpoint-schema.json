@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mcafee.com/schemas/mcafee/endpoint.json",
+  "title": "McAfee Managed Endpoint",
+  "description": "A managed endpoint (system) registered in McAfee ePO or MVISION, representing a computer, server, or device with McAfee security products installed and managed through the centralized console.",
+  "type": "object",
+  "required": ["computerName", "agentGuid"],
+  "properties": {
+    "agentGuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique McAfee Agent GUID identifying the endpoint"
+    },
+    "computerName": {
+      "type": "string",
+      "description": "NetBIOS or hostname of the endpoint",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "ipAddress": {
+      "type": "string",
+      "format": "ipv4",
+      "description": "Primary IPv4 address of the endpoint"
+    },
+    "ipv6Address": {
+      "type": "string",
+      "format": "ipv6",
+      "description": "IPv6 address of the endpoint"
+    },
+    "macAddress": {
+      "type": "string",
+      "pattern": "^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$",
+      "description": "MAC address of the primary network adapter"
+    },
+    "operatingSystem": {
+      "$ref": "#/$defs/OperatingSystem"
+    },
+    "domainName": {
+      "type": "string",
+      "description": "Active Directory domain or workgroup name"
+    },
+    "userName": {
+      "type": "string",
+      "description": "Currently logged-in user name"
+    },
+    "agentVersion": {
+      "type": "string",
+      "description": "Installed McAfee Agent version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(\\.\\d+)?$"
+    },
+    "agentStatus": {
+      "type": "string",
+      "enum": ["managed", "unmanaged", "inactive"],
+      "description": "Management state of the McAfee Agent"
+    },
+    "lastCommunication": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last agent-server communication"
+    },
+    "systemGroupPath": {
+      "type": "string",
+      "description": "Full path in the ePO System Tree (e.g., My Organization/Workstations/Finance)"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags applied to this endpoint in ePO"
+    },
+    "installedProducts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/InstalledProduct"
+      },
+      "description": "McAfee security products installed on the endpoint"
+    },
+    "complianceStatus": {
+      "type": "string",
+      "enum": ["compliant", "non-compliant", "unknown"],
+      "description": "Security compliance status based on assigned policies"
+    },
+    "datVersion": {
+      "type": "string",
+      "description": "Current virus definition (DAT) version"
+    },
+    "engineVersion": {
+      "type": "string",
+      "description": "Current scan engine version"
+    },
+    "lastFullScan": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last completed full system scan"
+    },
+    "cpuType": {
+      "type": "string",
+      "description": "CPU type and model"
+    },
+    "totalPhysicalMemory": {
+      "type": "integer",
+      "description": "Total physical memory in megabytes"
+    },
+    "freeDiskSpace": {
+      "type": "integer",
+      "description": "Free disk space on the system drive in megabytes"
+    }
+  },
+  "$defs": {
+    "OperatingSystem": {
+      "type": "object",
+      "description": "Operating system information for the endpoint",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": ["Windows", "macOS", "Linux"],
+          "description": "Operating system platform"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operating system name (e.g., Windows 11 Enterprise, macOS Ventura)"
+        },
+        "version": {
+          "type": "string",
+          "description": "Operating system version string"
+        },
+        "buildNumber": {
+          "type": "string",
+          "description": "Operating system build number"
+        },
+        "architecture": {
+          "type": "string",
+          "enum": ["x86", "x64", "ARM64"],
+          "description": "System architecture"
+        },
+        "servicePack": {
+          "type": "string",
+          "description": "Service pack level (Windows only)"
+        }
+      }
+    },
+    "InstalledProduct": {
+      "type": "object",
+      "description": "A McAfee security product installed on the endpoint",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Unique product identifier"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "productVersion": {
+          "type": "string",
+          "description": "Installed product version"
+        },
+        "hotfixVersion": {
+          "type": "string",
+          "description": "Applied hotfix or patch version"
+        },
+        "installDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Product installation timestamp"
+        }
+      }
+    }
+  }
+}

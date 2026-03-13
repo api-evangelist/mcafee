@@ -1,0 +1,942 @@
+openapi: 3.1.0
+info:
+  title: McAfee MVISION API
+  description: >-
+    McAfee MVISION cloud-native security platform API for endpoint detection
+    and response (EDR), threat prevention, device management, and incident
+    investigation. Provides access to detections, threats, devices, and
+    investigation workflows.
+  version: '2.0'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+externalDocs:
+  description: McAfee MVISION Developer Documentation
+  url: https://developer.mvision.mcafee.com/
+servers:
+  - url: https://api.mvision.mcafee.com
+    description: MVISION Cloud Production
+tags:
+  - name: Authentication
+    description: Obtain access tokens for API authentication
+  - name: Threats
+    description: Retrieve and manage detected threats
+  - name: Detections
+    description: EDR detection events and alerts
+  - name: Devices
+    description: Managed device inventory and status
+  - name: Investigations
+    description: Threat investigation workflows and actions
+  - name: Policies
+    description: Security policy management
+  - name: Real-Time Search
+    description: Real-time data collection from endpoints
+security:
+  - bearerAuth: []
+paths:
+  /iam/v1.1/token:
+    post:
+      operationId: getToken
+      summary: Obtain access token
+      description: >-
+        Authenticate using client credentials to obtain a bearer token for
+        accessing MVISION APIs. Tokens are valid for a limited duration.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+                - scope
+                - grant_type
+                - audience
+              properties:
+                scope:
+                  type: string
+                  description: OAuth scope for the token
+                  example: edr.threats.rb edr.alerts.r
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                  description: OAuth 2.0 grant type
+                audience:
+                  type: string
+                  description: Target API audience
+                  example: mcafee
+      responses:
+        '200':
+          description: Access token returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+      security: []
+  /edr/v2/threats:
+    get:
+      operationId: listThreats
+      summary: List threats
+      description: >-
+        Retrieve a paginated list of detected threats across all managed
+        endpoints, with optional filtering by severity, status, and time range.
+      tags:
+        - Threats
+      parameters:
+        - name: filter[severity]
+          in: query
+          required: false
+          description: Filter threats by severity level
+          schema:
+            type: string
+            enum:
+              - low
+              - medium
+              - high
+              - critical
+        - name: filter[status]
+          in: query
+          required: false
+          description: Filter threats by current status
+          schema:
+            type: string
+            enum:
+              - new
+              - investigating
+              - resolved
+              - dismissed
+        - name: filter[detectedAfter]
+          in: query
+          required: false
+          description: Filter threats detected after this ISO 8601 timestamp
+          schema:
+            type: string
+            format: date-time
+        - $ref: '#/components/parameters/pageLimit'
+        - $ref: '#/components/parameters/pageOffset'
+      responses:
+        '200':
+          description: Paginated list of threats
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ThreatListResponse'
+        '401':
+          description: Unauthorized
+  /edr/v2/threats/{threatId}:
+    get:
+      operationId: getThreat
+      summary: Get a specific threat
+      description: >-
+        Retrieve detailed information about a specific threat by its unique ID,
+        including affected hosts, threat indicators, and remediation status.
+      tags:
+        - Threats
+      parameters:
+        - $ref: '#/components/parameters/threatId'
+      responses:
+        '200':
+          description: Threat details
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ThreatResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Threat not found
+    patch:
+      operationId: updateThreat
+      summary: Update threat status
+      description: >-
+        Update the status or assignment of a specific threat, such as marking
+        it as investigating, resolved, or dismissed.
+      tags:
+        - Threats
+      parameters:
+        - $ref: '#/components/parameters/threatId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - threats
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                            - new
+                            - investigating
+                            - resolved
+                            - dismissed
+      responses:
+        '200':
+          description: Threat updated successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ThreatResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Threat not found
+  /edr/v2/detections:
+    get:
+      operationId: listDetections
+      summary: List detections
+      description: >-
+        Retrieve EDR detection events, including alerts from behavioral
+        analysis, signature matching, and real-time monitoring across endpoints.
+      tags:
+        - Detections
+      parameters:
+        - name: filter[severity]
+          in: query
+          required: false
+          description: Filter by detection severity
+          schema:
+            type: string
+        - name: filter[hostName]
+          in: query
+          required: false
+          description: Filter detections by hostname
+          schema:
+            type: string
+        - name: filter[ruleId]
+          in: query
+          required: false
+          description: Filter by detection rule ID
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pageLimit'
+        - $ref: '#/components/parameters/pageOffset'
+      responses:
+        '200':
+          description: Paginated list of detections
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DetectionListResponse'
+        '401':
+          description: Unauthorized
+  /edr/v2/detections/{detectionId}:
+    get:
+      operationId: getDetection
+      summary: Get a specific detection
+      description: >-
+        Retrieve detailed information about a specific detection event,
+        including process trees, indicators of compromise, and MITRE ATT&CK mapping.
+      tags:
+        - Detections
+      parameters:
+        - name: detectionId
+          in: path
+          required: true
+          description: Unique detection identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detection details
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DetectionResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Detection not found
+  /edr/v2/devices:
+    get:
+      operationId: listDevices
+      summary: List managed devices
+      description: >-
+        Retrieve a paginated list of all devices managed by MVISION, including
+        their health status, agent version, and last check-in time.
+      tags:
+        - Devices
+      parameters:
+        - name: filter[hostName]
+          in: query
+          required: false
+          description: Filter devices by hostname
+          schema:
+            type: string
+        - name: filter[os]
+          in: query
+          required: false
+          description: Filter devices by operating system
+          schema:
+            type: string
+        - name: filter[healthStatus]
+          in: query
+          required: false
+          description: Filter by device health status
+          schema:
+            type: string
+            enum:
+              - healthy
+              - unhealthy
+              - inactive
+        - $ref: '#/components/parameters/pageLimit'
+        - $ref: '#/components/parameters/pageOffset'
+      responses:
+        '200':
+          description: Paginated list of devices
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DeviceListResponse'
+        '401':
+          description: Unauthorized
+  /edr/v2/devices/{deviceId}:
+    get:
+      operationId: getDevice
+      summary: Get a specific device
+      description: >-
+        Retrieve detailed information about a specific managed device,
+        including installed products, agent version, and security posture.
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: Unique device identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Device details
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Device not found
+  /edr/v2/investigations:
+    get:
+      operationId: listInvestigations
+      summary: List investigations
+      description: >-
+        Retrieve a list of threat investigations, which group related threats
+        and detections for analysis and response.
+      tags:
+        - Investigations
+      parameters:
+        - name: filter[status]
+          in: query
+          required: false
+          description: Filter by investigation status
+          schema:
+            type: string
+            enum:
+              - open
+              - in_progress
+              - closed
+        - name: filter[priority]
+          in: query
+          required: false
+          description: Filter by investigation priority
+          schema:
+            type: string
+            enum:
+              - low
+              - medium
+              - high
+              - critical
+        - $ref: '#/components/parameters/pageLimit'
+        - $ref: '#/components/parameters/pageOffset'
+      responses:
+        '200':
+          description: List of investigations
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InvestigationListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createInvestigation
+      summary: Create an investigation
+      description: >-
+        Create a new investigation to group related threats and detections
+        for collaborative analysis and response.
+      tags:
+        - Investigations
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - investigations
+                    attributes:
+                      type: object
+                      required:
+                        - name
+                      properties:
+                        name:
+                          type: string
+                          description: Investigation name
+                        description:
+                          type: string
+                          description: Investigation description
+                        priority:
+                          type: string
+                          enum:
+                            - low
+                            - medium
+                            - high
+                            - critical
+      responses:
+        '201':
+          description: Investigation created
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InvestigationResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /edr/v2/remediation/actions:
+    post:
+      operationId: createRemediationAction
+      summary: Create a remediation action
+      description: >-
+        Initiate a remediation action on one or more endpoints, such as
+        isolating a host, killing a process, or deleting a file.
+      tags:
+        - Investigations
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - remediationActions
+                    attributes:
+                      type: object
+                      required:
+                        - action
+                        - deviceIds
+                      properties:
+                        action:
+                          type: string
+                          enum:
+                            - isolateHost
+                            - releaseHost
+                            - killProcess
+                            - deleteFile
+                            - quarantineFile
+                          description: Type of remediation action
+                        deviceIds:
+                          type: array
+                          items:
+                            type: string
+                          description: Target device IDs
+                        parameters:
+                          type: object
+                          additionalProperties: true
+                          description: Action-specific parameters
+      responses:
+        '202':
+          description: Remediation action accepted
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RemediationActionResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /edr/v2/real-time-search:
+    post:
+      operationId: createRealTimeSearch
+      summary: Create a real-time search
+      description: >-
+        Execute a real-time query across managed endpoints to collect live
+        data such as running processes, network connections, and file hashes.
+      tags:
+        - Real-Time Search
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - realTimeSearches
+                    attributes:
+                      type: object
+                      required:
+                        - query
+                        - deviceIds
+                      properties:
+                        query:
+                          type: string
+                          description: Real-time search query expression
+                        deviceIds:
+                          type: array
+                          items:
+                            type: string
+                          description: Target device IDs for the search
+      responses:
+        '202':
+          description: Real-time search initiated
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RealTimeSearchResponse'
+        '400':
+          description: Invalid query
+        '401':
+          description: Unauthorized
+  /edr/v2/real-time-search/{searchId}/results:
+    get:
+      operationId: getRealTimeSearchResults
+      summary: Get real-time search results
+      description: >-
+        Retrieve the results of a previously initiated real-time search.
+        Results are collected as endpoints respond to the query.
+      tags:
+        - Real-Time Search
+      parameters:
+        - name: searchId
+          in: path
+          required: true
+          description: Real-time search identifier
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pageLimit'
+        - $ref: '#/components/parameters/pageOffset'
+      responses:
+        '200':
+          description: Real-time search results
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Search not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token from client credentials grant
+  parameters:
+    threatId:
+      name: threatId
+      in: path
+      required: true
+      description: Unique threat identifier
+      schema:
+        type: string
+    pageLimit:
+      name: page[limit]
+      in: query
+      required: false
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    pageOffset:
+      name: page[offset]
+      in: query
+      required: false
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: OAuth 2.0 access token
+        token_type:
+          type: string
+          description: Token type (bearer)
+        expires_in:
+          type: integer
+          description: Token expiration time in seconds
+        scope:
+          type: string
+          description: Granted scope
+    PaginationMeta:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching records
+        pageLimit:
+          type: integer
+          description: Current page size limit
+        pageOffset:
+          type: integer
+          description: Current offset
+    Threat:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique threat ID
+        type:
+          type: string
+          enum:
+            - threats
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Threat name
+            severity:
+              type: string
+              enum:
+                - low
+                - medium
+                - high
+                - critical
+              description: Threat severity level
+            status:
+              type: string
+              enum:
+                - new
+                - investigating
+                - resolved
+                - dismissed
+              description: Current threat status
+            detectedAt:
+              type: string
+              format: date-time
+              description: Detection timestamp
+            hostName:
+              type: string
+              description: Affected hostname
+            processName:
+              type: string
+              description: Associated process name
+            filePath:
+              type: string
+              description: Associated file path
+            sha256:
+              type: string
+              description: SHA-256 hash of the associated file
+            mitreAttackTechnique:
+              type: string
+              description: MITRE ATT&CK technique ID
+    ThreatListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Threat'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    ThreatResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Threat'
+    Detection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique detection ID
+        type:
+          type: string
+          enum:
+            - detections
+        attributes:
+          type: object
+          properties:
+            ruleName:
+              type: string
+              description: Detection rule name
+            ruleId:
+              type: string
+              description: Detection rule identifier
+            severity:
+              type: string
+              enum:
+                - informational
+                - low
+                - medium
+                - high
+                - critical
+              description: Detection severity
+            detectedAt:
+              type: string
+              format: date-time
+              description: Detection timestamp
+            hostName:
+              type: string
+              description: Hostname where detection occurred
+            processName:
+              type: string
+              description: Triggering process name
+            processId:
+              type: integer
+              description: Process ID
+            parentProcessName:
+              type: string
+              description: Parent process name
+            commandLine:
+              type: string
+              description: Process command line
+            sha256:
+              type: string
+              description: SHA-256 hash of the file
+            mitreAttackTactic:
+              type: string
+              description: MITRE ATT&CK tactic
+            mitreAttackTechnique:
+              type: string
+              description: MITRE ATT&CK technique
+    DetectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Detection'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    DetectionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Detection'
+    Device:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique device ID
+        type:
+          type: string
+          enum:
+            - devices
+        attributes:
+          type: object
+          properties:
+            hostName:
+              type: string
+              description: Device hostname
+            ipAddress:
+              type: string
+              description: Device IP address
+            os:
+              type: string
+              description: Operating system
+            osVersion:
+              type: string
+              description: Operating system version
+            agentVersion:
+              type: string
+              description: MVISION agent version
+            healthStatus:
+              type: string
+              enum:
+                - healthy
+                - unhealthy
+                - inactive
+              description: Device health status
+            lastCheckIn:
+              type: string
+              format: date-time
+              description: Last agent check-in time
+            tags:
+              type: array
+              items:
+                type: string
+              description: Applied tags
+    DeviceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    DeviceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Device'
+    Investigation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Investigation ID
+        type:
+          type: string
+          enum:
+            - investigations
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Investigation name
+            description:
+              type: string
+              description: Investigation description
+            status:
+              type: string
+              enum:
+                - open
+                - in_progress
+                - closed
+              description: Investigation status
+            priority:
+              type: string
+              enum:
+                - low
+                - medium
+                - high
+                - critical
+              description: Investigation priority
+            createdAt:
+              type: string
+              format: date-time
+              description: Creation timestamp
+            updatedAt:
+              type: string
+              format: date-time
+              description: Last update timestamp
+    InvestigationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Investigation'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    InvestigationResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Investigation'
+    RemediationActionResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Remediation action ID
+            type:
+              type: string
+              enum:
+                - remediationActions
+            attributes:
+              type: object
+              properties:
+                action:
+                  type: string
+                  description: Action type
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - in_progress
+                    - completed
+                    - failed
+                  description: Action status
+                createdAt:
+                  type: string
+                  format: date-time
+                  description: Creation timestamp
+    RealTimeSearchResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Real-time search ID
+            type:
+              type: string
+              enum:
+                - realTimeSearches
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - running
+                    - completed
+                    - failed
+                  description: Search status
+                query:
+                  type: string
+                  description: Submitted query
+                createdAt:
+                  type: string
+                  format: date-time
+                  description: Creation timestamp

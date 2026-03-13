@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mcafee.com/schemas/mcafee/threat-event.json",
+  "title": "McAfee Threat Event",
+  "description": "A threat event represents a security detection from a McAfee product, including malware detections, intrusion attempts, policy violations, and behavioral anomalies reported by endpoints or network sensors.",
+  "type": "object",
+  "required": ["threatName", "detectedAt", "sourceHostName"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Auto-incremented unique event identifier"
+    },
+    "threatName": {
+      "type": "string",
+      "description": "Name of the detected threat (e.g., W32/Conficker.worm, Generic.dx)",
+      "minLength": 1
+    },
+    "threatType": {
+      "type": "string",
+      "enum": [
+        "virus",
+        "trojan",
+        "worm",
+        "ransomware",
+        "rootkit",
+        "exploit",
+        "pup",
+        "adware",
+        "spyware",
+        "backdoor",
+        "fileless",
+        "unknown"
+      ],
+      "description": "Classification type of the threat"
+    },
+    "threatSeverity": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Severity level of the threat (1=informational, 5=critical)"
+    },
+    "threatActionTaken": {
+      "type": "string",
+      "enum": [
+        "cleaned",
+        "deleted",
+        "quarantined",
+        "blocked",
+        "allowed",
+        "denied",
+        "logged",
+        "none"
+      ],
+      "description": "Remediation action taken on the threat"
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the threat was detected"
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the event was received by the management server"
+    },
+    "sourceHostName": {
+      "type": "string",
+      "description": "Hostname of the system where the threat was detected"
+    },
+    "sourceIPv4": {
+      "type": "string",
+      "format": "ipv4",
+      "description": "IPv4 address of the source system"
+    },
+    "sourceIPv6": {
+      "type": "string",
+      "format": "ipv6",
+      "description": "IPv6 address of the source system"
+    },
+    "sourceMac": {
+      "type": "string",
+      "pattern": "^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$",
+      "description": "MAC address of the source system"
+    },
+    "targetFileName": {
+      "type": "string",
+      "description": "Full file path of the affected file"
+    },
+    "targetFileHash": {
+      "$ref": "#/$defs/FileHash"
+    },
+    "analyzerName": {
+      "type": "string",
+      "description": "Name of the McAfee product that detected the threat (e.g., VirusScan Enterprise, Endpoint Security)"
+    },
+    "analyzerVersion": {
+      "type": "string",
+      "description": "Version of the detecting product"
+    },
+    "analyzerDATVersion": {
+      "type": "string",
+      "description": "DAT (virus definition) version used during detection"
+    },
+    "analyzerEngineVersion": {
+      "type": "string",
+      "description": "Scan engine version used during detection"
+    },
+    "userName": {
+      "type": "string",
+      "description": "Name of the user logged in at the time of detection"
+    },
+    "processName": {
+      "type": "string",
+      "description": "Name of the process associated with the threat"
+    },
+    "destinationHostName": {
+      "type": "string",
+      "description": "Hostname of the destination (for network-based threats)"
+    },
+    "destinationIPv4": {
+      "type": "string",
+      "format": "ipv4",
+      "description": "IPv4 address of the destination"
+    },
+    "destinationPort": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "Destination port (for network-based threats)"
+    },
+    "epoGroupPath": {
+      "type": "string",
+      "description": "System Tree group path of the affected system in ePO"
+    },
+    "agentGuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "McAfee Agent GUID of the reporting system"
+    }
+  },
+  "$defs": {
+    "FileHash": {
+      "type": "object",
+      "description": "Cryptographic hash values for a file",
+      "properties": {
+        "md5": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{32}$",
+          "description": "MD5 hash of the file"
+        },
+        "sha1": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{40}$",
+          "description": "SHA-1 hash of the file"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$",
+          "description": "SHA-256 hash of the file"
+        }
+      }
+    }
+  }
+}
