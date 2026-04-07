@@ -21,20 +21,20 @@ servers:
         default: your-esm-server
         description: Hostname or IP of the ESM server
 tags:
-  - name: Authentication
-    description: Session authentication and management
   - name: Alarms
     description: Manage security alarms
+  - name: Authentication
+    description: Session authentication and management
+  - name: Cases
+    description: Manage incident response cases
+  - name: Data Sources
+    description: Manage event data sources
+  - name: Devices
+    description: Manage ESM device hierarchy
   - name: Events
     description: Query and retrieve security events
   - name: Watchlists
     description: Manage security watchlists
-  - name: Data Sources
-    description: Manage event data sources
-  - name: Cases
-    description: Manage incident response cases
-  - name: Devices
-    description: Manage ESM device hierarchy
 security:
   - sessionAuth: []
 paths:

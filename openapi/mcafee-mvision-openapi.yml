@@ -20,18 +20,16 @@ servers:
 tags:
   - name: Authentication
     description: Obtain access tokens for API authentication
-  - name: Threats
-    description: Retrieve and manage detected threats
   - name: Detections
     description: EDR detection events and alerts
   - name: Devices
     description: Managed device inventory and status
   - name: Investigations
     description: Threat investigation workflows and actions
-  - name: Policies
-    description: Security policy management
   - name: Real-Time Search
     description: Real-time data collection from endpoints
+  - name: Threats
+    description: Retrieve and manage detected threats
 security:
   - bearerAuth: []
 paths:

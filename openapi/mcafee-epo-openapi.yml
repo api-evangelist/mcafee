@@ -21,22 +21,22 @@ servers:
         default: your-epo-server
         description: Hostname or IP of the ePO server
 tags:
-  - name: Systems
-    description: Manage endpoints and systems registered in ePO
-  - name: System Groups
-    description: Manage the ePO System Tree groups
-  - name: Policies
-    description: Manage and assign security policies
-  - name: Tasks
-    description: Manage client tasks and server tasks
-  - name: Queries
-    description: Execute ePO queries and retrieve results
-  - name: Threat Events
-    description: Retrieve threat event data from managed endpoints
-  - name: Software
-    description: Manage software repositories and packages
   - name: Core
     description: Core server operations and authentication
+  - name: Policies
+    description: Manage and assign security policies
+  - name: Queries
+    description: Execute ePO queries and retrieve results
+  - name: Software
+    description: Manage software repositories and packages
+  - name: System Groups
+    description: Manage the ePO System Tree groups
+  - name: Systems
+    description: Manage endpoints and systems registered in ePO
+  - name: Tasks
+    description: Manage client tasks and server tasks
+  - name: Threat Events
+    description: Retrieve threat event data from managed endpoints
 security:
   - basicAuth: []
 paths:

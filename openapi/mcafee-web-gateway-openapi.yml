@@ -23,16 +23,16 @@ servers:
 tags:
   - name: Authentication
     description: Session authentication and management
-  - name: Rule Sets
-    description: Manage web security rule sets
-  - name: Lists
-    description: Manage URL and IP lists used in filtering
-  - name: Policy Configuration
-    description: Manage proxy and policy settings
-  - name: Monitoring
-    description: Appliance health and traffic monitoring
   - name: File Operations
     description: Import and export configuration files
+  - name: Lists
+    description: Manage URL and IP lists used in filtering
+  - name: Monitoring
+    description: Appliance health and traffic monitoring
+  - name: Policy Configuration
+    description: Manage proxy and policy settings
+  - name: Rule Sets
+    description: Manage web security rule sets
 security:
   - cookieAuth: []
 paths:

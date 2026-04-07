@@ -7,50 +7,45 @@ created: '2024-01-20'
 modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
-  - security
-  - antivirus
-  - endpoint protection
-  - threat intelligence
-  - cybersecurity
+  - Antivirus
+  - Cybersecurity
+  - Endpoint Protection
+  - Security
+  - Threat Intelligence
 apis:
   - name: McAfee ePO API
     description: >-
       McAfee ePolicy Orchestrator (ePO) REST API for centralized security
       management, including system management, policy assignment, task scheduling,
       query execution, and threat event retrieval across managed endpoints.
-    image: 
-      https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
-    humanURL: 
-      https://www.mcafee.com/enterprise/en-us/products/epolicy-orchestrator.html
+    image: https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
+    humanURL: https://www.mcafee.com/enterprise/en-us/products/epolicy-orchestrator.html
     baseURL: https://your-epo-server:8443/remote
     tags:
-      - endpoint management
-      - policy orchestrator
-      - security management
+      - Endpoint Management
+      - Policy Orchestrator
+      - Security Management
     properties:
       - type: Documentation
-        url: 
-          https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide
+        url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide
       - type: OpenAPI
         url: https://your-epo-server:8443/remote/swagger.json
       - type: Authentication
-        url: 
-          https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide/page/GUID-authentication.html
+        url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide/page/GUID-authentication.html
       - type: OpenAPI
         url: openapi/mcafee-epo-openapi.yml
   - name: McAfee MVISION API
     description: >-
       Cloud-native security platform API for endpoint detection and response (EDR),
       threat prevention, device management, and incident investigation.
-    image: 
-      https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
+    image: https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
     humanURL: https://www.mcafee.com/enterprise/en-us/products/mvision.html
     baseURL: https://api.mvision.mcafee.com
     tags:
-      - cloud security
-      - threat detection
-      - mvision
-      - edr
+      - Cloud Security
+      - Edr
+      - Mvision
+      - Threat Detection
     properties:
       - type: Documentation
         url: https://developer.mvision.mcafee.com/
@@ -61,15 +56,13 @@ apis:
   - name: McAfee Threat Intelligence Exchange (TIE) API
     description: >-
       Real-time threat intelligence sharing and reputation services API.
-    image: 
-      https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
-    humanURL: 
-      https://www.mcafee.com/enterprise/en-us/products/threat-intelligence-exchange.html
+    image: https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
+    humanURL: https://www.mcafee.com/enterprise/en-us/products/threat-intelligence-exchange.html
     baseURL: https://your-tie-server/api
     tags:
-      - threat intelligence
-      - reputation
-      - malware analysis
+      - Malware Analysis
+      - Reputation
+      - Threat Intelligence
     properties:
       - type: Documentation
         url: https://opendxl.github.io/opendxl-tie-client-python/
@@ -78,16 +71,14 @@ apis:
   - name: McAfee Data Exchange Layer (DXL) API
     description: >-
       Messaging fabric for real-time security data exchange and integration.
-    image: 
-      https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
-    humanURL: 
-      https://www.mcafee.com/enterprise/en-us/products/data-exchange-layer.html
+    image: https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
+    humanURL: https://www.mcafee.com/enterprise/en-us/products/data-exchange-layer.html
     baseURL: https://your-dxl-broker
     tags:
-      - messaging
-      - integration
-      - data exchange
-      - fabric
+      - Data Exchange
+      - Fabric
+      - Integration
+      - Messaging
     properties:
       - type: Documentation
         url: https://opendxl.github.io/opendxl-client-python/
@@ -101,14 +92,13 @@ apis:
     description: >-
       Web security gateway REST API for managing rule sets, URL filtering lists,
       SSL inspection settings, and monitoring proxy traffic and appliance health.
-    image: 
-      https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
+    image: https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
     humanURL: https://www.mcafee.com/enterprise/en-us/products/web-gateway.html
     baseURL: https://your-mwg-server/Konfigurator/REST
     tags:
-      - web gateway
-      - web security
-      - proxy
+      - Proxy
+      - Web Gateway
+      - Web Security
     properties:
       - type: Documentation
         url: https://docs.mcafee.com/bundle/web-gateway-product-guide
@@ -119,19 +109,16 @@ apis:
       Enterprise Security Manager SIEM REST API for managing security events,
       alarms, watchlists, data sources, cases, and executing queries against
       the event database.
-    image: 
-      https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
-    humanURL: 
-      https://www.mcafee.com/enterprise/en-us/products/enterprise-security-manager.html
+    image: https://www.mcafee.com/content/dam/consumer/en-us/assets/mcafee-logo.png
+    humanURL: https://www.mcafee.com/enterprise/en-us/products/enterprise-security-manager.html
     baseURL: https://your-esm-server/rs/esm
     tags:
-      - siem
-      - security events
-      - log management
+      - Log Management
+      - Security Events
+      - Siem
     properties:
       - type: Documentation
-        url: 
-          https://docs.mcafee.com/bundle/enterprise-security-manager-api-reference-guide
+        url: https://docs.mcafee.com/bundle/enterprise-security-manager-api-reference-guide
       - type: OpenAPI
         url: openapi/mcafee-esm-openapi.yml
 common:
