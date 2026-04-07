@@ -38,7 +38,7 @@ paths:
   /iam/v1.1/token:
     post:
       operationId: getToken
-      summary: Obtain access token
+      summary: McAfee Obtain access token
       description: >-
         Authenticate using client credentials to obtain a bearer token for
         accessing MVISION APIs. Tokens are valid for a limited duration.
@@ -81,7 +81,7 @@ paths:
   /edr/v2/threats:
     get:
       operationId: listThreats
-      summary: List threats
+      summary: McAfee List threats
       description: >-
         Retrieve a paginated list of detected threats across all managed
         endpoints, with optional filtering by severity, status, and time range.
@@ -131,7 +131,7 @@ paths:
   /edr/v2/threats/{threatId}:
     get:
       operationId: getThreat
-      summary: Get a specific threat
+      summary: McAfee Get a specific threat
       description: >-
         Retrieve detailed information about a specific threat by its unique ID,
         including affected hosts, threat indicators, and remediation status.
@@ -152,7 +152,7 @@ paths:
           description: Threat not found
     patch:
       operationId: updateThreat
-      summary: Update threat status
+      summary: McAfee Update threat status
       description: >-
         Update the status or assignment of a specific threat, such as marking
         it as investigating, resolved, or dismissed.
@@ -200,7 +200,7 @@ paths:
   /edr/v2/detections:
     get:
       operationId: listDetections
-      summary: List detections
+      summary: McAfee List detections
       description: >-
         Retrieve EDR detection events, including alerts from behavioral
         analysis, signature matching, and real-time monitoring across endpoints.
@@ -239,7 +239,7 @@ paths:
   /edr/v2/detections/{detectionId}:
     get:
       operationId: getDetection
-      summary: Get a specific detection
+      summary: McAfee Get a specific detection
       description: >-
         Retrieve detailed information about a specific detection event,
         including process trees, indicators of compromise, and MITRE ATT&CK mapping.
@@ -266,7 +266,7 @@ paths:
   /edr/v2/devices:
     get:
       operationId: listDevices
-      summary: List managed devices
+      summary: McAfee List managed devices
       description: >-
         Retrieve a paginated list of all devices managed by MVISION, including
         their health status, agent version, and last check-in time.
@@ -309,7 +309,7 @@ paths:
   /edr/v2/devices/{deviceId}:
     get:
       operationId: getDevice
-      summary: Get a specific device
+      summary: McAfee Get a specific device
       description: >-
         Retrieve detailed information about a specific managed device,
         including installed products, agent version, and security posture.
@@ -336,7 +336,7 @@ paths:
   /edr/v2/investigations:
     get:
       operationId: listInvestigations
-      summary: List investigations
+      summary: McAfee List investigations
       description: >-
         Retrieve a list of threat investigations, which group related threats
         and detections for analysis and response.
@@ -377,7 +377,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createInvestigation
-      summary: Create an investigation
+      summary: McAfee Create an investigation
       description: >-
         Create a new investigation to group related threats and detections
         for collaborative analysis and response.
@@ -429,7 +429,7 @@ paths:
   /edr/v2/remediation/actions:
     post:
       operationId: createRemediationAction
-      summary: Create a remediation action
+      summary: McAfee Create a remediation action
       description: >-
         Initiate a remediation action on one or more endpoints, such as
         isolating a host, killing a process, or deleting a file.
@@ -487,7 +487,7 @@ paths:
   /edr/v2/real-time-search:
     post:
       operationId: createRealTimeSearch
-      summary: Create a real-time search
+      summary: McAfee Create a real-time search
       description: >-
         Execute a real-time query across managed endpoints to collect live
         data such as running processes, network connections, and file hashes.
@@ -535,7 +535,7 @@ paths:
   /edr/v2/real-time-search/{searchId}/results:
     get:
       operationId: getRealTimeSearchResults
-      summary: Get real-time search results
+      summary: McAfee Get real-time search results
       description: >-
         Retrieve the results of a previously initiated real-time search.
         Results are collected as endpoints respond to the query.

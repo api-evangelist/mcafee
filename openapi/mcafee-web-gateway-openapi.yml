@@ -39,7 +39,7 @@ paths:
   /login:
     post:
       operationId: login
-      summary: Authenticate and create session
+      summary: McAfee Authenticate and create session
       description: >-
         Authenticate with administrator credentials to establish a session.
         Returns a session cookie used for subsequent API requests.
@@ -72,7 +72,7 @@ paths:
   /logout:
     post:
       operationId: logout
-      summary: End current session
+      summary: McAfee End current session
       description: >-
         Terminate the current session and invalidate the session cookie.
       tags:
@@ -85,7 +85,7 @@ paths:
   /rulesets:
     get:
       operationId: listRuleSets
-      summary: List rule sets
+      summary: McAfee List rule sets
       description: >-
         Retrieve a list of all configured rule sets, including web filtering,
         SSL scanning, authentication, and media type filtering rules.
@@ -116,7 +116,7 @@ paths:
   /rulesets/{rulesetId}:
     get:
       operationId: getRuleSet
-      summary: Get a specific rule set
+      summary: McAfee Get a specific rule set
       description: >-
         Retrieve the full configuration of a specific rule set, including
         all contained rules, conditions, and actions.
@@ -140,7 +140,7 @@ paths:
           description: Rule set not found
     put:
       operationId: updateRuleSet
-      summary: Update a rule set
+      summary: McAfee Update a rule set
       description: >-
         Update the configuration of an existing rule set, including
         enabling/disabling rules and modifying conditions.
@@ -165,7 +165,7 @@ paths:
           description: Rule set not found
     delete:
       operationId: deleteRuleSet
-      summary: Delete a rule set
+      summary: McAfee Delete a rule set
       description: >-
         Delete a rule set from the configuration.
       tags:
@@ -182,7 +182,7 @@ paths:
   /lists:
     get:
       operationId: listLists
-      summary: List all filtering lists
+      summary: McAfee List all filtering lists
       description: >-
         Retrieve all configured lists used for URL filtering, IP blocking,
         media type filtering, and custom categorization.
@@ -205,7 +205,7 @@ paths:
   /lists/{listId}:
     get:
       operationId: getList
-      summary: Get a specific list
+      summary: McAfee Get a specific list
       description: >-
         Retrieve the contents and configuration of a specific filtering list.
       tags:
@@ -225,7 +225,7 @@ paths:
           description: List not found
     put:
       operationId: updateList
-      summary: Update a list
+      summary: McAfee Update a list
       description: >-
         Update the entries in a filtering list, adding or removing URLs,
         IPs, or other entries.
@@ -251,7 +251,7 @@ paths:
   /lists/{listId}/entries:
     post:
       operationId: addListEntry
-      summary: Add entry to a list
+      summary: McAfee Add entry to a list
       description: >-
         Add a new entry (URL, IP, or other value) to a filtering list.
       tags:
@@ -276,7 +276,7 @@ paths:
   /commit:
     post:
       operationId: commitChanges
-      summary: Commit configuration changes
+      summary: McAfee Commit configuration changes
       description: >-
         Save and activate all pending configuration changes. Changes made
         through the API are not active until committed.
@@ -292,7 +292,7 @@ paths:
   /appliance/status:
     get:
       operationId: getApplianceStatus
-      summary: Get appliance status
+      summary: McAfee Get appliance status
       description: >-
         Retrieve the current health status and resource utilization of the
         Web Gateway appliance, including CPU, memory, and connection counts.
@@ -310,7 +310,7 @@ paths:
   /appliance/traffic:
     get:
       operationId: getTrafficStatistics
-      summary: Get traffic statistics
+      summary: McAfee Get traffic statistics
       description: >-
         Retrieve web traffic statistics including request counts, bytes
         transferred, blocked requests, and category breakdowns.
@@ -341,7 +341,7 @@ paths:
   /file/export:
     get:
       operationId: exportConfiguration
-      summary: Export configuration
+      summary: McAfee Export configuration
       description: >-
         Export the complete appliance configuration as a backup file.
       tags:
@@ -359,7 +359,7 @@ paths:
   /file/import:
     post:
       operationId: importConfiguration
-      summary: Import configuration
+      summary: McAfee Import configuration
       description: >-
         Import a previously exported configuration backup to restore settings.
       tags:

@@ -41,7 +41,7 @@ paths:
   /v2/login:
     post:
       operationId: login
-      summary: Authenticate and create session
+      summary: McAfee Authenticate and create session
       description: >-
         Authenticate with ESM credentials to obtain a session token. The
         session token must be included in subsequent requests as a cookie
@@ -81,7 +81,7 @@ paths:
   /v2/logout:
     delete:
       operationId: logout
-      summary: End current session
+      summary: McAfee End current session
       description: >-
         Terminate the current authenticated session.
       tags:
@@ -94,7 +94,7 @@ paths:
   /v2/alarmGetTriggeredAlarms:
     post:
       operationId: getTriggeredAlarms
-      summary: Get triggered alarms
+      summary: McAfee Get triggered alarms
       description: >-
         Retrieve a list of triggered alarms within a specified time range,
         optionally filtered by status or severity.
@@ -157,7 +157,7 @@ paths:
   /v2/alarmAcknowledgeTriggeredAlarm:
     post:
       operationId: acknowledgeAlarm
-      summary: Acknowledge a triggered alarm
+      summary: McAfee Acknowledge a triggered alarm
       description: >-
         Acknowledge one or more triggered alarms, marking them as reviewed
         by an analyst.
@@ -185,7 +185,7 @@ paths:
   /v2/alarmDeleteTriggeredAlarm:
     post:
       operationId: deleteTriggeredAlarm
-      summary: Delete triggered alarms
+      summary: McAfee Delete triggered alarms
       description: >-
         Delete one or more triggered alarm records from the ESM database.
       tags:
@@ -212,7 +212,7 @@ paths:
   /v2/qryExecuteDetail:
     post:
       operationId: executeQuery
-      summary: Execute an event query
+      summary: McAfee Execute an event query
       description: >-
         Execute a query against the ESM event database to retrieve security
         events matching specified criteria. Returns a result ID for fetching
@@ -296,7 +296,7 @@ paths:
   /v2/qryGetResults:
     post:
       operationId: getQueryResults
-      summary: Get query results
+      summary: McAfee Get query results
       description: >-
         Retrieve the results of a previously executed query using the
         result ID. May need to be called multiple times as results become available.
@@ -361,7 +361,7 @@ paths:
   /v2/sysGetWatchlists:
     post:
       operationId: getWatchlists
-      summary: List watchlists
+      summary: McAfee List watchlists
       description: >-
         Retrieve all configured watchlists, which are collections of
         values (IPs, hostnames, etc.) used for correlation and alerting.
@@ -381,7 +381,7 @@ paths:
   /v2/sysGetWatchlistValues:
     post:
       operationId: getWatchlistValues
-      summary: Get watchlist values
+      summary: McAfee Get watchlist values
       description: >-
         Retrieve the values (entries) contained in a specific watchlist.
       tags:
@@ -418,7 +418,7 @@ paths:
   /v2/sysAddWatchlistValues:
     post:
       operationId: addWatchlistValues
-      summary: Add values to a watchlist
+      summary: McAfee Add values to a watchlist
       description: >-
         Add one or more values to an existing watchlist for use in
         correlation rules and alarm triggers.
@@ -452,7 +452,7 @@ paths:
   /v2/sysRemoveWatchlistValues:
     post:
       operationId: removeWatchlistValues
-      summary: Remove values from a watchlist
+      summary: McAfee Remove values from a watchlist
       description: >-
         Remove one or more values from an existing watchlist.
       tags:
@@ -485,7 +485,7 @@ paths:
   /v2/dsGetDataSourceList:
     post:
       operationId: getDataSources
-      summary: List data sources
+      summary: McAfee List data sources
       description: >-
         Retrieve all configured data sources that feed events into the
         ESM, including syslog sources, database connections, and agent-based sources.
@@ -505,7 +505,7 @@ paths:
   /v2/caseGetCaseList:
     post:
       operationId: getCases
-      summary: List incident cases
+      summary: McAfee List incident cases
       description: >-
         Retrieve a list of incident response cases managed in the ESM,
         with optional filtering by status, assignee, or priority.
@@ -535,7 +535,7 @@ paths:
   /v2/caseAddCase:
     post:
       operationId: addCase
-      summary: Create a new case
+      summary: McAfee Create a new case
       description: >-
         Create a new incident response case for tracking investigation
         and remediation of a security incident.
@@ -579,7 +579,7 @@ paths:
   /v2/devGetDeviceList:
     post:
       operationId: getDevices
-      summary: List ESM devices
+      summary: McAfee List ESM devices
       description: >-
         Retrieve the list of devices in the ESM device hierarchy, including
         receivers, ELM, ACE, DEM, and ADM components.

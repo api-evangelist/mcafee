@@ -43,7 +43,7 @@ paths:
   /core.help:
     get:
       operationId: coreHelp
-      summary: List available API commands
+      summary: McAfee List available API commands
       description: >-
         Returns a list of all available remote API commands on the ePO server
         with their descriptions and parameters.
@@ -65,7 +65,7 @@ paths:
   /system.find:
     get:
       operationId: systemFind
-      summary: Search for systems
+      summary: McAfee Search for systems
       description: >-
         Search for managed systems in the ePO System Tree matching specified
         criteria such as name, IP address, tags, or custom properties.
@@ -93,7 +93,7 @@ paths:
   /system.findTag:
     get:
       operationId: systemFindTag
-      summary: Find systems by tag
+      summary: McAfee Find systems by tag
       description: >-
         Retrieve a list of systems that have a specific tag applied.
       tags:
@@ -120,7 +120,7 @@ paths:
   /system.applyTag:
     post:
       operationId: systemApplyTag
-      summary: Apply a tag to systems
+      summary: McAfee Apply a tag to systems
       description: >-
         Apply a tag to one or more systems identified by name or ID.
       tags:
@@ -151,7 +151,7 @@ paths:
   /system.clearTag:
     post:
       operationId: systemClearTag
-      summary: Remove a tag from systems
+      summary: McAfee Remove a tag from systems
       description: >-
         Remove a tag from one or more systems identified by name or ID.
       tags:
@@ -182,7 +182,7 @@ paths:
   /epogroup.find:
     get:
       operationId: epogroupFind
-      summary: Find system tree groups
+      summary: McAfee Find system tree groups
       description: >-
         Search for groups in the ePO System Tree by name or other criteria.
       tags:
@@ -209,7 +209,7 @@ paths:
   /epogroup.moveSystem:
     post:
       operationId: epogroupMoveSystem
-      summary: Move a system to a different group
+      summary: McAfee Move a system to a different group
       description: >-
         Move one or more systems from their current location in the System Tree
         to a specified target group.
@@ -241,7 +241,7 @@ paths:
   /policy.find:
     get:
       operationId: policyFind
-      summary: Search for policies
+      summary: McAfee Search for policies
       description: >-
         Search for security policies configured in ePO, optionally filtered by
         product or policy type.
@@ -269,7 +269,7 @@ paths:
   /policy.assignToSystem:
     post:
       operationId: policyAssignToSystem
-      summary: Assign a policy to a system
+      summary: McAfee Assign a policy to a system
       description: >-
         Assign a specific policy to one or more systems, overriding the
         inherited group policy.
@@ -313,7 +313,7 @@ paths:
   /policy.assignToGroup:
     post:
       operationId: policyAssignToGroup
-      summary: Assign a policy to a group
+      summary: McAfee Assign a policy to a group
       description: >-
         Assign a specific policy to a System Tree group, which is then inherited
         by all child systems and sub-groups.
@@ -357,7 +357,7 @@ paths:
   /clienttask.find:
     get:
       operationId: clienttaskFind
-      summary: Search for client tasks
+      summary: McAfee Search for client tasks
       description: >-
         Search for client tasks that can be deployed to managed systems.
       tags:
@@ -384,7 +384,7 @@ paths:
   /clienttask.run:
     post:
       operationId: clienttaskRun
-      summary: Run a client task on systems
+      summary: McAfee Run a client task on systems
       description: >-
         Execute a client task immediately on one or more specified systems.
       tags:
@@ -421,7 +421,7 @@ paths:
   /core.executeQuery:
     get:
       operationId: coreExecuteQuery
-      summary: Execute a saved query
+      summary: McAfee Execute a saved query
       description: >-
         Execute a previously saved ePO query by ID and return the results. Queries
         can retrieve data about systems, events, policies, and other ePO objects.
@@ -452,7 +452,7 @@ paths:
   /core.listQueries:
     get:
       operationId: coreListQueries
-      summary: List saved queries
+      summary: McAfee List saved queries
       description: >-
         Retrieve a list of all saved queries available on the ePO server.
       tags:
@@ -473,7 +473,7 @@ paths:
   /detectedsystem.find:
     get:
       operationId: detectedsystemFind
-      summary: Find threat events
+      summary: McAfee Find threat events
       description: >-
         Search for detected threat events across managed systems, returning
         details about malware detections, intrusion attempts, and other security events.
@@ -501,7 +501,7 @@ paths:
   /repository.findPackages:
     get:
       operationId: repositoryFindPackages
-      summary: Find software packages
+      summary: McAfee Find software packages
       description: >-
         Search for software packages in the ePO master repository, including
         DAT files, engine updates, and product packages.
@@ -529,7 +529,7 @@ paths:
   /scheduler.listServerTasks:
     get:
       operationId: schedulerListServerTasks
-      summary: List server tasks
+      summary: McAfee List server tasks
       description: >-
         Retrieve a list of all configured server tasks in ePO, including
         pull tasks, replication tasks, and custom automation tasks.
@@ -551,7 +551,7 @@ paths:
   /scheduler.runServerTask:
     post:
       operationId: schedulerRunServerTask
-      summary: Run a server task
+      summary: McAfee Run a server task
       description: >-
         Execute a server task immediately by its ID.
       tags:
