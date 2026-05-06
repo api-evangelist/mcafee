@@ -4,111 +4,60 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: McAfee (Trellix)
 providerId: mcafee
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Antivirus
   - Cybersecurity
   - Endpoint Protection
   - Security
-  - Threat Intelligence
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the McAfee (Trellix) API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Most McAfee / Trellix APIs run inside customer-deployed appliances or virtual servers (ePO,
+  TIE, DXL broker, Web Gateway, ESM) where rate limits are bounded by the deployed hardware / VM rather
+  than by a vendor-published RPS. The cloud MVISION / Trellix XDR API has tenant-scoped throttles but
+  numeric ceilings are not surfaced on the public marketing site. Consumers should refer to the product's
+  Administration Guide for sizing and concurrency guidance per appliance.
+notes: |
+  No public RPS / RPM numbers documented. On-prem APIs scale with deployed hardware; cloud APIs use
+  per-tenant throttles documented in the customer-gated docs portal. Set reconciled=true once vendor-
+  documented numeric limits are confirmed.
+sources:
+  - https://www.trellix.com/
+  - https://www.mcafee.com/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
+  - name: On-prem appliance throughput
+    scope: appliance
+    metric: varies
+    limit: 'sized to deployed hardware / VM'
     applies:
       - McAfee ePO API
-      - McAfee MVISION API
       - McAfee Threat Intelligence Exchange (TIE) API
       - McAfee Data Exchange Layer (DXL) API
       - McAfee Web Gateway API
       - McAfee ESM API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
+    notes: For on-prem products, throughput is bounded by the customer's deployment (CPU, memory, EPS
+      sizing for ESM, broker count for DXL). Reference the product's Administration Guide for sizing.
+  - name: Cloud MVISION / XDR tenant limit
+    scope: tenant
+    metric: varies
+    limit: 'per-tenant throttle (not publicly documented)'
     applies:
-      - McAfee ePO API
       - McAfee MVISION API
-      - McAfee Threat Intelligence Exchange (TIE) API
-      - McAfee Data Exchange Layer (DXL) API
-      - McAfee Web Gateway API
-      - McAfee ESM API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - McAfee ePO API
-      - McAfee MVISION API
-      - McAfee Threat Intelligence Exchange (TIE) API
-      - McAfee Data Exchange Layer (DXL) API
-      - McAfee Web Gateway API
-      - McAfee ESM API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - McAfee ePO API
-      - McAfee MVISION API
-      - McAfee Threat Intelligence Exchange (TIE) API
-      - McAfee Data Exchange Layer (DXL) API
-      - McAfee Web Gateway API
-      - McAfee ESM API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - McAfee ePO API
-      - McAfee MVISION API
-      - McAfee Threat Intelligence Exchange (TIE) API
-      - McAfee Data Exchange Layer (DXL) API
-      - McAfee Web Gateway API
-      - McAfee ESM API
+    notes: Cloud APIs apply per-tenant throttles; specific numeric ceilings are documented in the customer-
+      gated portal rather than on the public marketing site.
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Use exponential backoff with jitter on transient errors and honor Retry-After when
+      present.
+  - name: Appliance Sizing
+    description: For on-prem deployments, scale appliance / VM resources or add brokers (DXL) to handle
+      higher request volumes; raw RPS is a function of deployed capacity rather than a vendor cap.
+  - name: Cloud Throttle Escalation
+    description: For cloud MVISION / XDR throttling, contact Trellix support to request quota review;
+      tenants on enterprise plans may receive raised ceilings.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
