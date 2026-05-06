@@ -1,0 +1,891 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee ePO API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management,
+    policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  tags:
+  - Mcafee
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: mcafee
+    baseUri: https://your-epo-server:8443/remote
+    description: McAfee ePO API HTTP API.
+    authentication:
+      type: basic
+      username: '{{MCAFEE_USERNAME}}'
+      password: '{{MCAFEE_PASSWORD}}'
+    resources:
+    - name: core-help
+      path: /core.help
+      operations:
+      - name: corehelp
+        method: GET
+        description: McAfee List available API commands
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-find
+      path: /system.find
+      operations:
+      - name: systemfind
+        method: GET
+        description: McAfee Search for systems
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          required: true
+          description: Search string to match against system names, IP addresses, or other properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-findtag
+      path: /system.findTag
+      operations:
+      - name: systemfindtag
+        method: GET
+        description: McAfee Find systems by tag
+        inputParameters:
+        - name: tagName
+          in: query
+          type: string
+          required: true
+          description: Name of the tag to search for
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-applytag
+      path: /system.applyTag
+      operations:
+      - name: systemapplytag
+        method: POST
+        description: McAfee Apply a tag to systems
+        inputParameters:
+        - name: names
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of system names or IDs
+        - name: tagName
+          in: query
+          type: string
+          required: true
+          description: Name of the tag to apply
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system-cleartag
+      path: /system.clearTag
+      operations:
+      - name: systemcleartag
+        method: POST
+        description: McAfee Remove a tag from systems
+        inputParameters:
+        - name: names
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of system names or IDs
+        - name: tagName
+          in: query
+          type: string
+          required: true
+          description: Name of the tag to remove
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: epogroup-find
+      path: /epogroup.find
+      operations:
+      - name: epogroupfind
+        method: GET
+        description: McAfee Find system tree groups
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search string to match against group names
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: epogroup-movesystem
+      path: /epogroup.moveSystem
+      operations:
+      - name: epogroupmovesystem
+        method: POST
+        description: McAfee Move a system to a different group
+        inputParameters:
+        - name: names
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of system names to move
+        - name: parentGroupId
+          in: query
+          type: integer
+          required: true
+          description: ID of the target parent group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policy-find
+      path: /policy.find
+      operations:
+      - name: policyfind
+        method: GET
+        description: McAfee Search for policies
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search string to match against policy names
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policy-assigntosystem
+      path: /policy.assignToSystem
+      operations:
+      - name: policyassigntosystem
+        method: POST
+        description: McAfee Assign a policy to a system
+        inputParameters:
+        - name: names
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of system names
+        - name: productId
+          in: query
+          type: string
+          required: true
+          description: Product ID for the policy
+        - name: typeId
+          in: query
+          type: string
+          required: true
+          description: Policy type ID
+        - name: objectId
+          in: query
+          type: integer
+          required: true
+          description: Policy object ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policy-assigntogroup
+      path: /policy.assignToGroup
+      operations:
+      - name: policyassigntogroup
+        method: POST
+        description: McAfee Assign a policy to a group
+        inputParameters:
+        - name: groupId
+          in: query
+          type: integer
+          required: true
+          description: Target group ID
+        - name: productId
+          in: query
+          type: string
+          required: true
+          description: Product ID for the policy
+        - name: typeId
+          in: query
+          type: string
+          required: true
+          description: Policy type ID
+        - name: objectId
+          in: query
+          type: integer
+          required: true
+          description: Policy object ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clienttask-find
+      path: /clienttask.find
+      operations:
+      - name: clienttaskfind
+        method: GET
+        description: McAfee Search for client tasks
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search string to match against task names
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clienttask-run
+      path: /clienttask.run
+      operations:
+      - name: clienttaskrun
+        method: POST
+        description: McAfee Run a client task on systems
+        inputParameters:
+        - name: names
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of system names
+        - name: productId
+          in: query
+          type: string
+          required: true
+          description: Product ID for the task
+        - name: taskId
+          in: query
+          type: integer
+          required: true
+          description: Client task ID to execute
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: core-executequery
+      path: /core.executeQuery
+      operations:
+      - name: coreexecutequery
+        method: GET
+        description: McAfee Execute a saved query
+        inputParameters:
+        - name: queryId
+          in: query
+          type: integer
+          required: true
+          description: ID of the saved query to execute
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: core-listqueries
+      path: /core.listQueries
+      operations:
+      - name: corelistqueries
+        method: GET
+        description: McAfee List saved queries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: detectedsystem-find
+      path: /detectedsystem.find
+      operations:
+      - name: detectedsystemfind
+        method: GET
+        description: McAfee Find threat events
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search text to filter threat events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repository-findpackages
+      path: /repository.findPackages
+      operations:
+      - name: repositoryfindpackages
+        method: GET
+        description: McAfee Find software packages
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search string to filter packages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduler-listservertasks
+      path: /scheduler.listServerTasks
+      operations:
+      - name: schedulerlistservertasks
+        method: GET
+        description: McAfee List server tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduler-runservertask
+      path: /scheduler.runServerTask
+      operations:
+      - name: schedulerrunservertask
+        method: POST
+        description: McAfee Run a server task
+        inputParameters:
+        - name: taskId
+          in: query
+          type: integer
+          required: true
+          description: ID of the server task to execute
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: mcafee-rest
+    description: REST adapter for McAfee ePO API.
+    resources:
+    - path: /core.help
+      name: corehelp
+      operations:
+      - method: GET
+        name: corehelp
+        description: McAfee List available API commands
+        call: mcafee.corehelp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /system.find
+      name: systemfind
+      operations:
+      - method: GET
+        name: systemfind
+        description: McAfee Search for systems
+        call: mcafee.systemfind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /system.findTag
+      name: systemfindtag
+      operations:
+      - method: GET
+        name: systemfindtag
+        description: McAfee Find systems by tag
+        call: mcafee.systemfindtag
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /system.applyTag
+      name: systemapplytag
+      operations:
+      - method: POST
+        name: systemapplytag
+        description: McAfee Apply a tag to systems
+        call: mcafee.systemapplytag
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /system.clearTag
+      name: systemcleartag
+      operations:
+      - method: POST
+        name: systemcleartag
+        description: McAfee Remove a tag from systems
+        call: mcafee.systemcleartag
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /epogroup.find
+      name: epogroupfind
+      operations:
+      - method: GET
+        name: epogroupfind
+        description: McAfee Find system tree groups
+        call: mcafee.epogroupfind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /epogroup.moveSystem
+      name: epogroupmovesystem
+      operations:
+      - method: POST
+        name: epogroupmovesystem
+        description: McAfee Move a system to a different group
+        call: mcafee.epogroupmovesystem
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policy.find
+      name: policyfind
+      operations:
+      - method: GET
+        name: policyfind
+        description: McAfee Search for policies
+        call: mcafee.policyfind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policy.assignToSystem
+      name: policyassigntosystem
+      operations:
+      - method: POST
+        name: policyassigntosystem
+        description: McAfee Assign a policy to a system
+        call: mcafee.policyassigntosystem
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /policy.assignToGroup
+      name: policyassigntogroup
+      operations:
+      - method: POST
+        name: policyassigntogroup
+        description: McAfee Assign a policy to a group
+        call: mcafee.policyassigntogroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /clienttask.find
+      name: clienttaskfind
+      operations:
+      - method: GET
+        name: clienttaskfind
+        description: McAfee Search for client tasks
+        call: mcafee.clienttaskfind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /clienttask.run
+      name: clienttaskrun
+      operations:
+      - method: POST
+        name: clienttaskrun
+        description: McAfee Run a client task on systems
+        call: mcafee.clienttaskrun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /core.executeQuery
+      name: coreexecutequery
+      operations:
+      - method: GET
+        name: coreexecutequery
+        description: McAfee Execute a saved query
+        call: mcafee.coreexecutequery
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /core.listQueries
+      name: corelistqueries
+      operations:
+      - method: GET
+        name: corelistqueries
+        description: McAfee List saved queries
+        call: mcafee.corelistqueries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /detectedsystem.find
+      name: detectedsystemfind
+      operations:
+      - method: GET
+        name: detectedsystemfind
+        description: McAfee Find threat events
+        call: mcafee.detectedsystemfind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /repository.findPackages
+      name: repositoryfindpackages
+      operations:
+      - method: GET
+        name: repositoryfindpackages
+        description: McAfee Find software packages
+        call: mcafee.repositoryfindpackages
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduler.listServerTasks
+      name: schedulerlistservertasks
+      operations:
+      - method: GET
+        name: schedulerlistservertasks
+        description: McAfee List server tasks
+        call: mcafee.schedulerlistservertasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /scheduler.runServerTask
+      name: schedulerrunservertask
+      operations:
+      - method: POST
+        name: schedulerrunservertask
+        description: McAfee Run a server task
+        call: mcafee.schedulerrunservertask
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: mcafee-mcp
+    transport: http
+    description: MCP adapter for McAfee ePO API for AI agent use.
+    tools:
+    - name: corehelp
+      description: McAfee List available API commands
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.corehelp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: systemfind
+      description: McAfee Search for systems
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.systemfind
+      with:
+        searchText: tools.searchText
+      inputParameters:
+      - name: searchText
+        type: string
+        description: Search string to match against system names, IP addresses, or other properties
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: systemfindtag
+      description: McAfee Find systems by tag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.systemfindtag
+      with:
+        tagName: tools.tagName
+      inputParameters:
+      - name: tagName
+        type: string
+        description: Name of the tag to search for
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: systemapplytag
+      description: McAfee Apply a tag to systems
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.systemapplytag
+      with:
+        names: tools.names
+        tagName: tools.tagName
+      inputParameters:
+      - name: names
+        type: string
+        description: Comma-separated list of system names or IDs
+        required: true
+      - name: tagName
+        type: string
+        description: Name of the tag to apply
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: systemcleartag
+      description: McAfee Remove a tag from systems
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.systemcleartag
+      with:
+        names: tools.names
+        tagName: tools.tagName
+      inputParameters:
+      - name: names
+        type: string
+        description: Comma-separated list of system names or IDs
+        required: true
+      - name: tagName
+        type: string
+        description: Name of the tag to remove
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: epogroupfind
+      description: McAfee Find system tree groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.epogroupfind
+      with:
+        searchText: tools.searchText
+      inputParameters:
+      - name: searchText
+        type: string
+        description: Search string to match against group names
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: epogroupmovesystem
+      description: McAfee Move a system to a different group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.epogroupmovesystem
+      with:
+        names: tools.names
+        parentGroupId: tools.parentGroupId
+      inputParameters:
+      - name: names
+        type: string
+        description: Comma-separated list of system names to move
+        required: true
+      - name: parentGroupId
+        type: integer
+        description: ID of the target parent group
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: policyfind
+      description: McAfee Search for policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.policyfind
+      with:
+        searchText: tools.searchText
+      inputParameters:
+      - name: searchText
+        type: string
+        description: Search string to match against policy names
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: policyassigntosystem
+      description: McAfee Assign a policy to a system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.policyassigntosystem
+      with:
+        names: tools.names
+        productId: tools.productId
+        typeId: tools.typeId
+        objectId: tools.objectId
+      inputParameters:
+      - name: names
+        type: string
+        description: Comma-separated list of system names
+        required: true
+      - name: productId
+        type: string
+        description: Product ID for the policy
+        required: true
+      - name: typeId
+        type: string
+        description: Policy type ID
+        required: true
+      - name: objectId
+        type: integer
+        description: Policy object ID
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: policyassigntogroup
+      description: McAfee Assign a policy to a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.policyassigntogroup
+      with:
+        groupId: tools.groupId
+        productId: tools.productId
+        typeId: tools.typeId
+        objectId: tools.objectId
+      inputParameters:
+      - name: groupId
+        type: integer
+        description: Target group ID
+        required: true
+      - name: productId
+        type: string
+        description: Product ID for the policy
+        required: true
+      - name: typeId
+        type: string
+        description: Policy type ID
+        required: true
+      - name: objectId
+        type: integer
+        description: Policy object ID
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clienttaskfind
+      description: McAfee Search for client tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.clienttaskfind
+      with:
+        searchText: tools.searchText
+      inputParameters:
+      - name: searchText
+        type: string
+        description: Search string to match against task names
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clienttaskrun
+      description: McAfee Run a client task on systems
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.clienttaskrun
+      with:
+        names: tools.names
+        productId: tools.productId
+        taskId: tools.taskId
+      inputParameters:
+      - name: names
+        type: string
+        description: Comma-separated list of system names
+        required: true
+      - name: productId
+        type: string
+        description: Product ID for the task
+        required: true
+      - name: taskId
+        type: integer
+        description: Client task ID to execute
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: coreexecutequery
+      description: McAfee Execute a saved query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.coreexecutequery
+      with:
+        queryId: tools.queryId
+      inputParameters:
+      - name: queryId
+        type: integer
+        description: ID of the saved query to execute
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: corelistqueries
+      description: McAfee List saved queries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.corelistqueries
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: detectedsystemfind
+      description: McAfee Find threat events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.detectedsystemfind
+      with:
+        searchText: tools.searchText
+      inputParameters:
+      - name: searchText
+        type: string
+        description: Search text to filter threat events
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: repositoryfindpackages
+      description: McAfee Find software packages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.repositoryfindpackages
+      with:
+        searchText: tools.searchText
+      inputParameters:
+      - name: searchText
+        type: string
+        description: Search string to filter packages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: schedulerlistservertasks
+      description: McAfee List server tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mcafee.schedulerlistservertasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: schedulerrunservertask
+      description: McAfee Run a server task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mcafee.schedulerrunservertask
+      with:
+        taskId: tools.taskId
+      inputParameters:
+      - name: taskId
+        type: integer
+        description: ID of the server task to execute
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    MCAFEE_USERNAME: MCAFEE_USERNAME
+    MCAFEE_PASSWORD: MCAFEE_PASSWORD
