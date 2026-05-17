@@ -138,11 +138,11 @@ common:
     url: https://www.trellix.com/
   - type: Support
     url: https://www.trellix.com/support/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.trellix.com/about/legal/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.trellix.com/about/legal/privacy/
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/mcafee-context.jsonld
   - type: JSONSchema
     url: json-schema/mcafee-threat-event-schema.json
