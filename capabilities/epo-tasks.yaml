@@ -1,0 +1,210 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee ePO API — Tasks
+  description: 'McAfee ePO API — Tasks. 4 operations. Lead operation: McAfee Search for client tasks. Self-contained Naftiko
+    capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: epo-tasks
+    baseUri: https://{epo-server}:8443/remote
+    description: McAfee ePO API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: clienttask.find
+      path: /clienttask.find
+      operations:
+      - name: clienttaskfind
+        method: GET
+        description: McAfee Search for client tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search string to match against task names
+    - name: clienttask.run
+      path: /clienttask.run
+      operations:
+      - name: clienttaskrun
+        method: POST
+        description: McAfee Run a client task on systems
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: names
+          in: query
+          type: string
+          description: Comma-separated list of system names
+          required: true
+        - name: productId
+          in: query
+          type: string
+          description: Product ID for the task
+          required: true
+        - name: taskId
+          in: query
+          type: integer
+          description: Client task ID to execute
+          required: true
+    - name: scheduler.listServerTasks
+      path: /scheduler.listServerTasks
+      operations:
+      - name: schedulerlistservertasks
+        method: GET
+        description: McAfee List server tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduler.runServerTask
+      path: /scheduler.runServerTask
+      operations:
+      - name: schedulerrunservertask
+        method: POST
+        description: McAfee Run a server task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: taskId
+          in: query
+          type: integer
+          description: ID of the server task to execute
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.MCAFEE_USER}}'
+      password: '{{env.MCAFEE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: epo-tasks-rest
+    port: 8080
+    description: REST adapter for McAfee ePO API — Tasks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/clienttask-find
+      name: clienttask-find
+      description: REST surface for clienttask.find.
+      operations:
+      - method: GET
+        name: clienttaskfind
+        description: McAfee Search for client tasks
+        call: epo-tasks.clienttaskfind
+        with:
+          searchText: rest.searchText
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clienttask-run
+      name: clienttask-run
+      description: REST surface for clienttask.run.
+      operations:
+      - method: POST
+        name: clienttaskrun
+        description: McAfee Run a client task on systems
+        call: epo-tasks.clienttaskrun
+        with:
+          names: rest.names
+          productId: rest.productId
+          taskId: rest.taskId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scheduler-listservertasks
+      name: scheduler-listservertasks
+      description: REST surface for scheduler.listServerTasks.
+      operations:
+      - method: GET
+        name: schedulerlistservertasks
+        description: McAfee List server tasks
+        call: epo-tasks.schedulerlistservertasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scheduler-runservertask
+      name: scheduler-runservertask
+      description: REST surface for scheduler.runServerTask.
+      operations:
+      - method: POST
+        name: schedulerrunservertask
+        description: McAfee Run a server task
+        call: epo-tasks.schedulerrunservertask
+        with:
+          taskId: rest.taskId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: epo-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee ePO API — Tasks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: mcafee-search-client-tasks
+      description: McAfee Search for client tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: epo-tasks.clienttaskfind
+      with:
+        searchText: tools.searchText
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-run-client-task-systems
+      description: McAfee Run a client task on systems
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: epo-tasks.clienttaskrun
+      with:
+        names: tools.names
+        productId: tools.productId
+        taskId: tools.taskId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-list-server-tasks
+      description: McAfee List server tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: epo-tasks.schedulerlistservertasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-run-server-task
+      description: McAfee Run a server task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: epo-tasks.schedulerrunservertask
+      with:
+        taskId: tools.taskId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee ePO API — Software
+  description: 'McAfee ePO API — Software. 1 operations. Lead operation: McAfee Find software packages. Self-contained Naftiko
+    capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Software
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: epo-software
+    baseUri: https://{epo-server}:8443/remote
+    description: McAfee ePO API — Software business capability. Self-contained, no shared references.
+    resources:
+    - name: repository.findPackages
+      path: /repository.findPackages
+      operations:
+      - name: repositoryfindpackages
+        method: GET
+        description: McAfee Find software packages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search string to filter packages
+    authentication:
+      type: basic
+      username: '{{env.MCAFEE_USER}}'
+      password: '{{env.MCAFEE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: epo-software-rest
+    port: 8080
+    description: REST adapter for McAfee ePO API — Software. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/repository-findpackages
+      name: repository-findpackages
+      description: REST surface for repository.findPackages.
+      operations:
+      - method: GET
+        name: repositoryfindpackages
+        description: McAfee Find software packages
+        call: epo-software.repositoryfindpackages
+        with:
+          searchText: rest.searchText
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: epo-software-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee ePO API — Software. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: mcafee-find-software-packages
+      description: McAfee Find software packages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: epo-software.repositoryfindpackages
+      with:
+        searchText: tools.searchText
+      outputParameters:
+      - type: object
+        mapping: $.

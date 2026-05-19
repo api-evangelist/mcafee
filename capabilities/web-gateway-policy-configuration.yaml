@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee Web Gateway API — Policy Configuration
+  description: 'McAfee Web Gateway API — Policy Configuration. 1 operations. Lead operation: McAfee Commit configuration changes.
+    Self-contained Naftiko capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Policy Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-gateway-policy-configuration
+    baseUri: https://{mwg-server}:4712/Konfigurator/REST
+    description: McAfee Web Gateway API — Policy Configuration business capability. Self-contained, no shared references.
+    resources:
+    - name: commit
+      path: /commit
+      operations:
+      - name: commitchanges
+        method: POST
+        description: McAfee Commit configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.MCAFEE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: web-gateway-policy-configuration-rest
+    port: 8080
+    description: REST adapter for McAfee Web Gateway API — Policy Configuration. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/commit
+      name: commit
+      description: REST surface for commit.
+      operations:
+      - method: POST
+        name: commitchanges
+        description: McAfee Commit configuration changes
+        call: web-gateway-policy-configuration.commitchanges
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-gateway-policy-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee Web Gateway API — Policy Configuration. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: mcafee-commit-configuration-changes
+      description: McAfee Commit configuration changes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: web-gateway-policy-configuration.commitchanges
+      outputParameters:
+      - type: object
+        mapping: $.

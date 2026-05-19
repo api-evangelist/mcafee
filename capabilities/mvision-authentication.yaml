@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee MVISION API — Authentication
+  description: 'McAfee MVISION API — Authentication. 1 operations. Lead operation: McAfee Obtain access token. Self-contained
+    Naftiko capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mvision-authentication
+    baseUri: https://api.mvision.mcafee.com
+    description: McAfee MVISION API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: iam-v1.1-token
+      path: /iam/v1.1/token
+      operations:
+      - name: gettoken
+        method: POST
+        description: McAfee Obtain access token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MCAFEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mvision-authentication-rest
+    port: 8080
+    description: REST adapter for McAfee MVISION API — Authentication. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/iam/v1-1/token
+      name: iam-v1-1-token
+      description: REST surface for iam-v1.1-token.
+      operations:
+      - method: POST
+        name: gettoken
+        description: McAfee Obtain access token
+        call: mvision-authentication.gettoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mvision-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee MVISION API — Authentication. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: mcafee-obtain-access-token
+      description: McAfee Obtain access token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mvision-authentication.gettoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

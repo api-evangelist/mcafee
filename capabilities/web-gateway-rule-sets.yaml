@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee Web Gateway API — Rule Sets
+  description: 'McAfee Web Gateway API — Rule Sets. 4 operations. Lead operation: McAfee List rule sets. Self-contained Naftiko
+    capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Rule Sets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-gateway-rule-sets
+    baseUri: https://{mwg-server}:4712/Konfigurator/REST
+    description: McAfee Web Gateway API — Rule Sets business capability. Self-contained, no shared references.
+    resources:
+    - name: rulesets
+      path: /rulesets
+      operations:
+      - name: listrulesets
+        method: GET
+        description: McAfee List rule sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rulesets-rulesetId
+      path: /rulesets/{rulesetId}
+      operations:
+      - name: getruleset
+        method: GET
+        description: McAfee Get a specific rule set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateruleset
+        method: PUT
+        description: McAfee Update a rule set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteruleset
+        method: DELETE
+        description: McAfee Delete a rule set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.MCAFEE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: web-gateway-rule-sets-rest
+    port: 8080
+    description: REST adapter for McAfee Web Gateway API — Rule Sets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/rulesets
+      name: rulesets
+      description: REST surface for rulesets.
+      operations:
+      - method: GET
+        name: listrulesets
+        description: McAfee List rule sets
+        call: web-gateway-rule-sets.listrulesets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rulesets/{rulesetid}
+      name: rulesets-rulesetid
+      description: REST surface for rulesets-rulesetId.
+      operations:
+      - method: GET
+        name: getruleset
+        description: McAfee Get a specific rule set
+        call: web-gateway-rule-sets.getruleset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateruleset
+        description: McAfee Update a rule set
+        call: web-gateway-rule-sets.updateruleset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteruleset
+        description: McAfee Delete a rule set
+        call: web-gateway-rule-sets.deleteruleset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-gateway-rule-sets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee Web Gateway API — Rule Sets. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: mcafee-list-rule-sets
+      description: McAfee List rule sets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-gateway-rule-sets.listrulesets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-get-specific-rule-set
+      description: McAfee Get a specific rule set
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-gateway-rule-sets.getruleset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-update-rule-set
+      description: McAfee Update a rule set
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: web-gateway-rule-sets.updateruleset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-delete-rule-set
+      description: McAfee Delete a rule set
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: web-gateway-rule-sets.deleteruleset
+      outputParameters:
+      - type: object
+        mapping: $.

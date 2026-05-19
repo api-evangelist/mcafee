@@ -1,0 +1,158 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee MVISION API — Threats
+  description: 'McAfee MVISION API — Threats. 3 operations. Lead operation: McAfee List threats. Self-contained Naftiko capability
+    covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Threats
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mvision-threats
+    baseUri: https://api.mvision.mcafee.com
+    description: McAfee MVISION API — Threats business capability. Self-contained, no shared references.
+    resources:
+    - name: edr-v2-threats
+      path: /edr/v2/threats
+      operations:
+      - name: listthreats
+        method: GET
+        description: McAfee List threats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter[severity]
+          in: query
+          type: string
+          description: Filter threats by severity level
+        - name: filter[status]
+          in: query
+          type: string
+          description: Filter threats by current status
+        - name: filter[detectedAfter]
+          in: query
+          type: string
+          description: Filter threats detected after this ISO 8601 timestamp
+    - name: edr-v2-threats-threatId
+      path: /edr/v2/threats/{threatId}
+      operations:
+      - name: getthreat
+        method: GET
+        description: McAfee Get a specific threat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatethreat
+        method: PATCH
+        description: McAfee Update threat status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MCAFEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mvision-threats-rest
+    port: 8080
+    description: REST adapter for McAfee MVISION API — Threats. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/edr/v2/threats
+      name: edr-v2-threats
+      description: REST surface for edr-v2-threats.
+      operations:
+      - method: GET
+        name: listthreats
+        description: McAfee List threats
+        call: mvision-threats.listthreats
+        with:
+          filter[severity]: rest.filter[severity]
+          filter[status]: rest.filter[status]
+          filter[detectedAfter]: rest.filter[detectedAfter]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edr/v2/threats/{threatid}
+      name: edr-v2-threats-threatid
+      description: REST surface for edr-v2-threats-threatId.
+      operations:
+      - method: GET
+        name: getthreat
+        description: McAfee Get a specific threat
+        call: mvision-threats.getthreat
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatethreat
+        description: McAfee Update threat status
+        call: mvision-threats.updatethreat
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mvision-threats-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee MVISION API — Threats. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: mcafee-list-threats
+      description: McAfee List threats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mvision-threats.listthreats
+      with:
+        filter[severity]: tools.filter[severity]
+        filter[status]: tools.filter[status]
+        filter[detectedAfter]: tools.filter[detectedAfter]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-get-specific-threat
+      description: McAfee Get a specific threat
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mvision-threats.getthreat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-update-threat-status
+      description: McAfee Update threat status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: mvision-threats.updatethreat
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

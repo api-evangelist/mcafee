@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee MVISION API — Detections
+  description: 'McAfee MVISION API — Detections. 2 operations. Lead operation: McAfee List detections. Self-contained Naftiko
+    capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Detections
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mvision-detections
+    baseUri: https://api.mvision.mcafee.com
+    description: McAfee MVISION API — Detections business capability. Self-contained, no shared references.
+    resources:
+    - name: edr-v2-detections
+      path: /edr/v2/detections
+      operations:
+      - name: listdetections
+        method: GET
+        description: McAfee List detections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter[severity]
+          in: query
+          type: string
+          description: Filter by detection severity
+        - name: filter[hostName]
+          in: query
+          type: string
+          description: Filter detections by hostname
+        - name: filter[ruleId]
+          in: query
+          type: string
+          description: Filter by detection rule ID
+    - name: edr-v2-detections-detectionId
+      path: /edr/v2/detections/{detectionId}
+      operations:
+      - name: getdetection
+        method: GET
+        description: McAfee Get a specific detection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: detectionId
+          in: path
+          type: string
+          description: Unique detection identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MCAFEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mvision-detections-rest
+    port: 8080
+    description: REST adapter for McAfee MVISION API — Detections. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/edr/v2/detections
+      name: edr-v2-detections
+      description: REST surface for edr-v2-detections.
+      operations:
+      - method: GET
+        name: listdetections
+        description: McAfee List detections
+        call: mvision-detections.listdetections
+        with:
+          filter[severity]: rest.filter[severity]
+          filter[hostName]: rest.filter[hostName]
+          filter[ruleId]: rest.filter[ruleId]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/edr/v2/detections/{detectionid}
+      name: edr-v2-detections-detectionid
+      description: REST surface for edr-v2-detections-detectionId.
+      operations:
+      - method: GET
+        name: getdetection
+        description: McAfee Get a specific detection
+        call: mvision-detections.getdetection
+        with:
+          detectionId: rest.detectionId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mvision-detections-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee MVISION API — Detections. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: mcafee-list-detections
+      description: McAfee List detections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mvision-detections.listdetections
+      with:
+        filter[severity]: tools.filter[severity]
+        filter[hostName]: tools.filter[hostName]
+        filter[ruleId]: tools.filter[ruleId]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-get-specific-detection
+      description: McAfee Get a specific detection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mvision-detections.getdetection
+      with:
+        detectionId: tools.detectionId
+      outputParameters:
+      - type: object
+        mapping: $.

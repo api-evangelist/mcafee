@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee ePO API — Threat Events
+  description: 'McAfee ePO API — Threat Events. 1 operations. Lead operation: McAfee Find threat events. Self-contained Naftiko
+    capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Threat Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: epo-threat-events
+    baseUri: https://{epo-server}:8443/remote
+    description: McAfee ePO API — Threat Events business capability. Self-contained, no shared references.
+    resources:
+    - name: detectedsystem.find
+      path: /detectedsystem.find
+      operations:
+      - name: detectedsystemfind
+        method: GET
+        description: McAfee Find threat events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchText
+          in: query
+          type: string
+          description: Search text to filter threat events
+    authentication:
+      type: basic
+      username: '{{env.MCAFEE_USER}}'
+      password: '{{env.MCAFEE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: epo-threat-events-rest
+    port: 8080
+    description: REST adapter for McAfee ePO API — Threat Events. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/detectedsystem-find
+      name: detectedsystem-find
+      description: REST surface for detectedsystem.find.
+      operations:
+      - method: GET
+        name: detectedsystemfind
+        description: McAfee Find threat events
+        call: epo-threat-events.detectedsystemfind
+        with:
+          searchText: rest.searchText
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: epo-threat-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee ePO API — Threat Events. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: mcafee-find-threat-events
+      description: McAfee Find threat events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: epo-threat-events.detectedsystemfind
+      with:
+        searchText: tools.searchText
+      outputParameters:
+      - type: object
+        mapping: $.

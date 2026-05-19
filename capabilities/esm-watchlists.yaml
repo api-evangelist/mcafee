@@ -1,0 +1,198 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee ESM API — Watchlists
+  description: 'McAfee ESM API — Watchlists. 4 operations. Lead operation: McAfee Add values to a watchlist. Self-contained
+    Naftiko capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Watchlists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: esm-watchlists
+    baseUri: https://{esm-server}/rs/esm
+    description: McAfee ESM API — Watchlists business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-sysAddWatchlistValues
+      path: /v2/sysAddWatchlistValues
+      operations:
+      - name: addwatchlistvalues
+        method: POST
+        description: McAfee Add values to a watchlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-sysGetWatchlistValues
+      path: /v2/sysGetWatchlistValues
+      operations:
+      - name: getwatchlistvalues
+        method: POST
+        description: McAfee Get watchlist values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-sysGetWatchlists
+      path: /v2/sysGetWatchlists
+      operations:
+      - name: getwatchlists
+        method: POST
+        description: McAfee List watchlists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-sysRemoveWatchlistValues
+      path: /v2/sysRemoveWatchlistValues
+      operations:
+      - name: removewatchlistvalues
+        method: POST
+        description: McAfee Remove values from a watchlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: JWTToken
+      value: '{{env.MCAFEE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: esm-watchlists-rest
+    port: 8080
+    description: REST adapter for McAfee ESM API — Watchlists. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v2/sysaddwatchlistvalues
+      name: v2-sysaddwatchlistvalues
+      description: REST surface for v2-sysAddWatchlistValues.
+      operations:
+      - method: POST
+        name: addwatchlistvalues
+        description: McAfee Add values to a watchlist
+        call: esm-watchlists.addwatchlistvalues
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/sysgetwatchlistvalues
+      name: v2-sysgetwatchlistvalues
+      description: REST surface for v2-sysGetWatchlistValues.
+      operations:
+      - method: POST
+        name: getwatchlistvalues
+        description: McAfee Get watchlist values
+        call: esm-watchlists.getwatchlistvalues
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/sysgetwatchlists
+      name: v2-sysgetwatchlists
+      description: REST surface for v2-sysGetWatchlists.
+      operations:
+      - method: POST
+        name: getwatchlists
+        description: McAfee List watchlists
+        call: esm-watchlists.getwatchlists
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/sysremovewatchlistvalues
+      name: v2-sysremovewatchlistvalues
+      description: REST surface for v2-sysRemoveWatchlistValues.
+      operations:
+      - method: POST
+        name: removewatchlistvalues
+        description: McAfee Remove values from a watchlist
+        call: esm-watchlists.removewatchlistvalues
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: esm-watchlists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee ESM API — Watchlists. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: mcafee-add-values-watchlist
+      description: McAfee Add values to a watchlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: esm-watchlists.addwatchlistvalues
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-get-watchlist-values
+      description: McAfee Get watchlist values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: esm-watchlists.getwatchlistvalues
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-list-watchlists
+      description: McAfee List watchlists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: esm-watchlists.getwatchlists
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-remove-values-watchlist
+      description: McAfee Remove values from a watchlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: esm-watchlists.removewatchlistvalues
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

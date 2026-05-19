@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: McAfee Web Gateway API — Monitoring
+  description: 'McAfee Web Gateway API — Monitoring. 2 operations. Lead operation: McAfee Get appliance status. Self-contained
+    Naftiko capability covering one Mcafee business surface.'
+  tags:
+  - Mcafee
+  - Monitoring
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MCAFEE_API_KEY: MCAFEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-gateway-monitoring
+    baseUri: https://{mwg-server}:4712/Konfigurator/REST
+    description: McAfee Web Gateway API — Monitoring business capability. Self-contained, no shared references.
+    resources:
+    - name: appliance-status
+      path: /appliance/status
+      operations:
+      - name: getappliancestatus
+        method: GET
+        description: McAfee Get appliance status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: appliance-traffic
+      path: /appliance/traffic
+      operations:
+      - name: gettrafficstatistics
+        method: GET
+        description: McAfee Get traffic statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: period
+          in: query
+          type: string
+          description: Time period for statistics
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.MCAFEE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: web-gateway-monitoring-rest
+    port: 8080
+    description: REST adapter for McAfee Web Gateway API — Monitoring. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/appliance/status
+      name: appliance-status
+      description: REST surface for appliance-status.
+      operations:
+      - method: GET
+        name: getappliancestatus
+        description: McAfee Get appliance status
+        call: web-gateway-monitoring.getappliancestatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/appliance/traffic
+      name: appliance-traffic
+      description: REST surface for appliance-traffic.
+      operations:
+      - method: GET
+        name: gettrafficstatistics
+        description: McAfee Get traffic statistics
+        call: web-gateway-monitoring.gettrafficstatistics
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-gateway-monitoring-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for McAfee Web Gateway API — Monitoring. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: mcafee-get-appliance-status
+      description: McAfee Get appliance status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-gateway-monitoring.getappliancestatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mcafee-get-traffic-statistics
+      description: McAfee Get traffic statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-gateway-monitoring.gettrafficstatistics
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
