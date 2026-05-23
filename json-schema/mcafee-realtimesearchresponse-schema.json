@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RealTimeSearchResponse",
+  "title": "RealTimeSearchResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Real-time search ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "realTimeSearches"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "running",
+                "completed",
+                "failed"
+              ],
+              "description": "Search status"
+            },
+            "query": {
+              "type": "string",
+              "description": "Submitted query"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            }
+          }
+        }
+      }
+    }
+  }
+}

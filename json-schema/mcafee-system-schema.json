@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/System",
+  "title": "System",
+  "type": "object",
+  "properties": {
+    "EPOComputerProperties.ParentID": {
+      "type": "integer",
+      "description": "Parent group ID in the System Tree"
+    },
+    "EPOComputerProperties.ComputerName": {
+      "type": "string",
+      "description": "NetBIOS computer name"
+    },
+    "EPOComputerProperties.IPAddress": {
+      "type": "string",
+      "description": "IP address of the system"
+    },
+    "EPOComputerProperties.OSType": {
+      "type": "string",
+      "description": "Operating system type"
+    },
+    "EPOComputerProperties.OSVersion": {
+      "type": "string",
+      "description": "Operating system version"
+    },
+    "EPOComputerProperties.DomainName": {
+      "type": "string",
+      "description": "Domain or workgroup name"
+    },
+    "EPOComputerProperties.UserName": {
+      "type": "string",
+      "description": "Logged-in user name"
+    },
+    "EPOComputerProperties.Tags": {
+      "type": "string",
+      "description": "Comma-separated list of applied tags"
+    },
+    "EPOLeafNode.AgentGUID": {
+      "type": "string",
+      "description": "Unique McAfee Agent GUID"
+    },
+    "EPOLeafNode.AgentVersion": {
+      "type": "string",
+      "description": "Installed McAfee Agent version"
+    },
+    "EPOLeafNode.LastUpdate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last agent-server communication time"
+    },
+    "EPOLeafNode.ManagedState": {
+      "type": "string",
+      "description": "Management state of the system"
+    }
+  }
+}

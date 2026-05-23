@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Device",
+  "title": "Device",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique device ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "devices"
+      ]
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "Device hostname"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Device IP address"
+        },
+        "os": {
+          "type": "string",
+          "description": "Operating system"
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Operating system version"
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "MVISION agent version"
+        },
+        "healthStatus": {
+          "type": "string",
+          "enum": [
+            "healthy",
+            "unhealthy",
+            "inactive"
+          ],
+          "description": "Device health status"
+        },
+        "lastCheckIn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last agent check-in time"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Applied tags"
+        }
+      }
+    }
+  }
+}

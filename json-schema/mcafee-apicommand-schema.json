@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApiCommand",
+  "title": "ApiCommand",
+  "type": "object",
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "Command name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Command description"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RemediationActionResponse",
+  "title": "RemediationActionResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Remediation action ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "remediationActions"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "description": "Action type"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "in_progress",
+                "completed",
+                "failed"
+              ],
+              "description": "Action status"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            }
+          }
+        }
+      }
+    }
+  }
+}

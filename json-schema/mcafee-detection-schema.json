@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Detection",
+  "title": "Detection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique detection ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "detections"
+      ]
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "ruleName": {
+          "type": "string",
+          "description": "Detection rule name"
+        },
+        "ruleId": {
+          "type": "string",
+          "description": "Detection rule identifier"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "informational",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "description": "Detection severity"
+        },
+        "detectedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Detection timestamp"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Hostname where detection occurred"
+        },
+        "processName": {
+          "type": "string",
+          "description": "Triggering process name"
+        },
+        "processId": {
+          "type": "integer",
+          "description": "Process ID"
+        },
+        "parentProcessName": {
+          "type": "string",
+          "description": "Parent process name"
+        },
+        "commandLine": {
+          "type": "string",
+          "description": "Process command line"
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA-256 hash of the file"
+        },
+        "mitreAttackTactic": {
+          "type": "string",
+          "description": "MITRE ATT&CK tactic"
+        },
+        "mitreAttackTechnique": {
+          "type": "string",
+          "description": "MITRE ATT&CK technique"
+        }
+      }
+    }
+  }
+}

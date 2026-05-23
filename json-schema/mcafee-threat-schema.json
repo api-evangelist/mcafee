@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Threat",
+  "title": "Threat",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique threat ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "threats"
+      ]
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Threat name"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "description": "Threat severity level"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "new",
+            "investigating",
+            "resolved",
+            "dismissed"
+          ],
+          "description": "Current threat status"
+        },
+        "detectedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Detection timestamp"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Affected hostname"
+        },
+        "processName": {
+          "type": "string",
+          "description": "Associated process name"
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Associated file path"
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA-256 hash of the associated file"
+        },
+        "mitreAttackTechnique": {
+          "type": "string",
+          "description": "MITRE ATT&CK technique ID"
+        }
+      }
+    }
+  }
+}

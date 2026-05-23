@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RuleSet",
+  "title": "RuleSet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Rule set identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Rule set name"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the rule set is enabled"
+    },
+    "type": {
+      "type": "string",
+      "description": "Rule set type (e.g., request, response)"
+    }
+  }
+}

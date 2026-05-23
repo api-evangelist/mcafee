@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ThreatEvent",
+  "title": "ThreatEvent",
+  "type": "object",
+  "properties": {
+    "AutoID": {
+      "type": "integer",
+      "description": "Auto-incremented event ID"
+    },
+    "DetectedUTC": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Detection time in UTC"
+    },
+    "ReceivedUTC": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the event was received by ePO"
+    },
+    "ThreatName": {
+      "type": "string",
+      "description": "Name of the detected threat"
+    },
+    "ThreatType": {
+      "type": "string",
+      "description": "Type of threat (e.g., virus, trojan, PUP)"
+    },
+    "ThreatSeverity": {
+      "type": "integer",
+      "description": "Severity level of the threat"
+    },
+    "ThreatActionTaken": {
+      "type": "string",
+      "description": "Action taken on the threat (e.g., cleaned, deleted, quarantined)"
+    },
+    "SourceHostName": {
+      "type": "string",
+      "description": "Hostname of the system where the threat was detected"
+    },
+    "SourceIPV4": {
+      "type": "string",
+      "description": "IPv4 address of the source system"
+    },
+    "TargetFileName": {
+      "type": "string",
+      "description": "File path of the affected file"
+    },
+    "AnalyzerName": {
+      "type": "string",
+      "description": "Name of the product that detected the threat"
+    },
+    "AnalyzerVersion": {
+      "type": "string",
+      "description": "Version of the detecting product"
+    }
+  }
+}

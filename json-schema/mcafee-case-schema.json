@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Case",
+  "title": "Case",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Case ID"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Case summary"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Closed",
+        "Other"
+      ],
+      "description": "Case status"
+    },
+    "severity": {
+      "type": "integer",
+      "description": "Case severity (1-100)"
+    },
+    "assignee": {
+      "type": "string",
+      "description": "Assigned analyst"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "author": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Case notes"
+    },
+    "openTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the case was opened"
+    },
+    "closeTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the case was closed"
+    }
+  }
+}

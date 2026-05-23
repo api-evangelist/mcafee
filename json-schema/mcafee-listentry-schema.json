@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ListEntry",
+  "title": "ListEntry",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "string",
+      "description": "Entry value (URL, IP, etc.)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description for the entry"
+    }
+  }
+}

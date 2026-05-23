@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplianceStatus",
+  "title": "ApplianceStatus",
+  "type": "object",
+  "properties": {
+    "hostname": {
+      "type": "string",
+      "description": "Appliance hostname"
+    },
+    "uptime": {
+      "type": "string",
+      "description": "Appliance uptime"
+    },
+    "cpuUsage": {
+      "type": "number",
+      "format": "float",
+      "description": "Current CPU usage percentage"
+    },
+    "memoryUsage": {
+      "type": "number",
+      "format": "float",
+      "description": "Current memory usage percentage"
+    },
+    "activeConnections": {
+      "type": "integer",
+      "description": "Number of active proxy connections"
+    },
+    "version": {
+      "type": "string",
+      "description": "Web Gateway software version"
+    }
+  }
+}

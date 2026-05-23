@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TrafficStatistics",
+  "title": "TrafficStatistics",
+  "type": "object",
+  "properties": {
+    "period": {
+      "type": "string",
+      "description": "Statistics time period"
+    },
+    "totalRequests": {
+      "type": "integer",
+      "description": "Total number of web requests"
+    },
+    "blockedRequests": {
+      "type": "integer",
+      "description": "Number of blocked requests"
+    },
+    "allowedRequests": {
+      "type": "integer",
+      "description": "Number of allowed requests"
+    },
+    "bytesTransferred": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Total bytes transferred"
+    },
+    "topCategories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      },
+      "description": "Top URL categories by request count"
+    }
+  }
+}

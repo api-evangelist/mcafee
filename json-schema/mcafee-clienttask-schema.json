@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClientTask",
+  "title": "ClientTask",
+  "type": "object",
+  "properties": {
+    "objectId": {
+      "type": "integer",
+      "description": "Task object ID"
+    },
+    "objectName": {
+      "type": "string",
+      "description": "Task name"
+    },
+    "productId": {
+      "type": "string",
+      "description": "Product ID the task belongs to"
+    },
+    "typeId": {
+      "type": "string",
+      "description": "Task type identifier"
+    },
+    "productName": {
+      "type": "string",
+      "description": "Display name of the product"
+    }
+  }
+}

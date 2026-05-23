@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FilterList",
+  "title": "FilterList",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "List identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "List name"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "url",
+        "ip",
+        "mediaType",
+        "string",
+        "category"
+      ],
+      "description": "Type of entries in the list"
+    },
+    "entryCount": {
+      "type": "integer",
+      "description": "Number of entries in the list"
+    }
+  }
+}

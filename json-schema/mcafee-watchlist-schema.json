@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Watchlist",
+  "title": "Watchlist",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Watchlist ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Watchlist name"
+    },
+    "type": {
+      "type": "string",
+      "description": "Watchlist value type (e.g., IPAddress, Hash, String)"
+    },
+    "valueCount": {
+      "type": "integer",
+      "description": "Number of values in the watchlist"
+    },
+    "dynamic": {
+      "type": "boolean",
+      "description": "Whether the watchlist is dynamically populated"
+    }
+  }
+}

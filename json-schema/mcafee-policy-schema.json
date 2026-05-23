@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Policy",
+  "title": "Policy",
+  "type": "object",
+  "properties": {
+    "objectId": {
+      "type": "integer",
+      "description": "Policy object ID"
+    },
+    "objectName": {
+      "type": "string",
+      "description": "Policy name"
+    },
+    "productId": {
+      "type": "string",
+      "description": "Product ID the policy belongs to"
+    },
+    "typeId": {
+      "type": "string",
+      "description": "Policy type identifier"
+    },
+    "productName": {
+      "type": "string",
+      "description": "Display name of the product"
+    }
+  }
+}

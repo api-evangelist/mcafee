@@ -1,0 +1,225 @@
+{
+  "provider": "McAfee (Trellix)",
+  "providerId": "mcafee",
+  "kind": "json-structure",
+  "description": "Structural overview of the McAfee (Trellix) API surface; extracted from openapi/.",
+  "schemaCount": 16,
+  "operationCount": 13,
+  "schemas": [
+    {
+      "name": "TokenResponse",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "PaginationMeta",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Threat",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ThreatListResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ThreatResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Detection",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "DetectionListResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "DetectionResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Device",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "DeviceListResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "DeviceResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Investigation",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "InvestigationListResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "InvestigationResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "RemediationActionResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "RealTimeSearchResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/iam/v1.1/token",
+      "operationId": "getToken",
+      "summary": "McAfee Obtain access token",
+      "tags": [
+        "Authentication"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/threats",
+      "operationId": "listThreats",
+      "summary": "McAfee List threats",
+      "tags": [
+        "Threats"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/threats/{threatId}",
+      "operationId": "getThreat",
+      "summary": "McAfee Get a specific threat",
+      "tags": [
+        "Threats"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/edr/v2/threats/{threatId}",
+      "operationId": "updateThreat",
+      "summary": "McAfee Update threat status",
+      "tags": [
+        "Threats"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/detections",
+      "operationId": "listDetections",
+      "summary": "McAfee List detections",
+      "tags": [
+        "Detections"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/detections/{detectionId}",
+      "operationId": "getDetection",
+      "summary": "McAfee Get a specific detection",
+      "tags": [
+        "Detections"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/devices",
+      "operationId": "listDevices",
+      "summary": "McAfee List managed devices",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/devices/{deviceId}",
+      "operationId": "getDevice",
+      "summary": "McAfee Get a specific device",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/investigations",
+      "operationId": "listInvestigations",
+      "summary": "McAfee List investigations",
+      "tags": [
+        "Investigations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/edr/v2/investigations",
+      "operationId": "createInvestigation",
+      "summary": "McAfee Create an investigation",
+      "tags": [
+        "Investigations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/edr/v2/remediation/actions",
+      "operationId": "createRemediationAction",
+      "summary": "McAfee Create a remediation action",
+      "tags": [
+        "Investigations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/edr/v2/real-time-search",
+      "operationId": "createRealTimeSearch",
+      "summary": "McAfee Create a real-time search",
+      "tags": [
+        "Real-Time Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edr/v2/real-time-search/{searchId}/results",
+      "operationId": "getRealTimeSearchResults",
+      "summary": "McAfee Get real-time search results",
+      "tags": [
+        "Real-Time Search"
+      ]
+    }
+  ]
+}

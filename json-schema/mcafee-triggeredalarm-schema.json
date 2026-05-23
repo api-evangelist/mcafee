@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TriggeredAlarm",
+  "title": "TriggeredAlarm",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Triggered alarm ID"
+    },
+    "alarmName": {
+      "type": "string",
+      "description": "Name of the alarm definition"
+    },
+    "triggeredDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the alarm was triggered"
+    },
+    "acknowledgedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the alarm was acknowledged"
+    },
+    "acknowledgedUsername": {
+      "type": "string",
+      "description": "User who acknowledged the alarm"
+    },
+    "severity": {
+      "type": "integer",
+      "description": "Alarm severity"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Alarm summary text"
+    },
+    "assignee": {
+      "type": "string",
+      "description": "Assigned analyst"
+    },
+    "caseId": {
+      "type": "integer",
+      "description": "Associated case ID"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string"
+          },
+          "sourceIp": {
+            "type": "string"
+          },
+          "destIp": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Associated events"
+    }
+  }
+}

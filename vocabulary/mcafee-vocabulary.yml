@@ -1,0 +1,17 @@
+name: McAfee (Trellix) Domain Vocabulary
+provider: McAfee (Trellix)
+providerId: mcafee
+description: Tag-derived vocabulary for the McAfee (Trellix) API surface; sourced from openapi/ tags.
+terms:
+- term: Authentication
+  description: Obtain access tokens for API authentication
+- term: Detections
+  description: EDR detection events and alerts
+- term: Devices
+  description: Managed device inventory and status
+- term: Investigations
+  description: Threat investigation workflows and actions
+- term: Real-Time Search
+  description: Real-time data collection from endpoints
+- term: Threats
+  description: Retrieve and manage detected threats

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LoginResponse",
+  "title": "LoginResponse",
+  "type": "object",
+  "properties": {
+    "session": {
+      "type": "string",
+      "description": "Session token for subsequent requests"
+    },
+    "userId": {
+      "type": "integer",
+      "description": "Authenticated user ID"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "User roles"
+    },
+    "locale": {
+      "type": "string",
+      "description": "Session locale"
+    }
+  }
+}

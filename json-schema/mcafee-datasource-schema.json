@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataSource",
+  "title": "DataSource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Data source ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Data source name"
+    },
+    "ipAddress": {
+      "type": "string",
+      "description": "IP address of the data source"
+    },
+    "type": {
+      "type": "string",
+      "description": "Data source type"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the data source is enabled"
+    },
+    "childType": {
+      "type": "string",
+      "description": "Child data source type"
+    },
+    "zoneId": {
+      "type": "integer",
+      "description": "Zone ID"
+    }
+  }
+}

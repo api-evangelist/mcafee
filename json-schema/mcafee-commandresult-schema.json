@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommandResult",
+  "title": "CommandResult",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "description": "Result status message"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SavedQuery",
+  "title": "SavedQuery",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Query ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Query name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Query description"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the query"
+    },
+    "groupName": {
+      "type": "string",
+      "description": "Query group name"
+    }
+  }
+}

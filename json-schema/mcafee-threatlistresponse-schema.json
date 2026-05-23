@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ThreatListResponse",
+  "title": "ThreatListResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Threat"
+      }
+    },
+    "meta": {
+      "$ref": "#/components/schemas/PaginationMeta"
+    }
+  }
+}

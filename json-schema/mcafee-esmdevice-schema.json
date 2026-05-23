@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EsmDevice",
+  "title": "EsmDevice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Device ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Device name"
+    },
+    "ipAddress": {
+      "type": "string",
+      "description": "Device IP address"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "ESM",
+        "Receiver",
+        "ELM",
+        "ACE",
+        "DEM",
+        "ADM"
+      ],
+      "description": "Device type in the ESM hierarchy"
+    },
+    "status": {
+      "type": "string",
+      "description": "Device operational status"
+    },
+    "model": {
+      "type": "string",
+      "description": "Hardware or virtual model"
+    }
+  }
+}
