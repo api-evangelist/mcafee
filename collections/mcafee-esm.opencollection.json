@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ESM API",
+    "version": "11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JWTToken",
+      "value": "{{JWTToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Authenticate and create session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate with ESM credentials to obtain a session token. The session token must be included in subsequent requests as a cookie or header."
+        },
+        {
+          "info": {
+            "name": "McAfee End current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{esm-server}/rs/esm/v2/logout"
+          },
+          "docs": "Terminate the current authenticated session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Alarms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Get triggered alarms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/alarmGetTriggeredAlarms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve a list of triggered alarms within a specified time range, optionally filtered by status or severity."
+        },
+        {
+          "info": {
+            "name": "McAfee Acknowledge a triggered alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/alarmAcknowledgeTriggeredAlarm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge one or more triggered alarms, marking them as reviewed by an analyst."
+        },
+        {
+          "info": {
+            "name": "McAfee Delete triggered alarms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/alarmDeleteTriggeredAlarm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete one or more triggered alarm records from the ESM database."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Execute an event query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/qryExecuteDetail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a query against the ESM event database to retrieve security events matching specified criteria. Returns a result ID for fetching results asynchronously."
+        },
+        {
+          "info": {
+            "name": "McAfee Get query results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/qryGetResults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the results of a previously executed query using the result ID. May need to be called multiple times as results become available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Watchlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/sysGetWatchlists"
+          },
+          "docs": "Retrieve all configured watchlists, which are collections of values (IPs, hostnames, etc.) used for correlation and alerting."
+        },
+        {
+          "info": {
+            "name": "McAfee Get watchlist values",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/sysGetWatchlistValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the values (entries) contained in a specific watchlist."
+        },
+        {
+          "info": {
+            "name": "McAfee Add values to a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/sysAddWatchlistValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more values to an existing watchlist for use in correlation rules and alarm triggers."
+        },
+        {
+          "info": {
+            "name": "McAfee Remove values from a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/sysRemoveWatchlistValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove one or more values from an existing watchlist."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List data sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/dsGetDataSourceList"
+          },
+          "docs": "Retrieve all configured data sources that feed events into the ESM, including syslog sources, database connections, and agent-based sources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List incident cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/caseGetCaseList",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve a list of incident response cases managed in the ESM, with optional filtering by status, assignee, or priority."
+        },
+        {
+          "info": {
+            "name": "McAfee Create a new case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/caseAddCase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new incident response case for tracking investigation and remediation of a security incident."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List ESM devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{esm-server}/rs/esm/v2/devGetDeviceList"
+          },
+          "docs": "Retrieve the list of devices in the ESM device hierarchy, including receivers, ELM, ACE, DEM, and ADM components."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

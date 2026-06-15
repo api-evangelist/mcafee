@@ -1,0 +1,305 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee Web Gateway API",
+    "version": "10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Authenticate and create session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/login"
+          },
+          "docs": "Authenticate with administrator credentials to establish a session. Returns a session cookie used for subsequent API requests."
+        },
+        {
+          "info": {
+            "name": "McAfee End current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/logout"
+          },
+          "docs": "Terminate the current session and invalidate the session cookie."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rule Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List rule sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/rulesets"
+          },
+          "docs": "Retrieve a list of all configured rule sets, including web filtering, SSL scanning, authentication, and media type filtering rules."
+        },
+        {
+          "info": {
+            "name": "McAfee Get a specific rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/rulesets/:rulesetId",
+            "params": [
+              {
+                "name": "rulesetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule set identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the full configuration of a specific rule set, including all contained rules, conditions, and actions."
+        },
+        {
+          "info": {
+            "name": "McAfee Update a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/rulesets/:rulesetId",
+            "params": [
+              {
+                "name": "rulesetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule set identifier"
+              }
+            ]
+          },
+          "docs": "Update the configuration of an existing rule set, including enabling/disabling rules and modifying conditions."
+        },
+        {
+          "info": {
+            "name": "McAfee Delete a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/rulesets/:rulesetId",
+            "params": [
+              {
+                "name": "rulesetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule set identifier"
+              }
+            ]
+          },
+          "docs": "Delete a rule set from the configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List all filtering lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/lists"
+          },
+          "docs": "Retrieve all configured lists used for URL filtering, IP blocking, media type filtering, and custom categorization."
+        },
+        {
+          "info": {
+            "name": "McAfee Get a specific list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique filtering list identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the contents and configuration of a specific filtering list."
+        },
+        {
+          "info": {
+            "name": "McAfee Update a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique filtering list identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the entries in a filtering list, adding or removing URLs, IPs, or other entries."
+        },
+        {
+          "info": {
+            "name": "McAfee Add entry to a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/lists/:listId/entries",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique filtering list identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new entry (URL, IP, or other value) to a filtering list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Policy Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Commit configuration changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/commit"
+          },
+          "docs": "Save and activate all pending configuration changes. Changes made through the API are not active until committed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Get appliance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/appliance/status"
+          },
+          "docs": "Retrieve the current health status and resource utilization of the Web Gateway appliance, including CPU, memory, and connection counts."
+        },
+        {
+          "info": {
+            "name": "McAfee Get traffic statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/appliance/traffic",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "Time period for statistics"
+              }
+            ]
+          },
+          "docs": "Retrieve web traffic statistics including request counts, bytes transferred, blocked requests, and category breakdowns."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Export configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/file/export"
+          },
+          "docs": "Export the complete appliance configuration as a backup file."
+        },
+        {
+          "info": {
+            "name": "McAfee Import configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:4712/Konfigurator/REST/file/import",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Import a previously exported configuration backup to restore settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

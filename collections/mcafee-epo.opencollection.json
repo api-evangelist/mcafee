@@ -1,0 +1,579 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Core",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List available API commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/core.help",
+            "params": [
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Returns a list of all available remote API commands on the ePO server with their descriptions and parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Systems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Search for systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/system.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against system names, IP addresses, or other properties"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for managed systems in the ePO System Tree matching specified criteria such as name, IP address, tags, or custom properties."
+        },
+        {
+          "info": {
+            "name": "McAfee Find systems by tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/system.findTag",
+            "params": [
+              {
+                "name": "tagName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag to search for"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of systems that have a specific tag applied."
+        },
+        {
+          "info": {
+            "name": "McAfee Apply a tag to systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/system.applyTag",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names or IDs"
+              },
+              {
+                "name": "tagName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag to apply"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Apply a tag to one or more systems identified by name or ID."
+        },
+        {
+          "info": {
+            "name": "McAfee Remove a tag from systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/system.clearTag",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names or IDs"
+              },
+              {
+                "name": "tagName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag to remove"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Remove a tag from one or more systems identified by name or ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "System Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Find system tree groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/epogroup.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against group names"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for groups in the ePO System Tree by name or other criteria."
+        },
+        {
+          "info": {
+            "name": "McAfee Move a system to a different group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/epogroup.moveSystem",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names to move"
+              },
+              {
+                "name": "parentGroupId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the target parent group"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Move one or more systems from their current location in the System Tree to a specified target group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Search for policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/policy.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against policy names"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for security policies configured in ePO, optionally filtered by product or policy type."
+        },
+        {
+          "info": {
+            "name": "McAfee Assign a policy to a system",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/policy.assignToSystem",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product ID for the policy"
+              },
+              {
+                "name": "typeId",
+                "value": "",
+                "type": "query",
+                "description": "Policy type ID"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Policy object ID"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Assign a specific policy to one or more systems, overriding the inherited group policy."
+        },
+        {
+          "info": {
+            "name": "McAfee Assign a policy to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/policy.assignToGroup",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "Target group ID"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product ID for the policy"
+              },
+              {
+                "name": "typeId",
+                "value": "",
+                "type": "query",
+                "description": "Policy type ID"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Policy object ID"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Assign a specific policy to a System Tree group, which is then inherited by all child systems and sub-groups."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Search for client tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/clienttask.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against task names"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for client tasks that can be deployed to managed systems."
+        },
+        {
+          "info": {
+            "name": "McAfee Run a client task on systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/clienttask.run",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product ID for the task"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "query",
+                "description": "Client task ID to execute"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Execute a client task immediately on one or more specified systems."
+        },
+        {
+          "info": {
+            "name": "McAfee List server tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/scheduler.listServerTasks",
+            "params": [
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all configured server tasks in ePO, including pull tasks, replication tasks, and custom automation tasks."
+        },
+        {
+          "info": {
+            "name": "McAfee Run a server task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/scheduler.runServerTask",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the server task to execute"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Execute a server task immediately by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Execute a saved query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/core.executeQuery",
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the saved query to execute"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Execute a previously saved ePO query by ID and return the results. Queries can retrieve data about systems, events, policies, and other ePO objects."
+        },
+        {
+          "info": {
+            "name": "McAfee List saved queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/core.listQueries",
+            "params": [
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all saved queries available on the ePO server."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Threat Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Find threat events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/detectedsystem.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search text to filter threat events"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for detected threat events across managed systems, returning details about malware detections, intrusion attempts, and other security events."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Software",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Find software packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/repository.findPackages",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to filter packages"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for software packages in the ePO master repository, including DAT files, engine updates, and product packages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

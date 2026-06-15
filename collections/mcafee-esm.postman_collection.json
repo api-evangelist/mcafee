@@ -1,0 +1,2846 @@
+{
+  "item": [
+    {
+      "id": "4656a457-0701-4952-ad55-afd66702ae54",
+      "name": "Alarms",
+      "description": {
+        "content": "Manage security alarms",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41a39b6e-d657-4757-8001-ff3440f6015d",
+          "name": "McAfee Get triggered alarms",
+          "request": {
+            "name": "McAfee Get triggered alarms",
+            "description": {
+              "content": "Retrieve a list of triggered alarms within a specified time range, optionally filtered by status or severity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alarmGetTriggeredAlarms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggeredTimeRange\": \"<string>\",\n  \"customStart\": \"<dateTime>\",\n  \"customEnd\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"pageSize\": 50,\n  \"pageNumber\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a79d5a0-ad41-475a-8732-99034b0f9193",
+              "name": "List of triggered alarms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmGetTriggeredAlarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredTimeRange\": \"<string>\",\n  \"customStart\": \"<dateTime>\",\n  \"customEnd\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"pageSize\": 50,\n  \"pageNumber\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"triggeredAlarms\": [\n    {\n      \"id\": 4557,\n      \"alarmName\": \"string\",\n      \"triggeredDate\": \"1982-04-07T01:26:41.006Z\",\n      \"acknowledgedDate\": \"1955-07-11T23:10:32.713Z\",\n      \"acknowledgedUsername\": \"string\",\n      \"severity\": 1152,\n      \"summary\": \"string\",\n      \"assignee\": \"string\",\n      \"caseId\": 9032,\n      \"events\": [\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        },\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 6935,\n      \"alarmName\": \"string\",\n      \"triggeredDate\": \"2021-06-29T19:40:10.590Z\",\n      \"acknowledgedDate\": \"1952-08-20T05:22:42.091Z\",\n      \"acknowledgedUsername\": \"string\",\n      \"severity\": 6090,\n      \"summary\": \"string\",\n      \"assignee\": \"string\",\n      \"caseId\": 1664,\n      \"events\": [\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        },\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": 9813\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91a8a599-675e-4e3f-8d75-c04b476b60dc",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmGetTriggeredAlarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredTimeRange\": \"<string>\",\n  \"customStart\": \"<dateTime>\",\n  \"customEnd\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"pageSize\": 50,\n  \"pageNumber\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f04fb05-ca3f-43f1-98b7-06a3c27031c8",
+          "name": "McAfee Acknowledge a triggered alarm",
+          "request": {
+            "name": "McAfee Acknowledge a triggered alarm",
+            "description": {
+              "content": "Acknowledge one or more triggered alarms, marking them as reviewed by an analyst.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alarmAcknowledgeTriggeredAlarm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b2035404-5a2d-4c15-b604-07896e1b6a0e",
+              "name": "Alarms acknowledged",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmAcknowledgeTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d523d71a-206e-4fab-87fc-8849a02092c5",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmAcknowledgeTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "811dd928-af7a-4048-b6bd-263683994579",
+          "name": "McAfee Delete triggered alarms",
+          "request": {
+            "name": "McAfee Delete triggered alarms",
+            "description": {
+              "content": "Delete one or more triggered alarm records from the ESM database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alarmDeleteTriggeredAlarm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "215bbdfe-d82f-4266-b301-5bb9822d2f5e",
+              "name": "Alarms deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmDeleteTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "868cc51d-2b3f-4f88-b934-36c2fd7c58ab",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmDeleteTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6d36221f-c560-472b-861c-68a46ad6f5e0",
+      "name": "Authentication",
+      "description": {
+        "content": "Session authentication and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66e76f5b-e593-49f2-9c26-8daaf9c75c12",
+          "name": "McAfee Authenticate and create session",
+          "request": {
+            "name": "McAfee Authenticate and create session",
+            "description": {
+              "content": "Authenticate with ESM credentials to obtain a session token. The session token must be included in subsequent requests as a cookie or header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"locale\": \"en_US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e85dc03-d492-4955-8b80-29e4f9d9e9c3",
+              "name": "Authentication successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"locale\": \"en_US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session\": \"string\",\n  \"userId\": 9447,\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"locale\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d25dede0-4e45-4d37-9db4-8593300d44a7",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"locale\": \"en_US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da5c98bd-73dc-40a3-a84c-228b6d67d82f",
+          "name": "McAfee End current session",
+          "request": {
+            "name": "McAfee End current session",
+            "description": {
+              "content": "Terminate the current authenticated session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "378edbc0-46e5-4af6-8d45-ab356cdcaf28",
+              "name": "Session terminated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8cf561f-b7b3-4e47-8406-87cdc87e7a54",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3e8a118b-481f-49a2-b0b8-b841464314ab",
+      "name": "Cases",
+      "description": {
+        "content": "Manage incident response cases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2468346-fa25-4c77-a82d-aae43c780c41",
+          "name": "McAfee List incident cases",
+          "request": {
+            "name": "McAfee List incident cases",
+            "description": {
+              "content": "Retrieve a list of incident response cases managed in the ESM, with optional filtering by status, assignee, or priority.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "caseGetCaseList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"since\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d43729cf-6181-4328-b9b8-690b5e18fc62",
+              "name": "List of cases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseGetCaseList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"since\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6538,\n    \"summary\": \"string\",\n    \"status\": \"Open\",\n    \"severity\": 8682,\n    \"assignee\": \"string\",\n    \"notes\": [\n      {\n        \"timestamp\": \"1947-12-10T03:12:48.132Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      },\n      {\n        \"timestamp\": \"2010-04-08T16:57:23.791Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      }\n    ],\n    \"openTime\": \"1979-10-29T18:55:16.270Z\",\n    \"closeTime\": \"2003-02-23T00:00:58.817Z\"\n  },\n  {\n    \"id\": 7000,\n    \"summary\": \"string\",\n    \"status\": \"Closed\",\n    \"severity\": 9797,\n    \"assignee\": \"string\",\n    \"notes\": [\n      {\n        \"timestamp\": \"1957-10-05T04:58:35.262Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      },\n      {\n        \"timestamp\": \"1996-08-29T05:27:06.427Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      }\n    ],\n    \"openTime\": \"2022-01-11T06:25:11.850Z\",\n    \"closeTime\": \"2020-10-22T15:51:38.592Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f3fb0f0-418b-4b86-ac05-a9609f85c79f",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseGetCaseList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"since\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c390f27-2028-40a6-bb5d-441e47779ab9",
+          "name": "McAfee Create a new case",
+          "request": {
+            "name": "McAfee Create a new case",
+            "description": {
+              "content": "Create a new incident response case for tracking investigation and remediation of a security incident.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "caseAddCase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c740a20-454d-42d4-90a8-c2de76cebafb",
+              "name": "Case created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseAddCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3493,\n  \"summary\": \"string\",\n  \"status\": \"Other\",\n  \"severity\": 9239,\n  \"assignee\": \"string\",\n  \"notes\": [\n    {\n      \"timestamp\": \"1979-04-04T01:57:09.904Z\",\n      \"author\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"timestamp\": \"2010-03-31T19:40:28.447Z\",\n      \"author\": \"string\",\n      \"content\": \"string\"\n    }\n  ],\n  \"openTime\": \"2002-12-17T17:53:47.793Z\",\n  \"closeTime\": \"2015-06-18T05:28:38.077Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d165833-f291-4cad-bf14-26cd96bb8e3f",
+              "name": "Invalid case data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseAddCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84ebcfd2-8fd3-4c55-a701-45ec53955d1d",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseAddCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6ded7bb2-d7b9-42ed-8eb3-8c19345e2c1a",
+      "name": "Data Sources",
+      "description": {
+        "content": "Manage event data sources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fa2b0763-1216-4e56-a4ef-83b0b684894e",
+          "name": "McAfee List data sources",
+          "request": {
+            "name": "McAfee List data sources",
+            "description": {
+              "content": "Retrieve all configured data sources that feed events into the ESM, including syslog sources, database connections, and agent-based sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "dsGetDataSourceList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b890b1d-d015-4287-ae73-232e0fb0ef8c",
+              "name": "List of data sources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "dsGetDataSourceList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 80,\n    \"name\": \"string\",\n    \"ipAddress\": \"string\",\n    \"type\": \"string\",\n    \"enabled\": false,\n    \"childType\": \"string\",\n    \"zoneId\": 4196\n  },\n  {\n    \"id\": 6130,\n    \"name\": \"string\",\n    \"ipAddress\": \"string\",\n    \"type\": \"string\",\n    \"enabled\": true,\n    \"childType\": \"string\",\n    \"zoneId\": 5835\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3b31310-8053-4563-a7ee-7a99e0b1832d",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "dsGetDataSourceList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "99613c05-b1b1-4373-b0e6-a917ff095e36",
+      "name": "Devices",
+      "description": {
+        "content": "Manage ESM device hierarchy",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb0835bb-2fd3-4ae8-be85-f07da9557436",
+          "name": "McAfee List ESM devices",
+          "request": {
+            "name": "McAfee List ESM devices",
+            "description": {
+              "content": "Retrieve the list of devices in the ESM device hierarchy, including receivers, ELM, ACE, DEM, and ADM components.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "devGetDeviceList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b101a741-a1e3-4498-aa66-7be1099de66e",
+              "name": "List of ESM devices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "devGetDeviceList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 79,\n    \"name\": \"string\",\n    \"ipAddress\": \"string\",\n    \"type\": \"ADM\",\n    \"status\": \"string\",\n    \"model\": \"string\"\n  },\n  {\n    \"id\": 359,\n    \"name\": \"string\",\n    \"ipAddress\": \"string\",\n    \"type\": \"Receiver\",\n    \"status\": \"string\",\n    \"model\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62e8982a-40de-477f-948f-5f05852d89c5",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "devGetDeviceList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0929a130-d8f2-47d7-aa75-6ff5e0ab18d0",
+      "name": "Events",
+      "description": {
+        "content": "Query and retrieve security events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa63e53a-3b0c-4633-8561-a59ddccb29ec",
+          "name": "McAfee Execute an event query",
+          "request": {
+            "name": "McAfee Execute an event query",
+            "description": {
+              "content": "Execute a query against the ESM event database to retrieve security events matching specified criteria. Returns a result ID for fetching results asynchronously.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "qryExecuteDetail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74775512-0c4f-4fca-9736-99ae44147fb8",
+              "name": "Query initiated, result ID returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryExecuteDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resultID\": 7274\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0449c100-fd2e-4e98-a181-518019426855",
+              "name": "Invalid query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryExecuteDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8047cbf8-4c82-495d-a595-efe3a2155406",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryExecuteDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d614cf4-4d12-43fd-9c98-7712fffb33fc",
+          "name": "McAfee Get query results",
+          "request": {
+            "name": "McAfee Get query results",
+            "description": {
+              "content": "Retrieve the results of a previously executed query using the result ID. May need to be called multiple times as results become available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "qryGetResults"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7090de26-354e-482c-b111-16a0948c1275",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryGetResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"columns\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"rows\": [\n    {\n      \"values\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"values\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"totalRows\": 9512,\n  \"complete\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51e30cca-7631-431e-ad65-bf7ce08e5dd0",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryGetResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb6e9d08-2dd5-4701-b288-6d7257743dfe",
+              "name": "Result ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryGetResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ec98636d-ce2b-423b-97ea-285a8fc14be5",
+      "name": "Watchlists",
+      "description": {
+        "content": "Manage security watchlists",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "51b05f17-7af9-4c74-ab4e-272fe49c477b",
+          "name": "McAfee List watchlists",
+          "request": {
+            "name": "McAfee List watchlists",
+            "description": {
+              "content": "Retrieve all configured watchlists, which are collections of values (IPs, hostnames, etc.) used for correlation and alerting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "sysGetWatchlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75f60618-e53b-418c-aa93-09d2b09d845e",
+              "name": "List of watchlists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysGetWatchlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1576,\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"valueCount\": 2828,\n    \"dynamic\": false\n  },\n  {\n    \"id\": 1356,\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"valueCount\": 835,\n    \"dynamic\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6f44fc5-6def-4e5d-a41c-bc6b8272f038",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysGetWatchlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a42ccf4-f3ab-48d3-becf-a1753a71ac37",
+          "name": "McAfee Get watchlist values",
+          "request": {
+            "name": "McAfee Get watchlist values",
+            "description": {
+              "content": "Retrieve the values (entries) contained in a specific watchlist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "sysGetWatchlistValues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "90667f40-f2f2-4ec7-bf35-113663d639bd",
+              "name": "Watchlist values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysGetWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164a51ca-7ca2-4feb-b777-f6db3880cb2a",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysGetWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c51671c9-382b-43fb-92d9-de3731772895",
+              "name": "Watchlist not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysGetWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "297594db-300f-419a-b246-de8f10adf72b",
+          "name": "McAfee Add values to a watchlist",
+          "request": {
+            "name": "McAfee Add values to a watchlist",
+            "description": {
+              "content": "Add one or more values to an existing watchlist for use in correlation rules and alarm triggers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "sysAddWatchlistValues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4cf16919-d20c-4959-82e5-2d84e8657575",
+              "name": "Values added to watchlist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysAddWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86b50066-142b-4cb7-abfe-26ef1f48e81c",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysAddWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf975de4-7cfc-45e1-b89b-8f63d2b3954b",
+              "name": "Watchlist not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysAddWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41692e3a-574a-413a-97bb-64bb5f80b9df",
+          "name": "McAfee Remove values from a watchlist",
+          "request": {
+            "name": "McAfee Remove values from a watchlist",
+            "description": {
+              "content": "Remove one or more values from an existing watchlist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "sysRemoveWatchlistValues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ESM server",
+                  "type": "any",
+                  "value": "{{esm-server}}",
+                  "key": "esm-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dcc95832-94e9-4834-9d88-77db3b6168e8",
+              "name": "Values removed from watchlist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysRemoveWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a8892c9-92f9-47ff-9f19-a00b0a13a4e0",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysRemoveWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87a4f759-9eb5-4788-8467-ee7cf5ef7656",
+              "name": "Watchlist not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "sysRemoveWatchlistValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ESM server",
+                      "type": "any",
+                      "value": "{{esm-server}}",
+                      "key": "esm-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JWTToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ESM server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-esm-server",
+      "key": "esm-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{esm-server}}/rs/esm",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JWTToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63c76f62-48ca-4746-84b6-ee7a73bb4abc",
+    "name": "McAfee ESM API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee Enterprise Security Manager (ESM) SIEM REST API for managing security events, alarms, watchlists, data sources, and executing queries against the event database for security monitoring and incident response.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}
