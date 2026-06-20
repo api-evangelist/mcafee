@@ -5,7 +5,7 @@ description: >-
   on-premises and SaaS platforms (ePO, MVISION, ESM, Web Gateway, TIE, DXL) continue to expose REST APIs documented here
   for centralized security management, threat intelligence, EDR, messaging, and SIEM integration.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/mcafee/refs/heads/main/apis.yml
 created: '2024-01-20'
 modified: '2026-05-19'
@@ -22,7 +22,7 @@ apis:
     description: >-
       McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management,
       policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.trellix.com/products/epo/
     baseURL: https://your-epo-server:8443/remote
     tags:
@@ -41,7 +41,7 @@ apis:
     description: >-
       Cloud-native security platform API for endpoint detection and response (EDR), threat prevention, device
       management, and incident investigation.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.trellix.com/
     baseURL: https://api.mvision.mcafee.com
     tags:
@@ -57,7 +57,7 @@ apis:
   - aid: mcafee:mcafee-tie-api
     name: McAfee Threat Intelligence Exchange (TIE) API
     description: Real-time threat intelligence sharing and reputation services API.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.trellix.com/
     baseURL: https://your-tie-server/api
     tags:
@@ -72,7 +72,7 @@ apis:
   - aid: mcafee:mcafee-dxl-api
     name: McAfee Data Exchange Layer (DXL) API
     description: Messaging fabric for real-time security data exchange and integration.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.trellix.com/
     baseURL: https://your-dxl-broker
     tags:
@@ -94,7 +94,7 @@ apis:
     description: >-
       Web security gateway REST API for managing rule sets, URL filtering lists, SSL inspection settings, and monitoring
       proxy traffic and appliance health.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.trellix.com/
     baseURL: https://your-mwg-server/Konfigurator/REST
     tags:
@@ -111,7 +111,7 @@ apis:
     description: >-
       Enterprise Security Manager SIEM REST API for managing security events, alarms, watchlists, data sources, cases,
       and executing queries against the event database.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.trellix.com/
     baseURL: https://your-esm-server/rs/esm
     tags:
