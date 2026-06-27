@@ -67,7 +67,7 @@ apis:
     properties:
       - type: Documentation
         url: https://opendxl.github.io/opendxl-tie-client-python/
-      - type: SDK
+      - type: SDKs
         url: https://github.com/opendxl/opendxl-tie-client-python
   - aid: mcafee:mcafee-dxl-api
     name: McAfee Data Exchange Layer (DXL) API
@@ -126,7 +126,7 @@ apis:
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/mcafee
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.mcafee.com
   - type: Website
     url: https://www.trellix.com/
