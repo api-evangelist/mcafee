@@ -124,6 +124,10 @@ apis:
       - type: OpenAPI
         url: openapi/mcafee-esm-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/mcafee-domain-security.yml
+  - type: Authentication
+    url: authentication/mcafee-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/mcafee
   - type: DeveloperPortal

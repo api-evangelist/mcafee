@@ -1,0 +1,30 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.trellix.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 30 23:59:59 2026 GMT
+  hsts: null
+- host: api.mvision.mcafee.com
+  https: false
+domains:
+- domain: trellix.com
+  dnssec: false
+  caa:
+  - 0 issue "amazon.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  - 0 issue "sectigo.com"
+  - 0 issuewild "amazon.com"
+  - 0 issuewild "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: mcafee.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
