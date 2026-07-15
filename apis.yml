@@ -124,6 +124,8 @@ apis:
       - type: OpenAPI
         url: openapi/mcafee-esm-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/mcafee-agentic-access.yml
   - type: DomainSecurity
     url: security/mcafee-domain-security.yml
   - type: Authentication
