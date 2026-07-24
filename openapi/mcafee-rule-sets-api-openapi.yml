@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Rule Sets API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Rule Sets
+  description: Manage web security rule sets
+paths:
+  /rulesets:
+    get:
+      operationId: listRuleSets
+      summary: McAfee List rule sets
+      description: Retrieve a list of all configured rule sets, including web filtering, SSL scanning, authentication, and media type filtering rules.
+      tags:
+      - Rule Sets
+      responses:
+        '200':
+          description: List of rule sets
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  rulesets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RuleSet'
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rulesets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RuleSet'
+        '401':
+          description: Not authenticated
+  /rulesets/{rulesetId}:
+    get:
+      operationId: getRuleSet
+      summary: McAfee Get a specific rule set
+      description: Retrieve the full configuration of a specific rule set, including all contained rules, conditions, and actions.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/rulesetId'
+      responses:
+        '200':
+          description: Rule set details
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RuleSetDetail'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetDetail'
+        '401':
+          description: Not authenticated
+        '404':
+          description: Rule set not found
+    put:
+      operationId: updateRuleSet
+      summary: McAfee Update a rule set
+      description: Update the configuration of an existing rule set, including enabling/disabling rules and modifying conditions.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/rulesetId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/RuleSetDetail'
+      responses:
+        '200':
+          description: Rule set updated
+        '400':
+          description: Invalid configuration
+        '401':
+          description: Not authenticated
+        '404':
+          description: Rule set not found
+    delete:
+      operationId: deleteRuleSet
+      summary: McAfee Delete a rule set
+      description: Delete a rule set from the configuration.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/rulesetId'
+      responses:
+        '204':
+          description: Rule set deleted
+        '401':
+          description: Not authenticated
+        '404':
+          description: Rule set not found
+components:
+  schemas:
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule identifier
+        name:
+          type: string
+          description: Rule name
+        enabled:
+          type: boolean
+          description: Whether the rule is enabled
+        action:
+          type: string
+          enum:
+          - allow
+          - block
+          - redirect
+          - authenticate
+          description: Action to take when the rule matches
+        criteria:
+          type: string
+          description: Rule matching criteria expression
+    RuleSetDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        enabled:
+          type: boolean
+          description: Whether the rule set is enabled
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: Rules contained in this rule set
+    RuleSet:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        enabled:
+          type: boolean
+          description: Whether the rule set is enabled
+        type:
+          type: string
+          description: Rule set type (e.g., request, response)
+  parameters:
+    rulesetId:
+      name: rulesetId
+      in: path
+      required: true
+      description: Unique rule set identifier
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

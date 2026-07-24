@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Watchlists API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Watchlists
+  description: Manage security watchlists
+paths:
+  /v2/sysGetWatchlists:
+    post:
+      operationId: getWatchlists
+      summary: McAfee List watchlists
+      description: Retrieve all configured watchlists, which are collections of values (IPs, hostnames, etc.) used for correlation and alerting.
+      tags:
+      - Watchlists
+      responses:
+        '200':
+          description: List of watchlists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Watchlist'
+        '401':
+          description: Not authenticated
+  /v2/sysGetWatchlistValues:
+    post:
+      operationId: getWatchlistValues
+      summary: McAfee Get watchlist values
+      description: Retrieve the values (entries) contained in a specific watchlist.
+      tags:
+      - Watchlists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              properties:
+                id:
+                  type: integer
+                  description: Watchlist ID
+      responses:
+        '200':
+          description: Watchlist values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    description: List of watchlist values
+        '401':
+          description: Not authenticated
+        '404':
+          description: Watchlist not found
+  /v2/sysAddWatchlistValues:
+    post:
+      operationId: addWatchlistValues
+      summary: McAfee Add values to a watchlist
+      description: Add one or more values to an existing watchlist for use in correlation rules and alarm triggers.
+      tags:
+      - Watchlists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              - values
+              properties:
+                id:
+                  type: integer
+                  description: Watchlist ID
+                values:
+                  type: array
+                  items:
+                    type: string
+                  description: Values to add
+      responses:
+        '200':
+          description: Values added to watchlist
+        '401':
+          description: Not authenticated
+        '404':
+          description: Watchlist not found
+  /v2/sysRemoveWatchlistValues:
+    post:
+      operationId: removeWatchlistValues
+      summary: McAfee Remove values from a watchlist
+      description: Remove one or more values from an existing watchlist.
+      tags:
+      - Watchlists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              - values
+              properties:
+                id:
+                  type: integer
+                  description: Watchlist ID
+                values:
+                  type: array
+                  items:
+                    type: string
+                  description: Values to remove
+      responses:
+        '200':
+          description: Values removed from watchlist
+        '401':
+          description: Not authenticated
+        '404':
+          description: Watchlist not found
+components:
+  schemas:
+    Watchlist:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Watchlist ID
+        name:
+          type: string
+          description: Watchlist name
+        type:
+          type: string
+          description: Watchlist value type (e.g., IPAddress, Hash, String)
+        valueCount:
+          type: integer
+          description: Number of values in the watchlist
+        dynamic:
+          type: boolean
+          description: Whether the watchlist is dynamically populated
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

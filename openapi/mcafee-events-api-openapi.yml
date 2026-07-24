@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Events API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Events
+  description: Query and retrieve security events
+paths:
+  /v2/qryExecuteDetail:
+    post:
+      operationId: executeQuery
+      summary: McAfee Execute an event query
+      description: Execute a query against the ESM event database to retrieve security events matching specified criteria. Returns a result ID for fetching results asynchronously.
+      tags:
+      - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - config
+              properties:
+                config:
+                  type: object
+                  properties:
+                    timeRange:
+                      type: string
+                      enum:
+                      - LAST_10_MINUTES
+                      - LAST_HOUR
+                      - LAST_24_HOURS
+                      - LAST_WEEK
+                      - LAST_MONTH
+                      - CUSTOM
+                      description: Query time range
+                    customStart:
+                      type: string
+                      format: date-time
+                      description: Custom start time
+                    customEnd:
+                      type: string
+                      format: date-time
+                      description: Custom end time
+                    fields:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: Field name
+                      description: Fields to return in results
+                    filters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Filter type
+                          field:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                          value:
+                            type: string
+                      description: Query filters
+                    limit:
+                      type: integer
+                      description: Maximum number of results
+                      default: 100
+      responses:
+        '200':
+          description: Query initiated, result ID returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resultID:
+                    type: integer
+                    description: Result ID for fetching query results
+        '400':
+          description: Invalid query
+        '401':
+          description: Not authenticated
+  /v2/qryGetResults:
+    post:
+      operationId: getQueryResults
+      summary: McAfee Get query results
+      description: Retrieve the results of a previously executed query using the result ID. May need to be called multiple times as results become available.
+      tags:
+      - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resultID
+              properties:
+                resultID:
+                  type: integer
+                  description: Result ID from executeQuery
+                startPos:
+                  type: integer
+                  description: Starting position for pagination
+                  default: 0
+                numRows:
+                  type: integer
+                  description: Number of rows to return
+                  default: 50
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  columns:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                    description: Column definitions
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        values:
+                          type: array
+                          items:
+                            type: string
+                    description: Result rows
+                  totalRows:
+                    type: integer
+                    description: Total number of matching rows
+                  complete:
+                    type: boolean
+                    description: Whether the query has completed
+        '401':
+          description: Not authenticated
+        '404':
+          description: Result ID not found
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

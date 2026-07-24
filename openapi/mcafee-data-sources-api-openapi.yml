@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Data Sources API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Data Sources
+  description: Manage event data sources
+paths:
+  /v2/dsGetDataSourceList:
+    post:
+      operationId: getDataSources
+      summary: McAfee List data sources
+      description: Retrieve all configured data sources that feed events into the ESM, including syslog sources, database connections, and agent-based sources.
+      tags:
+      - Data Sources
+      responses:
+        '200':
+          description: List of data sources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataSource'
+        '401':
+          description: Not authenticated
+components:
+  schemas:
+    DataSource:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Data source ID
+        name:
+          type: string
+          description: Data source name
+        ipAddress:
+          type: string
+          description: IP address of the data source
+        type:
+          type: string
+          description: Data source type
+        enabled:
+          type: boolean
+          description: Whether the data source is enabled
+        childType:
+          type: string
+          description: Child data source type
+        zoneId:
+          type: integer
+          description: Zone ID
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

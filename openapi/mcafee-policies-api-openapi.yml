@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Policies API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Policies
+  description: Manage and assign security policies
+paths:
+  /policy.find:
+    get:
+      operationId: policyFind
+      summary: McAfee Search for policies
+      description: Search for security policies configured in ePO, optionally filtered by product or policy type.
+      tags:
+      - Policies
+      parameters:
+      - name: searchText
+        in: query
+        required: false
+        description: Search string to match against policy names
+        schema:
+          type: string
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching policies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Policy'
+        '401':
+          description: Authentication failed
+  /policy.assignToSystem:
+    post:
+      operationId: policyAssignToSystem
+      summary: McAfee Assign a policy to a system
+      description: Assign a specific policy to one or more systems, overriding the inherited group policy.
+      tags:
+      - Policies
+      parameters:
+      - name: names
+        in: query
+        required: true
+        description: Comma-separated list of system names
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        description: Product ID for the policy
+        schema:
+          type: string
+      - name: typeId
+        in: query
+        required: true
+        description: Policy type ID
+        schema:
+          type: string
+      - name: objectId
+        in: query
+        required: true
+        description: Policy object ID
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Policy assigned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /policy.assignToGroup:
+    post:
+      operationId: policyAssignToGroup
+      summary: McAfee Assign a policy to a group
+      description: Assign a specific policy to a System Tree group, which is then inherited by all child systems and sub-groups.
+      tags:
+      - Policies
+      parameters:
+      - name: groupId
+        in: query
+        required: true
+        description: Target group ID
+        schema:
+          type: integer
+      - name: productId
+        in: query
+        required: true
+        description: Product ID for the policy
+        schema:
+          type: string
+      - name: typeId
+        in: query
+        required: true
+        description: Policy type ID
+        schema:
+          type: string
+      - name: objectId
+        in: query
+        required: true
+        description: Policy object ID
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Policy assigned to group successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+components:
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
+  schemas:
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
+    Policy:
+      type: object
+      properties:
+        objectId:
+          type: integer
+          description: Policy object ID
+        objectName:
+          type: string
+          description: Policy name
+        productId:
+          type: string
+          description: Product ID the policy belongs to
+        typeId:
+          type: string
+          description: Policy type identifier
+        productName:
+          type: string
+          description: Display name of the product
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

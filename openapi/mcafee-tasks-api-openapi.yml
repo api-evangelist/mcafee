@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Tasks API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Tasks
+  description: Manage client tasks and server tasks
+paths:
+  /clienttask.find:
+    get:
+      operationId: clienttaskFind
+      summary: McAfee Search for client tasks
+      description: Search for client tasks that can be deployed to managed systems.
+      tags:
+      - Tasks
+      parameters:
+      - name: searchText
+        in: query
+        required: false
+        description: Search string to match against task names
+        schema:
+          type: string
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching client tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientTask'
+        '401':
+          description: Authentication failed
+  /clienttask.run:
+    post:
+      operationId: clienttaskRun
+      summary: McAfee Run a client task on systems
+      description: Execute a client task immediately on one or more specified systems.
+      tags:
+      - Tasks
+      parameters:
+      - name: names
+        in: query
+        required: true
+        description: Comma-separated list of system names
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        description: Product ID for the task
+        schema:
+          type: string
+      - name: taskId
+        in: query
+        required: true
+        description: Client task ID to execute
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Task execution initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+  /scheduler.listServerTasks:
+    get:
+      operationId: schedulerListServerTasks
+      summary: McAfee List server tasks
+      description: Retrieve a list of all configured server tasks in ePO, including pull tasks, replication tasks, and custom automation tasks.
+      tags:
+      - Tasks
+      parameters:
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of server tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServerTask'
+        '401':
+          description: Authentication failed
+  /scheduler.runServerTask:
+    post:
+      operationId: schedulerRunServerTask
+      summary: McAfee Run a server task
+      description: Execute a server task immediately by its ID.
+      tags:
+      - Tasks
+      parameters:
+      - name: taskId
+        in: query
+        required: true
+        description: ID of the server task to execute
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Server task execution initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+components:
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
+  schemas:
+    ClientTask:
+      type: object
+      properties:
+        objectId:
+          type: integer
+          description: Task object ID
+        objectName:
+          type: string
+          description: Task name
+        productId:
+          type: string
+          description: Product ID the task belongs to
+        typeId:
+          type: string
+          description: Task type identifier
+        productName:
+          type: string
+          description: Display name of the product
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
+    ServerTask:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Server task ID
+        name:
+          type: string
+          description: Server task name
+        description:
+          type: string
+          description: Server task description
+        enabled:
+          type: boolean
+          description: Whether the task is enabled
+        nextRunTime:
+          type: string
+          format: date-time
+          description: Next scheduled run time
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

@@ -1,0 +1,189 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Alarms
+  description: Manage security alarms
+paths:
+  /v2/alarmGetTriggeredAlarms:
+    post:
+      operationId: getTriggeredAlarms
+      summary: McAfee Get triggered alarms
+      description: Retrieve a list of triggered alarms within a specified time range, optionally filtered by status or severity.
+      tags:
+      - Alarms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                triggeredTimeRange:
+                  type: string
+                  enum:
+                  - LAST_24_HOURS
+                  - LAST_WEEK
+                  - LAST_MONTH
+                  - CUSTOM
+                  description: Time range for triggered alarms
+                customStart:
+                  type: string
+                  format: date-time
+                  description: Custom start time (when triggeredTimeRange is CUSTOM)
+                customEnd:
+                  type: string
+                  format: date-time
+                  description: Custom end time (when triggeredTimeRange is CUSTOM)
+                status:
+                  type: string
+                  enum:
+                  - acknowledged
+                  - unacknowledged
+                  - all
+                  description: Filter by alarm acknowledgment status
+                pageSize:
+                  type: integer
+                  description: Number of results per page
+                  default: 50
+                pageNumber:
+                  type: integer
+                  description: Page number for pagination
+                  default: 1
+      responses:
+        '200':
+          description: List of triggered alarms
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  triggeredAlarms:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TriggeredAlarm'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Not authenticated
+  /v2/alarmAcknowledgeTriggeredAlarm:
+    post:
+      operationId: acknowledgeAlarm
+      summary: McAfee Acknowledge a triggered alarm
+      description: Acknowledge one or more triggered alarms, marking them as reviewed by an analyst.
+      tags:
+      - Alarms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - triggeredIds
+              properties:
+                triggeredIds:
+                  type: array
+                  items:
+                    type: integer
+                  description: List of triggered alarm IDs to acknowledge
+      responses:
+        '200':
+          description: Alarms acknowledged
+        '401':
+          description: Not authenticated
+  /v2/alarmDeleteTriggeredAlarm:
+    post:
+      operationId: deleteTriggeredAlarm
+      summary: McAfee Delete triggered alarms
+      description: Delete one or more triggered alarm records from the ESM database.
+      tags:
+      - Alarms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - triggeredIds
+              properties:
+                triggeredIds:
+                  type: array
+                  items:
+                    type: integer
+                  description: List of triggered alarm IDs to delete
+      responses:
+        '200':
+          description: Alarms deleted
+        '401':
+          description: Not authenticated
+components:
+  schemas:
+    TriggeredAlarm:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Triggered alarm ID
+        alarmName:
+          type: string
+          description: Name of the alarm definition
+        triggeredDate:
+          type: string
+          format: date-time
+          description: When the alarm was triggered
+        acknowledgedDate:
+          type: string
+          format: date-time
+          description: When the alarm was acknowledged
+        acknowledgedUsername:
+          type: string
+          description: User who acknowledged the alarm
+        severity:
+          type: integer
+          description: Alarm severity
+        summary:
+          type: string
+          description: Alarm summary text
+        assignee:
+          type: string
+          description: Assigned analyst
+        caseId:
+          type: integer
+          description: Associated case ID
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              eventId:
+                type: string
+              sourceIp:
+                type: string
+              destIp:
+                type: string
+          description: Associated events
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

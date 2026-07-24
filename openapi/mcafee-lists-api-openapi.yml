@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Lists API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Lists
+  description: Manage URL and IP lists used in filtering
+paths:
+  /lists:
+    get:
+      operationId: listLists
+      summary: McAfee List all filtering lists
+      description: Retrieve all configured lists used for URL filtering, IP blocking, media type filtering, and custom categorization.
+      tags:
+      - Lists
+      responses:
+        '200':
+          description: All configured lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FilterList'
+        '401':
+          description: Not authenticated
+  /lists/{listId}:
+    get:
+      operationId: getList
+      summary: McAfee Get a specific list
+      description: Retrieve the contents and configuration of a specific filtering list.
+      tags:
+      - Lists
+      parameters:
+      - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: List details and entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilterListDetail'
+        '401':
+          description: Not authenticated
+        '404':
+          description: List not found
+    put:
+      operationId: updateList
+      summary: McAfee Update a list
+      description: Update the entries in a filtering list, adding or removing URLs, IPs, or other entries.
+      tags:
+      - Lists
+      parameters:
+      - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterListDetail'
+      responses:
+        '200':
+          description: List updated
+        '400':
+          description: Invalid list data
+        '401':
+          description: Not authenticated
+        '404':
+          description: List not found
+  /lists/{listId}/entries:
+    post:
+      operationId: addListEntry
+      summary: McAfee Add entry to a list
+      description: Add a new entry (URL, IP, or other value) to a filtering list.
+      tags:
+      - Lists
+      parameters:
+      - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEntry'
+      responses:
+        '201':
+          description: Entry added
+        '400':
+          description: Invalid entry
+        '401':
+          description: Not authenticated
+        '404':
+          description: List not found
+components:
+  schemas:
+    ListEntry:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Entry value (URL, IP, etc.)
+        description:
+          type: string
+          description: Optional description for the entry
+    FilterListDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: List identifier
+        name:
+          type: string
+          description: List name
+        type:
+          type: string
+          description: List type
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListEntry'
+          description: List entries
+    FilterList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: List identifier
+        name:
+          type: string
+          description: List name
+        type:
+          type: string
+          enum:
+          - url
+          - ip
+          - mediaType
+          - string
+          - category
+          description: Type of entries in the list
+        entryCount:
+          type: integer
+          description: Number of entries in the list
+  parameters:
+    listId:
+      name: listId
+      in: path
+      required: true
+      description: Unique filtering list identifier
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

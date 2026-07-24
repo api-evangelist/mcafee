@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Queries API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Queries
+  description: Execute ePO queries and retrieve results
+paths:
+  /core.executeQuery:
+    get:
+      operationId: coreExecuteQuery
+      summary: McAfee Execute a saved query
+      description: Execute a previously saved ePO query by ID and return the results. Queries can retrieve data about systems, events, policies, and other ePO objects.
+      tags:
+      - Queries
+      parameters:
+      - name: queryId
+        in: query
+        required: true
+        description: ID of the saved query to execute
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        '401':
+          description: Authentication failed
+        '404':
+          description: Query not found
+  /core.listQueries:
+    get:
+      operationId: coreListQueries
+      summary: McAfee List saved queries
+      description: Retrieve a list of all saved queries available on the ePO server.
+      tags:
+      - Queries
+      parameters:
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of saved queries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SavedQuery'
+        '401':
+          description: Authentication failed
+components:
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
+  schemas:
+    SavedQuery:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Query ID
+        name:
+          type: string
+          description: Query name
+        description:
+          type: string
+          description: Query description
+        createdBy:
+          type: string
+          description: User who created the query
+        groupName:
+          type: string
+          description: Query group name
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

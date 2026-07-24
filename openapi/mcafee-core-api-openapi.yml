@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Core API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Core
+  description: Core server operations and authentication
+paths:
+  /core.help:
+    get:
+      operationId: coreHelp
+      summary: McAfee List available API commands
+      description: Returns a list of all available remote API commands on the ePO server with their descriptions and parameters.
+      tags:
+      - Core
+      parameters:
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of available API commands
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiCommand'
+        '401':
+          description: Authentication failed
+components:
+  schemas:
+    ApiCommand:
+      type: object
+      properties:
+        command:
+          type: string
+          description: Command name
+        description:
+          type: string
+          description: Command description
+        parameters:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              required:
+                type: boolean
+              description:
+                type: string
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

@@ -1,0 +1,197 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Authentication API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Authentication
+  description: Session authentication and management
+paths:
+  /v2/login:
+    post:
+      operationId: login
+      summary: McAfee Authenticate and create session
+      description: Authenticate with ESM credentials to obtain a session token. The session token must be included in subsequent requests as a cookie or header.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                  description: ESM administrator username
+                password:
+                  type: string
+                  description: Base64-encoded password
+                locale:
+                  type: string
+                  description: Locale for the session
+                  default: en_US
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+      security: []
+  /v2/logout:
+    delete:
+      operationId: logout
+      summary: McAfee End current session
+      description: Terminate the current authenticated session.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Session terminated
+        '401':
+          description: Not authenticated
+  /iam/v1.1/token:
+    post:
+      operationId: getToken
+      summary: McAfee Obtain access token
+      description: Authenticate using client credentials to obtain a bearer token for accessing MVISION APIs. Tokens are valid for a limited duration.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - scope
+              - grant_type
+              - audience
+              properties:
+                scope:
+                  type: string
+                  description: OAuth scope for the token
+                  example: edr.threats.rb edr.alerts.r
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                  description: OAuth 2.0 grant type
+                audience:
+                  type: string
+                  description: Target API audience
+                  example: mcafee
+      responses:
+        '200':
+          description: Access token returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+      security: []
+  /login:
+    post:
+      operationId: login
+      summary: McAfee Authenticate and create session
+      description: Authenticate with administrator credentials to establish a session. Returns a session cookie used for subsequent API requests.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: Administrator username
+                password:
+                  type: string
+                  description: Administrator password
+      responses:
+        '200':
+          description: Authentication successful, session cookie returned
+          headers:
+            Set-Cookie:
+              description: Session cookie for subsequent requests
+              schema:
+                type: string
+        '401':
+          description: Authentication failed
+      security: []
+  /logout:
+    post:
+      operationId: logout
+      summary: McAfee End current session
+      description: Terminate the current session and invalidate the session cookie.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Session terminated
+        '401':
+          description: Not authenticated
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: OAuth 2.0 access token
+        token_type:
+          type: string
+          description: Token type (bearer)
+        expires_in:
+          type: integer
+          description: Token expiration time in seconds
+        scope:
+          type: string
+          description: Granted scope
+    LoginResponse:
+      type: object
+      properties:
+        session:
+          type: string
+          description: Session token for subsequent requests
+        userId:
+          type: integer
+          description: Authenticated user ID
+        roles:
+          type: array
+          items:
+            type: string
+          description: User roles
+        locale:
+          type: string
+          description: Session locale
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

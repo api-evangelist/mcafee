@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Monitoring API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Monitoring
+  description: Appliance health and traffic monitoring
+paths:
+  /appliance/status:
+    get:
+      operationId: getApplianceStatus
+      summary: McAfee Get appliance status
+      description: Retrieve the current health status and resource utilization of the Web Gateway appliance, including CPU, memory, and connection counts.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Appliance health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplianceStatus'
+        '401':
+          description: Not authenticated
+  /appliance/traffic:
+    get:
+      operationId: getTrafficStatistics
+      summary: McAfee Get traffic statistics
+      description: Retrieve web traffic statistics including request counts, bytes transferred, blocked requests, and category breakdowns.
+      tags:
+      - Monitoring
+      parameters:
+      - name: period
+        in: query
+        required: false
+        description: Time period for statistics
+        schema:
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          default: day
+      responses:
+        '200':
+          description: Traffic statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrafficStatistics'
+        '401':
+          description: Not authenticated
+components:
+  schemas:
+    TrafficStatistics:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Statistics time period
+        totalRequests:
+          type: integer
+          description: Total number of web requests
+        blockedRequests:
+          type: integer
+          description: Number of blocked requests
+        allowedRequests:
+          type: integer
+          description: Number of allowed requests
+        bytesTransferred:
+          type: integer
+          format: int64
+          description: Total bytes transferred
+        topCategories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              count:
+                type: integer
+          description: Top URL categories by request count
+    ApplianceStatus:
+      type: object
+      properties:
+        hostname:
+          type: string
+          description: Appliance hostname
+        uptime:
+          type: string
+          description: Appliance uptime
+        cpuUsage:
+          type: number
+          format: float
+          description: Current CPU usage percentage
+        memoryUsage:
+          type: number
+          format: float
+          description: Current memory usage percentage
+        activeConnections:
+          type: integer
+          description: Number of active proxy connections
+        version:
+          type: string
+          description: Web Gateway software version
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

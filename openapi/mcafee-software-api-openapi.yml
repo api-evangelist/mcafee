@@ -1,0 +1,87 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Software API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Software
+  description: Manage software repositories and packages
+paths:
+  /repository.findPackages:
+    get:
+      operationId: repositoryFindPackages
+      summary: McAfee Find software packages
+      description: Search for software packages in the ePO master repository, including DAT files, engine updates, and product packages.
+      tags:
+      - Software
+      parameters:
+      - name: searchText
+        in: query
+        required: false
+        description: Search string to filter packages
+        schema:
+          type: string
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching packages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SoftwarePackage'
+        '401':
+          description: Authentication failed
+components:
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
+  schemas:
+    SoftwarePackage:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Package product ID
+        packageType:
+          type: string
+          description: Package type (e.g., DAT, Engine, Product)
+        packageVersion:
+          type: string
+          description: Package version string
+        packageName:
+          type: string
+          description: Display name of the package
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

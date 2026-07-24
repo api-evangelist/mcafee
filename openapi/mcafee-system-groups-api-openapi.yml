@@ -1,0 +1,120 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms System Groups API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: System Groups
+  description: Manage the ePO System Tree groups
+paths:
+  /epogroup.find:
+    get:
+      operationId: epogroupFind
+      summary: McAfee Find system tree groups
+      description: Search for groups in the ePO System Tree by name or other criteria.
+      tags:
+      - System Groups
+      parameters:
+      - name: searchText
+        in: query
+        required: false
+        description: Search string to match against group names
+        schema:
+          type: string
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: List of matching groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemGroup'
+        '401':
+          description: Authentication failed
+  /epogroup.moveSystem:
+    post:
+      operationId: epogroupMoveSystem
+      summary: McAfee Move a system to a different group
+      description: Move one or more systems from their current location in the System Tree to a specified target group.
+      tags:
+      - System Groups
+      parameters:
+      - name: names
+        in: query
+        required: true
+        description: Comma-separated list of system names to move
+        schema:
+          type: string
+      - name: parentGroupId
+        in: query
+        required: true
+        description: ID of the target parent group
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/outputType'
+      responses:
+        '200':
+          description: Systems moved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResult'
+        '401':
+          description: Authentication failed
+components:
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
+  schemas:
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
+    SystemGroup:
+      type: object
+      properties:
+        groupId:
+          type: integer
+          description: Unique group ID
+        groupPath:
+          type: string
+          description: Full path in the System Tree
+        groupName:
+          type: string
+          description: Name of the group
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

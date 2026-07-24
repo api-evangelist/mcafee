@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms Cases API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: Cases
+  description: Manage incident response cases
+paths:
+  /v2/caseGetCaseList:
+    post:
+      operationId: getCases
+      summary: McAfee List incident cases
+      description: Retrieve a list of incident response cases managed in the ESM, with optional filtering by status, assignee, or priority.
+      tags:
+      - Cases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                since:
+                  type: string
+                  format: date-time
+                  description: Return cases created since this time
+      responses:
+        '200':
+          description: List of cases
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Case'
+        '401':
+          description: Not authenticated
+  /v2/caseAddCase:
+    post:
+      operationId: addCase
+      summary: McAfee Create a new case
+      description: Create a new incident response case for tracking investigation and remediation of a security incident.
+      tags:
+      - Cases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - summary
+              - severity
+              properties:
+                summary:
+                  type: string
+                  description: Case summary
+                assignee:
+                  type: string
+                  description: Assigned analyst
+                severity:
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                  description: Case severity (1-100)
+                notes:
+                  type: string
+                  description: Initial case notes
+      responses:
+        '200':
+          description: Case created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Invalid case data
+        '401':
+          description: Not authenticated
+components:
+  schemas:
+    Case:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Case ID
+        summary:
+          type: string
+          description: Case summary
+        status:
+          type: string
+          enum:
+          - Open
+          - Closed
+          - Other
+          description: Case status
+        severity:
+          type: integer
+          description: Case severity (1-100)
+        assignee:
+          type: string
+          description: Assigned analyst
+        notes:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              author:
+                type: string
+              content:
+                type: string
+          description: Case notes
+        openTime:
+          type: string
+          format: date-time
+          description: When the case was opened
+        closeTime:
+          type: string
+          format: date-time
+          description: When the case was closed
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide

@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: McAfee ePO Alarms File Operations API
+  description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+  version: '5.10'
+  contact:
+    name: McAfee Support
+    url: https://www.mcafee.com/enterprise/en-us/support.html
+  termsOfService: https://www.mcafee.com/enterprise/en-us/about/legal/terms-of-use.html
+servers:
+- url: https://{epo-server}:8443/remote
+  description: McAfee ePO Server
+  variables:
+    epo-server:
+      default: your-epo-server
+      description: Hostname or IP of the ePO server
+security:
+- basicAuth: []
+tags:
+- name: File Operations
+  description: Import and export configuration files
+paths:
+  /file/export:
+    get:
+      operationId: exportConfiguration
+      summary: McAfee Export configuration
+      description: Export the complete appliance configuration as a backup file.
+      tags:
+      - File Operations
+      responses:
+        '200':
+          description: Configuration backup file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Not authenticated
+  /file/import:
+    post:
+      operationId: importConfiguration
+      summary: McAfee Import configuration
+      description: Import a previously exported configuration backup to restore settings.
+      tags:
+      - File Operations
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Configuration backup file
+      responses:
+        '200':
+          description: Configuration imported successfully
+        '400':
+          description: Invalid configuration file
+        '401':
+          description: Not authenticated
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using ePO administrator credentials. Credentials are transmitted as a Base64-encoded username:password pair.
+externalDocs:
+  description: McAfee ePO Web API Reference Guide
+  url: https://docs.mcafee.com/bundle/epolicy-orchestrator-web-api-reference-guide
