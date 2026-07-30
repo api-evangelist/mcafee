@@ -5,7 +5,20 @@ description: >-
   on-premises and SaaS platforms (ePO, MVISION, ESM, Web Gateway, TIE, DXL) continue to expose REST APIs documented here
   for centralized security management, threat intelligence, EDR, messaging, and SIEM integration.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mcafee.png
 url: https://raw.githubusercontent.com/api-evangelist/mcafee/refs/heads/main/apis.yml
 created: '2024-01-20'
 modified: '2026-05-19'
@@ -17,112 +30,521 @@ tags:
   - Security
   - Threat Intelligence
 apis:
-  - aid: mcafee:mcafee-epo-api
-    name: McAfee ePO API
-    description: >-
-      McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management,
-      policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.trellix.com/products/epo/
-    baseURL: https://your-epo-server:8443/remote
-    tags:
-      - Endpoint Management
-      - Policy Orchestrator
-      - Security Management
-    properties:
-      - type: Documentation
-        url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
-      - type: Authentication
-        url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
-      - type: OpenAPI
-        url: openapi/mcafee-epo-openapi.yml
-  - aid: mcafee:mcafee-mvision-api
-    name: McAfee MVISION API
-    description: >-
-      Cloud-native security platform API for endpoint detection and response (EDR), threat prevention, device
-      management, and incident investigation.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.trellix.com/
-    baseURL: https://api.mvision.mcafee.com
-    tags:
-      - Cloud Security
-      - EDR
-      - MVISION
-      - Threat Detection
-    properties:
-      - type: Documentation
-        url: https://developer.mcafee.com/
-      - type: OpenAPI
-        url: openapi/mcafee-mvision-openapi.yml
-  - aid: mcafee:mcafee-tie-api
-    name: McAfee Threat Intelligence Exchange (TIE) API
-    description: Real-time threat intelligence sharing and reputation services API.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.trellix.com/
-    baseURL: https://your-tie-server/api
-    tags:
-      - Malware Analysis
-      - Reputation
-      - Threat Intelligence
-    properties:
-      - type: Documentation
-        url: https://opendxl.github.io/opendxl-tie-client-python/
-      - type: SDKs
-        url: https://github.com/opendxl/opendxl-tie-client-python
-  - aid: mcafee:mcafee-dxl-api
-    name: McAfee Data Exchange Layer (DXL) API
-    description: Messaging fabric for real-time security data exchange and integration.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.trellix.com/
-    baseURL: https://your-dxl-broker
-    tags:
-      - Data Exchange
-      - Fabric
-      - Integration
-      - Messaging
-    properties:
-      - type: Documentation
-        url: https://opendxl.github.io/opendxl-client-python/
-      - type: GitHub
-        url: https://github.com/opendxl
-      - type: SDK - Python
-        url: https://github.com/opendxl/opendxl-client-python
-      - type: SDK - JavaScript
-        url: https://github.com/opendxl/opendxl-client-javascript
-  - aid: mcafee:mcafee-web-gateway-api
-    name: McAfee Web Gateway API
-    description: >-
-      Web security gateway REST API for managing rule sets, URL filtering lists, SSL inspection settings, and monitoring
-      proxy traffic and appliance health.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.trellix.com/
-    baseURL: https://your-mwg-server/Konfigurator/REST
-    tags:
-      - Proxy
-      - Web Gateway
-      - Web Security
-    properties:
-      - type: Documentation
-        url: https://docs.trellix.com/bundle/web-gateway-product-guide
-      - type: OpenAPI
-        url: openapi/mcafee-web-gateway-openapi.yml
-  - aid: mcafee:mcafee-esm-api
-    name: McAfee ESM API
-    description: >-
-      Enterprise Security Manager SIEM REST API for managing security events, alarms, watchlists, data sources, cases,
-      and executing queries against the event database.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.trellix.com/
-    baseURL: https://your-esm-server/rs/esm
-    tags:
-      - Log Management
-      - Security Events
-      - SIEM
-    properties:
-      - type: Documentation
-        url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
-      - type: OpenAPI
-        url: openapi/mcafee-esm-openapi.yml
+- aid: mcafee:mcafee-tie-api
+  name: McAfee Threat Intelligence Exchange (TIE) API
+  description: Real-time threat intelligence sharing and reputation services API.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.trellix.com/
+  baseURL: https://your-tie-server/api
+  tags:
+  - Malware Analysis
+  - Reputation
+  - Threat Intelligence
+  properties:
+  - type: Documentation
+    url: https://opendxl.github.io/opendxl-tie-client-python/
+  - type: SDKs
+    url: https://github.com/opendxl/opendxl-tie-client-python
+- aid: mcafee:mcafee-dxl-api
+  name: McAfee Data Exchange Layer (DXL) API
+  description: Messaging fabric for real-time security data exchange and integration.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.trellix.com/
+  baseURL: https://your-dxl-broker
+  tags:
+  - Data Exchange
+  - Fabric
+  - Integration
+  - Messaging
+  properties:
+  - type: Documentation
+    url: https://opendxl.github.io/opendxl-client-python/
+  - type: GitHub
+    url: https://github.com/opendxl
+  - type: SDK - Python
+    url: https://github.com/opendxl/opendxl-client-python
+  - type: SDK - JavaScript
+    url: https://github.com/opendxl/opendxl-client-javascript
+- aid: mcafee:mcafee-alarms-api
+  name: McAfee (Trellix) Alarms API
+  description: Manage security alarms
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Alarms
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-alarms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-authentication-api
+  name: McAfee (Trellix) Authentication API
+  description: Session authentication and management
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-cases-api
+  name: McAfee (Trellix) Cases API
+  description: Manage incident response cases
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Cases
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-cases-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-core-api
+  name: McAfee (Trellix) Core API
+  description: Core server operations and authentication
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Core
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-core-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-data-sources-api
+  name: McAfee (Trellix) Data Sources API
+  description: Manage event data sources
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Data Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-data-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-detections-api
+  name: McAfee (Trellix) Detections API
+  description: EDR detection events and alerts
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Detections
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-detections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-devices-api
+  name: McAfee (Trellix) Devices API
+  description: Manage ESM device hierarchy
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-devices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-events-api
+  name: McAfee (Trellix) Events API
+  description: Query and retrieve security events
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-file-operations-api
+  name: McAfee (Trellix) File Operations API
+  description: Import and export configuration files
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - File Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-file-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-investigations-api
+  name: McAfee (Trellix) Investigations API
+  description: Threat investigation workflows and actions
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Investigations
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-investigations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-lists-api
+  name: McAfee (Trellix) Lists API
+  description: Manage URL and IP lists used in filtering
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-lists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-monitoring-api
+  name: McAfee (Trellix) Monitoring API
+  description: Appliance health and traffic monitoring
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-policies-api
+  name: McAfee (Trellix) Policies API
+  description: Manage and assign security policies
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-policy-configuration-api
+  name: McAfee (Trellix) Policy Configuration API
+  description: Manage proxy and policy settings
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Policy Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-policy-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-queries-api
+  name: McAfee (Trellix) Queries API
+  description: Execute ePO queries and retrieve results
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-queries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-real-time-search-api
+  name: McAfee (Trellix) Real-Time Search API
+  description: Real-time data collection from endpoints
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Real-Time Search
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-real-time-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-rule-sets-api
+  name: McAfee (Trellix) Rule Sets API
+  description: Manage web security rule sets
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Rule Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-rule-sets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-software-api
+  name: McAfee (Trellix) Software API
+  description: Manage software repositories and packages
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Software
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-software-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-system-groups-api
+  name: McAfee (Trellix) System Groups API
+  description: Manage the ePO System Tree groups
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - System Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-system-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-systems-api
+  name: McAfee (Trellix) Systems API
+  description: Manage endpoints and systems registered in ePO
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Systems
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-systems-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-tasks-api
+  name: McAfee (Trellix) Tasks API
+  description: Manage client tasks and server tasks
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-threat-events-api
+  name: McAfee (Trellix) Threat Events API
+  description: Retrieve threat event data from managed endpoints
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Threat Events
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-threat-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-threats-api
+  name: McAfee (Trellix) Threats API
+  description: Retrieve and manage detected threats
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Threats
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-threats-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-watchlists-api
+  name: McAfee (Trellix) Watchlists API
+  description: Manage security watchlists
+  humanURL: https://www.trellix.com/products/epo/
+  baseURL: https://your-epo-server:8443/remote
+  tags:
+  - Watchlists
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-watchlists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
 common:
   - type: AgenticAccess
     url: agentic-access/mcafee-agentic-access.yml
