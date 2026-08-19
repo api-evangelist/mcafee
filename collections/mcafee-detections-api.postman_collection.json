@@ -1,0 +1,495 @@
+{
+  "item": [
+    {
+      "id": "95a76ac9-7e6c-400f-b141-57f5524c0525",
+      "name": "Detections",
+      "description": {
+        "content": "EDR detection events and alerts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e53d9087-e4ee-49aa-9183-65006f4ca77f",
+          "name": "McAfee List detections",
+          "request": {
+            "name": "McAfee List detections",
+            "description": {
+              "content": "Retrieve EDR detection events, including alerts from behavioral analysis, signature matching, and real-time monitoring across endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edr",
+                "v2",
+                "detections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[severity]",
+                  "value": "<string>",
+                  "description": "Filter by detection severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hostName]",
+                  "value": "<string>",
+                  "description": "Filter detections by hostname"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[ruleId]",
+                  "value": "<string>",
+                  "description": "Filter by detection rule ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[limit]",
+                  "value": "20",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[offset]",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52ede542-7d3a-432a-9fbe-96e9a264b169",
+              "name": "Paginated list of detections",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edr",
+                    "v2",
+                    "detections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[severity]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[hostName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[ruleId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[limit]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page[offset]",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"detections\",\n      \"attributes\": {\n        \"ruleName\": \"string\",\n        \"ruleId\": \"string\",\n        \"severity\": \"low\",\n        \"detectedAt\": \"1972-07-15T08:22:39.849Z\",\n        \"hostName\": \"string\",\n        \"processName\": \"string\",\n        \"processId\": 5948,\n        \"parentProcessName\": \"string\",\n        \"commandLine\": \"string\",\n        \"sha256\": \"string\",\n        \"mitreAttackTactic\": \"string\",\n        \"mitreAttackTechnique\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"detections\",\n      \"attributes\": {\n        \"ruleName\": \"string\",\n        \"ruleId\": \"string\",\n        \"severity\": \"high\",\n        \"detectedAt\": \"2021-04-14T21:49:03.377Z\",\n        \"hostName\": \"string\",\n        \"processName\": \"string\",\n        \"processId\": 1351,\n        \"parentProcessName\": \"string\",\n        \"commandLine\": \"string\",\n        \"sha256\": \"string\",\n        \"mitreAttackTactic\": \"string\",\n        \"mitreAttackTechnique\": \"string\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"totalCount\": 3827,\n    \"pageLimit\": 5186,\n    \"pageOffset\": 6683\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8712aeaa-8c95-4886-93e2-714088d69c2d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edr",
+                    "v2",
+                    "detections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[severity]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[hostName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[ruleId]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[limit]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page[offset]",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22c68f79-0180-43f0-bb7d-43d2c606a2f5",
+          "name": "McAfee Get a specific detection",
+          "request": {
+            "name": "McAfee Get a specific detection",
+            "description": {
+              "content": "Retrieve detailed information about a specific detection event, including process trees, indicators of compromise, and MITRE ATT&CK mapping.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edr",
+                "v2",
+                "detections",
+                ":detectionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "detectionId",
+                  "description": "(Required) Unique detection identifier"
+                },
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f93d23b-617e-4684-9d9d-7f7684381bea",
+              "name": "Detection details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edr",
+                    "v2",
+                    "detections",
+                    ":detectionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "detectionId",
+                      "description": "(Required) Unique detection identifier"
+                    },
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"detections\",\n    \"attributes\": {\n      \"ruleName\": \"string\",\n      \"ruleId\": \"string\",\n      \"severity\": \"medium\",\n      \"detectedAt\": \"1998-10-24T08:48:07.379Z\",\n      \"hostName\": \"string\",\n      \"processName\": \"string\",\n      \"processId\": 2122,\n      \"parentProcessName\": \"string\",\n      \"commandLine\": \"string\",\n      \"sha256\": \"string\",\n      \"mitreAttackTactic\": \"string\",\n      \"mitreAttackTechnique\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79c33f8b-e5ae-424b-9d92-676255bba161",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edr",
+                    "v2",
+                    "detections",
+                    ":detectionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "detectionId",
+                      "description": "(Required) Unique detection identifier"
+                    },
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d817b911-5abb-4e79-a4ec-56f6d19a375f",
+              "name": "Detection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edr",
+                    "v2",
+                    "detections",
+                    ":detectionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "detectionId",
+                      "description": "(Required) Unique detection identifier"
+                    },
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6cd19409-ca0a-44b2-8b6a-5df529fee185",
+    "name": "McAfee ePO Alarms Detections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

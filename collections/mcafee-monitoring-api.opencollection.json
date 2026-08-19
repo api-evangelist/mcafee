@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Monitoring API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Get appliance status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/appliance/status"
+          },
+          "docs": "Retrieve the current health status and resource utilization of the Web Gateway appliance, including CPU, memory, and connection counts."
+        },
+        {
+          "info": {
+            "name": "McAfee Get traffic statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/appliance/traffic",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "Time period for statistics"
+              }
+            ]
+          },
+          "docs": "Retrieve web traffic statistics including request counts, bytes transferred, blocked requests, and category breakdowns."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

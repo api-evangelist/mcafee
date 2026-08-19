@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Core API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Core",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List available API commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/core.help",
+            "params": [
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Returns a list of all available remote API commands on the ePO server with their descriptions and parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

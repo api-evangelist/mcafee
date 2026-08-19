@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Threats API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List threats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/edr/v2/threats",
+            "params": [
+              {
+                "name": "filter[severity]",
+                "value": "",
+                "type": "query",
+                "description": "Filter threats by severity level"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Filter threats by current status"
+              },
+              {
+                "name": "filter[detectedAfter]",
+                "value": "",
+                "type": "query",
+                "description": "Filter threats detected after this ISO 8601 timestamp"
+              },
+              {
+                "name": "page[limit]",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "page[offset]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of detected threats across all managed endpoints, with optional filtering by severity, status, and time range."
+        },
+        {
+          "info": {
+            "name": "McAfee Get a specific threat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/edr/v2/threats/:threatId",
+            "params": [
+              {
+                "name": "threatId",
+                "value": "",
+                "type": "path",
+                "description": "Unique threat identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific threat by its unique ID, including affected hosts, threat indicators, and remediation status."
+        },
+        {
+          "info": {
+            "name": "McAfee Update threat status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{epo-server}:8443/remote/edr/v2/threats/:threatId",
+            "params": [
+              {
+                "name": "threatId",
+                "value": "",
+                "type": "path",
+                "description": "Unique threat identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status or assignment of a specific threat, such as marking it as investigating, resolved, or dismissed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

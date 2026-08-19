@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Policies API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Search for policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/policy.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against policy names"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for security policies configured in ePO, optionally filtered by product or policy type."
+        },
+        {
+          "info": {
+            "name": "McAfee Assign a policy to a system",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/policy.assignToSystem",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product ID for the policy"
+              },
+              {
+                "name": "typeId",
+                "value": "",
+                "type": "query",
+                "description": "Policy type ID"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Policy object ID"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Assign a specific policy to one or more systems, overriding the inherited group policy."
+        },
+        {
+          "info": {
+            "name": "McAfee Assign a policy to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/policy.assignToGroup",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "Target group ID"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product ID for the policy"
+              },
+              {
+                "name": "typeId",
+                "value": "",
+                "type": "query",
+                "description": "Policy type ID"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Policy object ID"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Assign a specific policy to a System Tree group, which is then inherited by all child systems and sub-groups."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

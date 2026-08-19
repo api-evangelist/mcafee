@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "83c38e53-dada-43f2-864a-c31fec15e212",
+      "name": "Core",
+      "description": {
+        "content": "Core server operations and authentication",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0e6933d-a30b-4646-84e2-f1005d1dd29a",
+          "name": "McAfee List available API commands",
+          "request": {
+            "name": "McAfee List available API commands",
+            "description": {
+              "content": "Returns a list of all available remote API commands on the ePO server with their descriptions and parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "core.help"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df3023d0-db77-428e-8fa5-c482766c0bad",
+              "name": "List of available API commands",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.help"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"command\": \"string\",\n    \"description\": \"string\",\n    \"parameters\": [\n      {\n        \"name\": \"string\",\n        \"required\": false,\n        \"description\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"required\": false,\n        \"description\": \"string\"\n      }\n    ]\n  },\n  {\n    \"command\": \"string\",\n    \"description\": \"string\",\n    \"parameters\": [\n      {\n        \"name\": \"string\",\n        \"required\": true,\n        \"description\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"required\": true,\n        \"description\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f516a20-c368-4f38-a0fc-158ceb11b7a8",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.help"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ea58d935-780a-474c-8046-44ac04b673f2",
+    "name": "McAfee ePO Alarms Core API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

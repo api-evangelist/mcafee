@@ -1,0 +1,433 @@
+{
+  "item": [
+    {
+      "id": "54433431-82a5-4036-bce5-65dcacf3b0a8",
+      "name": "Queries",
+      "description": {
+        "content": "Execute ePO queries and retrieve results",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3b9afe2-f10e-4726-8959-d5c97bf80e9e",
+          "name": "McAfee Execute a saved query",
+          "request": {
+            "name": "McAfee Execute a saved query",
+            "description": {
+              "content": "Execute a previously saved ePO query by ID and return the results. Queries can retrieve data about systems, events, policies, and other ePO objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "core.executeQuery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "queryId",
+                  "value": "<integer>",
+                  "description": "(Required) ID of the saved query to execute"
+                },
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "847cf113-0cc1-4ca7-b2d7-44633d099228",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.executeQuery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key_0\": \"string\"\n  },\n  {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbbc8b73-47e4-415c-a5ae-2e6125e60ddf",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.executeQuery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21a26f0b-cc78-4978-9904-7e0bafe258ea",
+              "name": "Query not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.executeQuery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "416fbc1f-d04e-4587-a704-bf4398369756",
+          "name": "McAfee List saved queries",
+          "request": {
+            "name": "McAfee List saved queries",
+            "description": {
+              "content": "Retrieve a list of all saved queries available on the ePO server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "core.listQueries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "700a36fd-ce40-46fc-a9c5-3f0f5581cd73",
+              "name": "List of saved queries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.listQueries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 2719,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"createdBy\": \"string\",\n    \"groupName\": \"string\"\n  },\n  {\n    \"id\": 8971,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"createdBy\": \"string\",\n    \"groupName\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52757b39-209d-499d-84c5-076eb04db302",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "core.listQueries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ee61d48d-e1e3-4d06-8ba1-ec8de8d6dfb7",
+    "name": "McAfee ePO Alarms Queries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

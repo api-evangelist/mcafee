@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Queries API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Execute a saved query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/core.executeQuery",
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the saved query to execute"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Execute a previously saved ePO query by ID and return the results. Queries can retrieve data about systems, events, policies, and other ePO objects."
+        },
+        {
+          "info": {
+            "name": "McAfee List saved queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/core.listQueries",
+            "params": [
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all saved queries available on the ePO server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

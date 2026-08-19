@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Events API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Execute an event query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/qryExecuteDetail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a query against the ESM event database to retrieve security events matching specified criteria. Returns a result ID for fetching results asynchronously."
+        },
+        {
+          "info": {
+            "name": "McAfee Get query results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/qryGetResults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the results of a previously executed query using the result ID. May need to be called multiple times as results become available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

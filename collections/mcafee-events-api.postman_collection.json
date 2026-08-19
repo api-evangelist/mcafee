@@ -1,0 +1,504 @@
+{
+  "item": [
+    {
+      "id": "dbfa2f31-374e-4363-8d67-a25d7b6ae1c9",
+      "name": "Events",
+      "description": {
+        "content": "Query and retrieve security events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8bd2d1c7-13fa-4962-b042-260536c297b5",
+          "name": "McAfee Execute an event query",
+          "request": {
+            "name": "McAfee Execute an event query",
+            "description": {
+              "content": "Execute a query against the ESM event database to retrieve security events matching specified criteria. Returns a result ID for fetching results asynchronously.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "qryExecuteDetail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ff81285-b245-4c87-9b0d-aa2bc39cd992",
+              "name": "Query initiated, result ID returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryExecuteDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resultID\": 8952\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab132cbc-d291-4f7a-9e42-d91b9cb9f809",
+              "name": "Invalid query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryExecuteDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df4bf7f0-d8d4-4510-8942-3530a53c3344",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryExecuteDetail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"timeRange\": \"<string>\",\n    \"customStart\": \"<dateTime>\",\n    \"customEnd\": \"<dateTime>\",\n    \"fields\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"filters\": [\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"field\": {\n          \"name\": \"<string>\"\n        },\n        \"value\": \"<string>\"\n      }\n    ],\n    \"limit\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f534e0c-ffbf-490f-80ae-d256c9c391c4",
+          "name": "McAfee Get query results",
+          "request": {
+            "name": "McAfee Get query results",
+            "description": {
+              "content": "Retrieve the results of a previously executed query using the result ID. May need to be called multiple times as results become available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "qryGetResults"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26c33b4e-66e1-4603-badb-8aef1bed36fd",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryGetResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"columns\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"rows\": [\n    {\n      \"values\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"values\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"totalRows\": 2581,\n  \"complete\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "653ba31b-324b-427b-9bdd-c74ad7986476",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryGetResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98b0264c-bd3f-49c3-85c1-63dd09caf796",
+              "name": "Result ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "qryGetResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultID\": \"<integer>\",\n  \"startPos\": 0,\n  \"numRows\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "981a8adb-db8f-4167-847d-3e762a23026b",
+    "name": "McAfee ePO Alarms Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

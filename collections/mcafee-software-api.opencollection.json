@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Software API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Software",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Find software packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/repository.findPackages",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to filter packages"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for software packages in the ePO master repository, including DAT files, engine updates, and product packages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Lists API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List all filtering lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/lists"
+          },
+          "docs": "Retrieve all configured lists used for URL filtering, IP blocking, media type filtering, and custom categorization."
+        },
+        {
+          "info": {
+            "name": "McAfee Get a specific list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique filtering list identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the contents and configuration of a specific filtering list."
+        },
+        {
+          "info": {
+            "name": "McAfee Update a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{epo-server}:8443/remote/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique filtering list identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the entries in a filtering list, adding or removing URLs, IPs, or other entries."
+        },
+        {
+          "info": {
+            "name": "McAfee Add entry to a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/lists/:listId/entries",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique filtering list identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new entry (URL, IP, or other value) to a filtering list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

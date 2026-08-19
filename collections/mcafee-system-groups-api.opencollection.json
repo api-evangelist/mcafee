@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms System Groups API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Find system tree groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/epogroup.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against group names"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for groups in the ePO System Tree by name or other criteria."
+        },
+        {
+          "info": {
+            "name": "McAfee Move a system to a different group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/epogroup.moveSystem",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names to move"
+              },
+              {
+                "name": "parentGroupId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the target parent group"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Move one or more systems from their current location in the System Tree to a specified target group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

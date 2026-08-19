@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Watchlists API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Watchlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/sysGetWatchlists"
+          },
+          "docs": "Retrieve all configured watchlists, which are collections of values (IPs, hostnames, etc.) used for correlation and alerting."
+        },
+        {
+          "info": {
+            "name": "McAfee Get watchlist values",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/sysGetWatchlistValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the values (entries) contained in a specific watchlist."
+        },
+        {
+          "info": {
+            "name": "McAfee Add values to a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/sysAddWatchlistValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more values to an existing watchlist for use in correlation rules and alarm triggers."
+        },
+        {
+          "info": {
+            "name": "McAfee Remove values from a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/sysRemoveWatchlistValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove one or more values from an existing watchlist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

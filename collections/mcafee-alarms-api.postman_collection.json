@@ -1,0 +1,548 @@
+{
+  "item": [
+    {
+      "id": "8082add1-7c57-4882-a1a2-0f4acb99dc5c",
+      "name": "Alarms",
+      "description": {
+        "content": "Manage security alarms",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3aab7e8a-b7dd-42cc-bd76-3d2b8351bd9f",
+          "name": "McAfee Get triggered alarms",
+          "request": {
+            "name": "McAfee Get triggered alarms",
+            "description": {
+              "content": "Retrieve a list of triggered alarms within a specified time range, optionally filtered by status or severity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alarmGetTriggeredAlarms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggeredTimeRange\": \"<string>\",\n  \"customStart\": \"<dateTime>\",\n  \"customEnd\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"pageSize\": 50,\n  \"pageNumber\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f43ab13-7b1a-4da5-baf2-255cbe68e686",
+              "name": "List of triggered alarms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmGetTriggeredAlarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredTimeRange\": \"<string>\",\n  \"customStart\": \"<dateTime>\",\n  \"customEnd\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"pageSize\": 50,\n  \"pageNumber\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"triggeredAlarms\": [\n    {\n      \"id\": 5955,\n      \"alarmName\": \"string\",\n      \"triggeredDate\": \"1983-02-07T08:06:06.474Z\",\n      \"acknowledgedDate\": \"2004-12-09T08:59:44.013Z\",\n      \"acknowledgedUsername\": \"string\",\n      \"severity\": 7614,\n      \"summary\": \"string\",\n      \"assignee\": \"string\",\n      \"caseId\": 3277,\n      \"events\": [\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        },\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 3846,\n      \"alarmName\": \"string\",\n      \"triggeredDate\": \"1977-05-30T20:49:42.692Z\",\n      \"acknowledgedDate\": \"1949-01-05T01:22:04.304Z\",\n      \"acknowledgedUsername\": \"string\",\n      \"severity\": 1559,\n      \"summary\": \"string\",\n      \"assignee\": \"string\",\n      \"caseId\": 5302,\n      \"events\": [\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        },\n        {\n          \"eventId\": \"string\",\n          \"sourceIp\": \"string\",\n          \"destIp\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": 3087\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e686c6d4-754a-4066-bddf-ee8f07715eed",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmGetTriggeredAlarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredTimeRange\": \"<string>\",\n  \"customStart\": \"<dateTime>\",\n  \"customEnd\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"pageSize\": 50,\n  \"pageNumber\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06272e40-7907-46a1-91da-6d6b1760f242",
+          "name": "McAfee Acknowledge a triggered alarm",
+          "request": {
+            "name": "McAfee Acknowledge a triggered alarm",
+            "description": {
+              "content": "Acknowledge one or more triggered alarms, marking them as reviewed by an analyst.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alarmAcknowledgeTriggeredAlarm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5df2ef54-4c03-4471-b23c-38e3b4a121dc",
+              "name": "Alarms acknowledged",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmAcknowledgeTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "258bc978-a7c9-43ef-a320-203a26af04ba",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmAcknowledgeTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd9adc72-922f-4771-9e04-7b8f65fad5ec",
+          "name": "McAfee Delete triggered alarms",
+          "request": {
+            "name": "McAfee Delete triggered alarms",
+            "description": {
+              "content": "Delete one or more triggered alarm records from the ESM database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alarmDeleteTriggeredAlarm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34b12915-d80f-4c44-8cdd-ba21ba4048be",
+              "name": "Alarms deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmDeleteTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea9fb7e5-6a9c-4c76-a999-55300837d925",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alarmDeleteTriggeredAlarm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggeredIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0d07ef6a-3152-4c3f-9b4d-2df1f60fc44e",
+    "name": "McAfee ePO Alarms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

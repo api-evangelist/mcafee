@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "e1da2afd-7870-439d-998b-1e43fb54e96e",
+      "name": "Threat Events",
+      "description": {
+        "content": "Retrieve threat event data from managed endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2b62a483-ac88-4f5c-b203-22eb08d2003b",
+          "name": "McAfee Find threat events",
+          "request": {
+            "name": "McAfee Find threat events",
+            "description": {
+              "content": "Search for detected threat events across managed systems, returning details about malware detections, intrusion attempts, and other security events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "detectedsystem.find"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "searchText",
+                  "value": "<string>",
+                  "description": "Search text to filter threat events"
+                },
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ca0246e-3b6a-40eb-aefb-51b3c0cda55c",
+              "name": "List of threat events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detectedsystem.find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AutoID\": 178,\n    \"DetectedUTC\": \"1986-08-22T09:35:03.609Z\",\n    \"ReceivedUTC\": \"2001-06-10T00:35:25.373Z\",\n    \"ThreatName\": \"string\",\n    \"ThreatType\": \"string\",\n    \"ThreatSeverity\": 2607,\n    \"ThreatActionTaken\": \"string\",\n    \"SourceHostName\": \"string\",\n    \"SourceIPV4\": \"string\",\n    \"TargetFileName\": \"string\",\n    \"AnalyzerName\": \"string\",\n    \"AnalyzerVersion\": \"string\"\n  },\n  {\n    \"AutoID\": 2043,\n    \"DetectedUTC\": \"1964-02-12T03:40:06.941Z\",\n    \"ReceivedUTC\": \"1955-02-24T23:38:22.484Z\",\n    \"ThreatName\": \"string\",\n    \"ThreatType\": \"string\",\n    \"ThreatSeverity\": 6357,\n    \"ThreatActionTaken\": \"string\",\n    \"SourceHostName\": \"string\",\n    \"SourceIPV4\": \"string\",\n    \"TargetFileName\": \"string\",\n    \"AnalyzerName\": \"string\",\n    \"AnalyzerVersion\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f9cc527-4891-4c4e-ba98-551f31b3fd14",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detectedsystem.find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c7dbc69-cfeb-4f0c-9c33-72d001363eec",
+    "name": "McAfee ePO Alarms Threat Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

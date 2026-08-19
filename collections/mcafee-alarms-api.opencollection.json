@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alarms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Get triggered alarms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/alarmGetTriggeredAlarms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve a list of triggered alarms within a specified time range, optionally filtered by status or severity."
+        },
+        {
+          "info": {
+            "name": "McAfee Acknowledge a triggered alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/alarmAcknowledgeTriggeredAlarm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge one or more triggered alarms, marking them as reviewed by an analyst."
+        },
+        {
+          "info": {
+            "name": "McAfee Delete triggered alarms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/alarmDeleteTriggeredAlarm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete one or more triggered alarm records from the ESM database."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

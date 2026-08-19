@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Rule Sets API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rule Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee List rule sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/rulesets"
+          },
+          "docs": "Retrieve a list of all configured rule sets, including web filtering, SSL scanning, authentication, and media type filtering rules."
+        },
+        {
+          "info": {
+            "name": "McAfee Get a specific rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/rulesets/:rulesetId",
+            "params": [
+              {
+                "name": "rulesetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule set identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the full configuration of a specific rule set, including all contained rules, conditions, and actions."
+        },
+        {
+          "info": {
+            "name": "McAfee Update a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{epo-server}:8443/remote/rulesets/:rulesetId",
+            "params": [
+              {
+                "name": "rulesetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule set identifier"
+              }
+            ]
+          },
+          "docs": "Update the configuration of an existing rule set, including enabling/disabling rules and modifying conditions."
+        },
+        {
+          "info": {
+            "name": "McAfee Delete a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{epo-server}:8443/remote/rulesets/:rulesetId",
+            "params": [
+              {
+                "name": "rulesetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule set identifier"
+              }
+            ]
+          },
+          "docs": "Delete a rule set from the configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

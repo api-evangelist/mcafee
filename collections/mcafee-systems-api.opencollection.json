@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Systems API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Systems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Search for systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/system.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against system names, IP addresses, or other properties"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for managed systems in the ePO System Tree matching specified criteria such as name, IP address, tags, or custom properties."
+        },
+        {
+          "info": {
+            "name": "McAfee Find systems by tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/system.findTag",
+            "params": [
+              {
+                "name": "tagName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag to search for"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of systems that have a specific tag applied."
+        },
+        {
+          "info": {
+            "name": "McAfee Apply a tag to systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/system.applyTag",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names or IDs"
+              },
+              {
+                "name": "tagName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag to apply"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Apply a tag to one or more systems identified by name or ID."
+        },
+        {
+          "info": {
+            "name": "McAfee Remove a tag from systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/system.clearTag",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names or IDs"
+              },
+              {
+                "name": "tagName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag to remove"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Remove a tag from one or more systems identified by name or ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

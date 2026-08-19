@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Tasks API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Search for client tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/clienttask.find",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Search string to match against task names"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Search for client tasks that can be deployed to managed systems."
+        },
+        {
+          "info": {
+            "name": "McAfee Run a client task on systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/clienttask.run",
+            "params": [
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of system names"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product ID for the task"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "query",
+                "description": "Client task ID to execute"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Execute a client task immediately on one or more specified systems."
+        },
+        {
+          "info": {
+            "name": "McAfee List server tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/scheduler.listServerTasks",
+            "params": [
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all configured server tasks in ePO, including pull tasks, replication tasks, and custom automation tasks."
+        },
+        {
+          "info": {
+            "name": "McAfee Run a server task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/scheduler.runServerTask",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the server task to execute"
+              },
+              {
+                "name": ":output",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the response. Defaults to JSON when not specified."
+              }
+            ]
+          },
+          "docs": "Execute a server task immediately by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

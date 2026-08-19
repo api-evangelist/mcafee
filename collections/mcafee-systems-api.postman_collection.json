@@ -1,0 +1,758 @@
+{
+  "item": [
+    {
+      "id": "2bbd5de5-04a0-4e83-a5ce-b726ef47a118",
+      "name": "Systems",
+      "description": {
+        "content": "Manage endpoints and systems registered in ePO",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "006fdfb8-bd51-45b7-aeae-d8b046624d14",
+          "name": "McAfee Search for systems",
+          "request": {
+            "name": "McAfee Search for systems",
+            "description": {
+              "content": "Search for managed systems in the ePO System Tree matching specified criteria such as name, IP address, tags, or custom properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system.find"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "searchText",
+                  "value": "<string>",
+                  "description": "(Required) Search string to match against system names, IP addresses, or other properties"
+                },
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ddfcbcdc-e44f-4988-bb7a-ad304b473525",
+              "name": "List of matching systems",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"EPOComputerProperties.ParentID\": 1419,\n    \"EPOComputerProperties.ComputerName\": \"string\",\n    \"EPOComputerProperties.IPAddress\": \"string\",\n    \"EPOComputerProperties.OSType\": \"string\",\n    \"EPOComputerProperties.OSVersion\": \"string\",\n    \"EPOComputerProperties.DomainName\": \"string\",\n    \"EPOComputerProperties.UserName\": \"string\",\n    \"EPOComputerProperties.Tags\": \"string\",\n    \"EPOLeafNode.AgentGUID\": \"string\",\n    \"EPOLeafNode.AgentVersion\": \"string\",\n    \"EPOLeafNode.LastUpdate\": \"1967-03-16T09:39:49.355Z\",\n    \"EPOLeafNode.ManagedState\": \"string\"\n  },\n  {\n    \"EPOComputerProperties.ParentID\": 2912,\n    \"EPOComputerProperties.ComputerName\": \"string\",\n    \"EPOComputerProperties.IPAddress\": \"string\",\n    \"EPOComputerProperties.OSType\": \"string\",\n    \"EPOComputerProperties.OSVersion\": \"string\",\n    \"EPOComputerProperties.DomainName\": \"string\",\n    \"EPOComputerProperties.UserName\": \"string\",\n    \"EPOComputerProperties.Tags\": \"string\",\n    \"EPOLeafNode.AgentGUID\": \"string\",\n    \"EPOLeafNode.AgentVersion\": \"string\",\n    \"EPOLeafNode.LastUpdate\": \"1997-09-09T16:53:44.340Z\",\n    \"EPOLeafNode.ManagedState\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1364e83e-e1db-4fee-aa98-eeae05184391",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1da9a0e5-1424-4d3b-a4f7-584c909f9d8e",
+          "name": "McAfee Find systems by tag",
+          "request": {
+            "name": "McAfee Find systems by tag",
+            "description": {
+              "content": "Retrieve a list of systems that have a specific tag applied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system.findTag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tagName",
+                  "value": "<string>",
+                  "description": "(Required) Name of the tag to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c590d8a5-11a0-4a6d-866f-a3cb843c964a",
+              "name": "List of systems with the specified tag",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.findTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tagName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"EPOComputerProperties.ParentID\": 1419,\n    \"EPOComputerProperties.ComputerName\": \"string\",\n    \"EPOComputerProperties.IPAddress\": \"string\",\n    \"EPOComputerProperties.OSType\": \"string\",\n    \"EPOComputerProperties.OSVersion\": \"string\",\n    \"EPOComputerProperties.DomainName\": \"string\",\n    \"EPOComputerProperties.UserName\": \"string\",\n    \"EPOComputerProperties.Tags\": \"string\",\n    \"EPOLeafNode.AgentGUID\": \"string\",\n    \"EPOLeafNode.AgentVersion\": \"string\",\n    \"EPOLeafNode.LastUpdate\": \"1967-03-16T09:39:49.355Z\",\n    \"EPOLeafNode.ManagedState\": \"string\"\n  },\n  {\n    \"EPOComputerProperties.ParentID\": 2912,\n    \"EPOComputerProperties.ComputerName\": \"string\",\n    \"EPOComputerProperties.IPAddress\": \"string\",\n    \"EPOComputerProperties.OSType\": \"string\",\n    \"EPOComputerProperties.OSVersion\": \"string\",\n    \"EPOComputerProperties.DomainName\": \"string\",\n    \"EPOComputerProperties.UserName\": \"string\",\n    \"EPOComputerProperties.Tags\": \"string\",\n    \"EPOLeafNode.AgentGUID\": \"string\",\n    \"EPOLeafNode.AgentVersion\": \"string\",\n    \"EPOLeafNode.LastUpdate\": \"1997-09-09T16:53:44.340Z\",\n    \"EPOLeafNode.ManagedState\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ac560c3-2ffc-48c0-a6c6-14d1cd8ee85a",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.findTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tagName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11949101-88a4-430e-b5dc-7b83bd1402a0",
+          "name": "McAfee Apply a tag to systems",
+          "request": {
+            "name": "McAfee Apply a tag to systems",
+            "description": {
+              "content": "Apply a tag to one or more systems identified by name or ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system.applyTag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of system names or IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagName",
+                  "value": "<string>",
+                  "description": "(Required) Name of the tag to apply"
+                },
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c878988-a7fd-46bd-a27d-c96a970b627b",
+              "name": "Tag applied successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.applyTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c354ab7-59cf-4faf-b3db-89ed7c938e0a",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.applyTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2975a69-3743-4d75-9d66-ad6d414d29ae",
+          "name": "McAfee Remove a tag from systems",
+          "request": {
+            "name": "McAfee Remove a tag from systems",
+            "description": {
+              "content": "Remove a tag from one or more systems identified by name or ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system.clearTag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of system names or IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagName",
+                  "value": "<string>",
+                  "description": "(Required) Name of the tag to remove"
+                },
+                {
+                  "disabled": false,
+                  "key": ":output",
+                  "value": "json",
+                  "description": "Output format for the response. Defaults to JSON when not specified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef6c67b2-cf76-4e18-aed8-e10199d7c650",
+              "name": "Tag removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.clearTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff77ac37-d53f-4f5c-a21b-b910996c5aea",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system.clearTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": ":output",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3f942596-7f31-41ce-9d85-c72043720bf0",
+    "name": "McAfee ePO Alarms Systems API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

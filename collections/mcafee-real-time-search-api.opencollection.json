@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Real-Time Search API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Real-Time Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Create a real-time search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/edr/v2/real-time-search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a real-time query across managed endpoints to collect live data such as running processes, network connections, and file hashes."
+        },
+        {
+          "info": {
+            "name": "McAfee Get real-time search results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{epo-server}:8443/remote/edr/v2/real-time-search/:searchId/results",
+            "params": [
+              {
+                "name": "searchId",
+                "value": "",
+                "type": "path",
+                "description": "Real-time search identifier"
+              },
+              {
+                "name": "page[limit]",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "page[offset]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve the results of a previously initiated real-time search. Results are collected as endpoints respond to the query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

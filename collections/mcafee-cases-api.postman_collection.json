@@ -1,0 +1,449 @@
+{
+  "item": [
+    {
+      "id": "dab3c0e6-10cc-4f22-8034-548e00218c7e",
+      "name": "Cases",
+      "description": {
+        "content": "Manage incident response cases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38253915-bb46-46ee-8332-828e2bdfdef0",
+          "name": "McAfee List incident cases",
+          "request": {
+            "name": "McAfee List incident cases",
+            "description": {
+              "content": "Retrieve a list of incident response cases managed in the ESM, with optional filtering by status, assignee, or priority.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "caseGetCaseList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"since\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1707441-91e2-4b1a-a654-7d4e9d831eb7",
+              "name": "List of cases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseGetCaseList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"since\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 9095,\n    \"summary\": \"string\",\n    \"status\": \"Closed\",\n    \"severity\": 8764,\n    \"assignee\": \"string\",\n    \"notes\": [\n      {\n        \"timestamp\": \"2005-07-02T01:31:28.273Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      },\n      {\n        \"timestamp\": \"1976-06-24T12:33:51.420Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      }\n    ],\n    \"openTime\": \"1979-01-31T12:46:19.576Z\",\n    \"closeTime\": \"1953-06-29T01:25:04.788Z\"\n  },\n  {\n    \"id\": 8725,\n    \"summary\": \"string\",\n    \"status\": \"Open\",\n    \"severity\": 2964,\n    \"assignee\": \"string\",\n    \"notes\": [\n      {\n        \"timestamp\": \"1954-10-21T08:47:46.561Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      },\n      {\n        \"timestamp\": \"2024-07-09T08:30:09.852Z\",\n        \"author\": \"string\",\n        \"content\": \"string\"\n      }\n    ],\n    \"openTime\": \"2026-03-03T18:58:20.744Z\",\n    \"closeTime\": \"2025-12-26T21:31:08.555Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6649d34c-e68e-4b2e-be0b-bb6c9bffc3f3",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseGetCaseList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"since\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebc160e7-6d11-46fa-869c-e3ad58bb046b",
+          "name": "McAfee Create a new case",
+          "request": {
+            "name": "McAfee Create a new case",
+            "description": {
+              "content": "Create a new incident response case for tracking investigation and remediation of a security incident.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "caseAddCase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP of the ePO server",
+                  "type": "any",
+                  "value": "{{epo-server}}",
+                  "key": "epo-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa629937-22d6-481d-acff-36ab6b985d3d",
+              "name": "Case created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseAddCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9140,\n  \"summary\": \"string\",\n  \"status\": \"Open\",\n  \"severity\": 1977,\n  \"assignee\": \"string\",\n  \"notes\": [\n    {\n      \"timestamp\": \"1988-11-04T12:15:14.255Z\",\n      \"author\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"timestamp\": \"2025-09-13T10:15:13.244Z\",\n      \"author\": \"string\",\n      \"content\": \"string\"\n    }\n  ],\n  \"openTime\": \"1965-09-14T13:42:33.221Z\",\n  \"closeTime\": \"1982-02-03T00:25:10.764Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6189d46-bf54-45b0-9fec-9cf1d9dde865",
+              "name": "Invalid case data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseAddCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "010b76c6-b163-40cc-9e34-01b83cd0dde7",
+              "name": "Not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "caseAddCase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP of the ePO server",
+                      "type": "any",
+                      "value": "{{epo-server}}",
+                      "key": "epo-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"summary\": \"<string>\",\n  \"severity\": \"<integer>\",\n  \"assignee\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP of the ePO server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-epo-server",
+      "key": "epo-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{epo-server}}:8443/remote",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ddc0cca9-0cd0-41bf-89a1-1825dbfb043f",
+    "name": "McAfee ePO Alarms Cases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.\n\nContact Support:\n Name: McAfee Support",
+      "type": "text/plain"
+    }
+  }
+}

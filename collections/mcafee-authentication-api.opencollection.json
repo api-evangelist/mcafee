@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "McAfee ePO Alarms Authentication API",
+    "version": "5.10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "McAfee Authenticate and create session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/v2/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate with ESM credentials to obtain a session token. The session token must be included in subsequent requests as a cookie or header."
+        },
+        {
+          "info": {
+            "name": "McAfee End current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{epo-server}:8443/remote/v2/logout"
+          },
+          "docs": "Terminate the current authenticated session."
+        },
+        {
+          "info": {
+            "name": "McAfee Obtain access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/iam/v1.1/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate using client credentials to obtain a bearer token for accessing MVISION APIs. Tokens are valid for a limited duration."
+        },
+        {
+          "info": {
+            "name": "McAfee Authenticate and create session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/login"
+          },
+          "docs": "Authenticate with administrator credentials to establish a session. Returns a session cookie used for subsequent API requests."
+        },
+        {
+          "info": {
+            "name": "McAfee End current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{epo-server}:8443/remote/logout"
+          },
+          "docs": "Terminate the current session and invalidate the session cookie."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
