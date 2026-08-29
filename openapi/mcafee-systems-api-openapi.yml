@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: McAfee ePO Alarms Systems API
+  title: McAfee ePO Systems API
   description: McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
   version: '5.10'
   contact:
@@ -133,21 +133,13 @@ paths:
         '401':
           description: Authentication failed
 components:
-  parameters:
-    outputType:
-      name: :output
-      in: query
-      required: false
-      description: Output format for the response. Defaults to JSON when not specified.
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - terse
-        - verbose
-        default: json
   schemas:
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
     System:
       type: object
       properties:
@@ -188,12 +180,20 @@ components:
         EPOLeafNode.ManagedState:
           type: string
           description: Management state of the system
-    CommandResult:
-      type: object
-      properties:
-        result:
-          type: string
-          description: Result status message
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
   securitySchemes:
     basicAuth:
       type: http
