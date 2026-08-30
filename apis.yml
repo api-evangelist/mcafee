@@ -409,7 +409,7 @@ apis:
   humanURL: https://www.trellix.com/products/epo/
   baseURL: https://your-epo-server:8443/remote
   tags:
-  - Rulesets
+  - Rule Sets
   tags_raw:
   - Rule Sets
   properties:
