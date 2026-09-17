@@ -404,28 +404,6 @@ apis:
     url: https://docs.trellix.com/bundle/web-gateway-product-guide
   - type: Documentation
     url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
-- aid: mcafee:mcafee-rule-sets-api
-  name: McAfee (Trellix) Rule Sets API
-  description: Manage web security rule sets
-  humanURL: https://www.trellix.com/products/epo/
-  baseURL: https://your-epo-server:8443/remote
-  tags:
-  - Rulesets
-  tags_raw:
-  - Rule Sets
-  properties:
-  - type: OpenAPI
-    url: openapi/mcafee-rule-sets-api-openapi.yml
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
-  - type: Authentication
-    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
-  - type: Documentation
-    url: https://developer.mcafee.com/
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-product-guide
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
 - aid: mcafee:mcafee-software-api
   name: McAfee (Trellix) Software API
   description: Manage software repositories and packages
@@ -560,6 +538,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/mcafee-watchlists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
+  - type: Documentation
+    url: https://developer.mcafee.com/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-product-guide
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
+- aid: mcafee:mcafee-rulesets-api
+  name: McAfee (Trellix) Rulesets API
+  description: Manage web security rule sets
+  humanURL: https://www.trellix.com/
+  baseURL: https://your-tie-server/api
+  tags:
+  - Rulesets
+  properties:
+  - type: OpenAPI
+    url: openapi/mcafee-rulesets-api-openapi.yml
   - type: Documentation
     url: https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide
   - type: Authentication
