@@ -197,6 +197,20 @@ components:
               items:
                 type: string
               description: Applied tags
+    DeviceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Device'
+    DeviceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -209,21 +223,15 @@ components:
         pageOffset:
           type: integer
           description: Current offset
-    DeviceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    DeviceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Device'
   parameters:
+    pageOffset:
+      name: page[offset]
+      in: query
+      required: false
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
     pageLimit:
       name: page[limit]
       in: query
@@ -233,14 +241,6 @@ components:
         type: integer
         default: 20
         maximum: 100
-    pageOffset:
-      name: page[offset]
-      in: query
-      required: false
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
   securitySchemes:
     sessionAuth:
       type: apiKey

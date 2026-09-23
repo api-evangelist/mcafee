@@ -99,6 +99,18 @@ paths:
           description: Search not found
 components:
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching records
+        pageLimit:
+          type: integer
+          description: Current page size limit
+        pageOffset:
+          type: integer
+          description: Current offset
     RealTimeSearchResponse:
       type: object
       properties:
@@ -130,18 +142,6 @@ components:
                   type: string
                   format: date-time
                   description: Creation timestamp
-    PaginationMeta:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total number of matching records
-        pageLimit:
-          type: integer
-          description: Current page size limit
-        pageOffset:
-          type: integer
-          description: Current offset
   parameters:
     pageOffset:
       name: page[offset]

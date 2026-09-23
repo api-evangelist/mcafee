@@ -70,6 +70,20 @@ paths:
         '401':
           description: Authentication failed
 components:
+  parameters:
+    outputType:
+      name: :output
+      in: query
+      required: false
+      description: Output format for the response. Defaults to JSON when not specified.
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - terse
+        - verbose
+        default: json
   schemas:
     SavedQuery:
       type: object
@@ -89,20 +103,6 @@ components:
         groupName:
           type: string
           description: Query group name
-  parameters:
-    outputType:
-      name: :output
-      in: query
-      required: false
-      description: Output format for the response. Defaults to JSON when not specified.
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - terse
-        - verbose
-        default: json
   securitySchemes:
     basicAuth:
       type: http

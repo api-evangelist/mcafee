@@ -32,7 +32,9 @@
     "mcafee-policy-configuration-api-openapi.yml",
     "mcafee-rule-sets-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -42,7 +44,9 @@
     "mcafee-mvision-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "mcafee-web-gateway-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "tag 'Authentication' spans 3 source specs (mcafee-esm-openapi.yml, mcafee-mvision-openapi.yml, mcafee-web-gateway-openapi.yml): per-path servers applied",
-    "tag 'Devices' spans 2 source specs (mcafee-esm-openapi.yml, mcafee-mvision-openapi.yml): per-path servers applied"
+    "tag 'Devices' spans 2 source specs (mcafee-esm-openapi.yml, mcafee-mvision-openapi.yml): per-path servers applied",
+    "superseded outputs removed: mcafee-rulesets-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 26 total)"
   ],
   "skipped": [
     "mcafee-alarms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -61,7 +65,7 @@
     "mcafee-policy-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mcafee-queries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mcafee-real-time-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "mcafee-rule-sets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mcafee-rulesets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mcafee-software-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mcafee-system-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mcafee-systems-api-openapi.yml: previously refined output, superseded by openapi/_original/",

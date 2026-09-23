@@ -130,28 +130,32 @@ paths:
         '404':
           description: Threat not found
 components:
+  parameters:
+    threatId:
+      name: threatId
+      in: path
+      required: true
+      description: Unique threat identifier
+      schema:
+        type: string
+    pageOffset:
+      name: page[offset]
+      in: query
+      required: false
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    pageLimit:
+      name: page[limit]
+      in: query
+      required: false
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
   schemas:
-    ThreatListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Threat'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    PaginationMeta:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total number of matching records
-        pageLimit:
-          type: integer
-          description: Current page size limit
-        pageOffset:
-          type: integer
-          description: Current offset
     Threat:
       type: object
       properties:
@@ -208,31 +212,27 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Threat'
-  parameters:
-    pageLimit:
-      name: page[limit]
-      in: query
-      required: false
-      description: Maximum number of results to return per page
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    pageOffset:
-      name: page[offset]
-      in: query
-      required: false
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    threatId:
-      name: threatId
-      in: path
-      required: true
-      description: Unique threat identifier
-      schema:
-        type: string
+    ThreatListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Threat'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching records
+        pageLimit:
+          type: integer
+          description: Current page size limit
+        pageOffset:
+          type: integer
+          description: Current offset
   securitySchemes:
     bearerAuth:
       type: http

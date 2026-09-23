@@ -67,6 +67,29 @@ paths:
           description: Not authenticated
 components:
   schemas:
+    ApplianceStatus:
+      type: object
+      properties:
+        hostname:
+          type: string
+          description: Appliance hostname
+        uptime:
+          type: string
+          description: Appliance uptime
+        cpuUsage:
+          type: number
+          format: float
+          description: Current CPU usage percentage
+        memoryUsage:
+          type: number
+          format: float
+          description: Current memory usage percentage
+        activeConnections:
+          type: integer
+          description: Number of active proxy connections
+        version:
+          type: string
+          description: Web Gateway software version
     TrafficStatistics:
       type: object
       properties:
@@ -96,29 +119,6 @@ components:
               count:
                 type: integer
           description: Top URL categories by request count
-    ApplianceStatus:
-      type: object
-      properties:
-        hostname:
-          type: string
-          description: Appliance hostname
-        uptime:
-          type: string
-          description: Appliance uptime
-        cpuUsage:
-          type: number
-          format: float
-          description: Current CPU usage percentage
-        memoryUsage:
-          type: number
-          format: float
-          description: Current memory usage percentage
-        activeConnections:
-          type: integer
-          description: Number of active proxy connections
-        version:
-          type: string
-          description: Web Gateway software version
   securitySchemes:
     cookieAuth:
       type: apiKey

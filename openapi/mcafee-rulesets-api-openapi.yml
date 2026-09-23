@@ -17,7 +17,7 @@ servers:
 security:
 - cookieAuth: []
 tags:
-- name: Rule Sets
+- name: Rulesets
   description: Manage web security rule sets
 paths:
   /rulesets:
@@ -26,7 +26,7 @@ paths:
       summary: McAfee List rule sets
       description: Retrieve a list of all configured rule sets, including web filtering, SSL scanning, authentication, and media type filtering rules.
       tags:
-      - Rule Sets
+      - Rulesets
       responses:
         '200':
           description: List of rule sets
@@ -55,7 +55,7 @@ paths:
       summary: McAfee Get a specific rule set
       description: Retrieve the full configuration of a specific rule set, including all contained rules, conditions, and actions.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/rulesetId'
       responses:
@@ -77,7 +77,7 @@ paths:
       summary: McAfee Update a rule set
       description: Update the configuration of an existing rule set, including enabling/disabling rules and modifying conditions.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/rulesetId'
       requestBody:
@@ -100,7 +100,7 @@ paths:
       summary: McAfee Delete a rule set
       description: Delete a rule set from the configuration.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/rulesetId'
       responses:
@@ -112,6 +112,23 @@ paths:
           description: Rule set not found
 components:
   schemas:
+    RuleSetDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        enabled:
+          type: boolean
+          description: Whether the rule set is enabled
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: Rules contained in this rule set
     Rule:
       type: object
       properties:
@@ -150,23 +167,6 @@ components:
         type:
           type: string
           description: Rule set type (e.g., request, response)
-    RuleSetDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Rule set identifier
-        name:
-          type: string
-          description: Rule set name
-        enabled:
-          type: boolean
-          description: Whether the rule set is enabled
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rule'
-          description: Rules contained in this rule set
   parameters:
     rulesetId:
       name: rulesetId
