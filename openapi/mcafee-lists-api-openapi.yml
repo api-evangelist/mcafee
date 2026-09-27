@@ -109,16 +109,15 @@ paths:
         '404':
           description: List not found
 components:
+  parameters:
+    listId:
+      name: listId
+      in: path
+      required: true
+      description: Unique filtering list identifier
+      schema:
+        type: string
   schemas:
-    ListEntry:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Entry value (URL, IP, etc.)
-        description:
-          type: string
-          description: Optional description for the entry
     FilterListDetail:
       type: object
       properties:
@@ -157,14 +156,15 @@ components:
         entryCount:
           type: integer
           description: Number of entries in the list
-  parameters:
-    listId:
-      name: listId
-      in: path
-      required: true
-      description: Unique filtering list identifier
-      schema:
-        type: string
+    ListEntry:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Entry value (URL, IP, etc.)
+        description:
+          type: string
+          description: Optional description for the entry
   securitySchemes:
     cookieAuth:
       type: apiKey

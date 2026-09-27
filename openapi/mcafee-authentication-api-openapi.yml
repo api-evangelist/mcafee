@@ -137,7 +137,7 @@ paths:
       description: MVISION Cloud Production
   /login:
     post:
-      operationId: login
+      operationId: postLogin
       summary: McAfee Authenticate and create session
       description: Authenticate with administrator credentials to establish a session. Returns a session cookie used for subsequent API requests.
       tags:
@@ -166,6 +166,8 @@ paths:
         '401':
           description: Authentication failed
       security: []
+      x-operation-id-source: normalized
+      x-operation-id-original: login
     servers:
     - url: https://{mwg-server}:4712/Konfigurator/REST
       description: McAfee Web Gateway Administration
@@ -175,7 +177,7 @@ paths:
           description: Hostname or IP of the MWG appliance
   /logout:
     post:
-      operationId: logout
+      operationId: postLogout
       summary: McAfee End current session
       description: Terminate the current session and invalidate the session cookie.
       tags:
@@ -187,6 +189,8 @@ paths:
           description: Not authenticated
       security:
       - cookieAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: logout
     servers:
     - url: https://{mwg-server}:4712/Konfigurator/REST
       description: McAfee Web Gateway Administration

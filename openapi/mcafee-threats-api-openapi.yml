@@ -138,14 +138,6 @@ components:
       description: Unique threat identifier
       schema:
         type: string
-    pageOffset:
-      name: page[offset]
-      in: query
-      required: false
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
     pageLimit:
       name: page[limit]
       in: query
@@ -155,6 +147,14 @@ components:
         type: integer
         default: 20
         maximum: 100
+    pageOffset:
+      name: page[offset]
+      in: query
+      required: false
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
     Threat:
       type: object
@@ -207,6 +207,18 @@ components:
             mitreAttackTechnique:
               type: string
               description: MITRE ATT&CK technique ID
+    PaginationMeta:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching records
+        pageLimit:
+          type: integer
+          description: Current page size limit
+        pageOffset:
+          type: integer
+          description: Current offset
     ThreatResponse:
       type: object
       properties:
@@ -221,18 +233,6 @@ components:
             $ref: '#/components/schemas/Threat'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    PaginationMeta:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total number of matching records
-        pageLimit:
-          type: integer
-          description: Current page size limit
-        pageOffset:
-          type: integer
-          description: Current offset
   securitySchemes:
     bearerAuth:
       type: http
