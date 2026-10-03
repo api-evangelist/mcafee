@@ -134,12 +134,6 @@ paths:
           description: Authentication failed
 components:
   schemas:
-    CommandResult:
-      type: object
-      properties:
-        result:
-          type: string
-          description: Result status message
     System:
       type: object
       properties:
@@ -180,6 +174,12 @@ components:
         EPOLeafNode.ManagedState:
           type: string
           description: Management state of the system
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
   parameters:
     outputType:
       name: :output

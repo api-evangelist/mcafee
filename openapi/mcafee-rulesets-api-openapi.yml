@@ -111,6 +111,14 @@ paths:
         '404':
           description: Rule set not found
 components:
+  parameters:
+    rulesetId:
+      name: rulesetId
+      in: path
+      required: true
+      description: Unique rule set identifier
+      schema:
+        type: string
   schemas:
     RuleSetDetail:
       type: object
@@ -129,21 +137,6 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
           description: Rules contained in this rule set
-    RuleSet:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Rule set identifier
-        name:
-          type: string
-          description: Rule set name
-        enabled:
-          type: boolean
-          description: Whether the rule set is enabled
-        type:
-          type: string
-          description: Rule set type (e.g., request, response)
     Rule:
       type: object
       properties:
@@ -167,14 +160,21 @@ components:
         criteria:
           type: string
           description: Rule matching criteria expression
-  parameters:
-    rulesetId:
-      name: rulesetId
-      in: path
-      required: true
-      description: Unique rule set identifier
-      schema:
-        type: string
+    RuleSet:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        enabled:
+          type: boolean
+          description: Whether the rule set is enabled
+        type:
+          type: string
+          description: Rule set type (e.g., request, response)
   securitySchemes:
     cookieAuth:
       type: apiKey

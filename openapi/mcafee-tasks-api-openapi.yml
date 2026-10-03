@@ -128,12 +128,6 @@ paths:
           description: Authentication failed
 components:
   schemas:
-    CommandResult:
-      type: object
-      properties:
-        result:
-          type: string
-          description: Result status message
     ClientTask:
       type: object
       properties:
@@ -171,6 +165,12 @@ components:
           type: string
           format: date-time
           description: Next scheduled run time
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
   parameters:
     outputType:
       name: :output

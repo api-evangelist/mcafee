@@ -132,12 +132,6 @@ paths:
           description: Authentication failed
 components:
   schemas:
-    CommandResult:
-      type: object
-      properties:
-        result:
-          type: string
-          description: Result status message
     Policy:
       type: object
       properties:
@@ -156,6 +150,12 @@ components:
         productName:
           type: string
           description: Display name of the product
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
   parameters:
     outputType:
       name: :output

@@ -109,32 +109,7 @@ paths:
         '404':
           description: List not found
 components:
-  parameters:
-    listId:
-      name: listId
-      in: path
-      required: true
-      description: Unique filtering list identifier
-      schema:
-        type: string
   schemas:
-    FilterListDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: List identifier
-        name:
-          type: string
-          description: List name
-        type:
-          type: string
-          description: List type
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListEntry'
-          description: List entries
     FilterList:
       type: object
       properties:
@@ -156,6 +131,23 @@ components:
         entryCount:
           type: integer
           description: Number of entries in the list
+    FilterListDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: List identifier
+        name:
+          type: string
+          description: List name
+        type:
+          type: string
+          description: List type
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListEntry'
+          description: List entries
     ListEntry:
       type: object
       properties:
@@ -165,6 +157,14 @@ components:
         description:
           type: string
           description: Optional description for the entry
+  parameters:
+    listId:
+      name: listId
+      in: path
+      required: true
+      description: Unique filtering list identifier
+      schema:
+        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey
