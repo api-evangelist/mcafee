@@ -569,6 +569,9 @@ apis:
   - type: Documentation
     url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
 common:
+  - type: CapabilityMap
+    url: capabilities/mcafee-capability-edges.yml
+    name: McAfee (Trellix) Business Capability Map
   - type: AgenticAccess
     url: agentic-access/mcafee-agentic-access.yml
   - type: DomainSecurity

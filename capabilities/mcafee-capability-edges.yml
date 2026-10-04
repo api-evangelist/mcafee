@@ -1,0 +1,119 @@
+slug: mcafee
+provider: McAfee (Trellix)
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Detections
+  spec_file: mcafee-detections-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.92
+  evidence: '''GET /edr/v2/detections  listDetections  McAfee List detections'' — platform for ''endpoint
+    detection and response (EDR) ... incident investigation'''
+  reason: EDR detection retrieval and investigation is threat detection and response.
+- tag: Threats
+  spec_file: mcafee-threats-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.92
+  evidence: GET /edr/v2/threats listThreats; PATCH /edr/v2/threats/{threatId} Update threat status; 'endpoint
+    detection and response (EDR)'
+  reason: EDR threat listing and status triage is squarely threat detection and response.
+- tag: Alarms
+  spec_file: mcafee-alarms-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: '''McAfee Get triggered alarms'', ''Acknowledge a triggered alarm'' — ESM SIEM REST API for
+    ''security monitoring and incident response'''
+  reason: SIEM alarm triage is squarely SOC/SIEM threat detection and response, not business alerting.
+- tag: Investigations
+  spec_file: mcafee-investigations-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: GET /edr/v2/investigations listInvestigations ... POST /edr/v2/remediation/actions createRemediationAction,
+    within an API for 'endpoint detection and response (EDR), threat prevention ... and incident investigation'
+  reason: Operations create and list security investigations and trigger remediation actions on endpoints
+    — squarely SOC threat detection and incident response.
+- tag: Threat Events
+  spec_file: mcafee-threat-events-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: 'GET /detectedsystem.find  Find threat events; schemas: ThreatEvent'
+  reason: Retrieval of security threat events from the ePO security management platform — threat detection
+    and response.
+- tag: Cases
+  spec_file: mcafee-cases-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: '''McAfee List incident cases'', ''Create a new case'' within the ESM SIEM API for ''security
+    monitoring and incident response'''
+  reason: Security incident case management within a SIEM maps to threat detection & response (SOC/IR),
+    not general customer case handling.
+- tag: Events
+  spec_file: mcafee-events-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: '''McAfee Execute an event query'' / ''Get query results'' against the SIEM ''event database
+    for security monitoring and incident response'''
+  reason: Querying the SIEM security event database is core SOC/SIEM detection and response work.
+- tag: Watchlists
+  spec_file: mcafee-watchlists-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: McAfee Enterprise Security Manager (ESM) SIEM REST API for managing security events, alarms,
+    watchlists ... for security monitoring and incident response
+  reason: SIEM watchlist value management used for security monitoring/detection — SOC/SIEM capability.
+- tag: Real-Time Search
+  spec_file: mcafee-real-time-search-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: POST /edr/v2/real-time-search createRealTimeSearch; GET /edr/v2/real-time-search/{searchId}/results,
+    in an 'endpoint detection and response (EDR)' API
+  reason: Live querying of endpoint state via the EDR platform is threat hunting/detection work, not a
+    generic search facility, given the EDR context.
+- tag: Lists
+  spec_file: mcafee-lists-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /lists listLists McAfee List all filtering lists; schemas FilterList, FilterListDetail,
+    ListEntry; spec for 'managing web security policies, rule sets, URL filtering lists'
+  reason: Manages URL/web filtering lists that implement web security controls, so cybersecurity management
+    at L1; the evidence does not clearly pick between security governance and security architecture sub-capabilities.
+- tag: Rulesets
+  spec_file: mcafee-rulesets-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /rulesets listRuleSets; PUT /rulesets/{rulesetId} updateRuleSet; schemas RuleSetDetail,
+    Rule, RuleSet; spec 'for managing web security policies, rule sets'
+  reason: CRUD over web-gateway security rule sets that define filtering and SSL inspection behaviour
+    — cybersecurity control management at L1; sub-capability not clearly distinguishable from the evidence.
