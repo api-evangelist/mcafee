@@ -169,10 +169,8 @@ apis:
 unitEconomics:
   - name: Cost per Managed Endpoint
     metric: billed_cost / managed_endpoints
-    target: TBD
   - name: Cost per EPS
     metric: siem_billed_cost / siem_eps
-    target: TBD
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
