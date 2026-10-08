@@ -569,6 +569,12 @@ apis:
   - type: Documentation
     url: https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide
 common:
+  - type: Plans
+    url: plans/mcafee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/mcafee-rate-limits.yml
+  - type: FinOps
+    url: finops/mcafee-finops.yml
   - type: CapabilityMap
     url: capabilities/mcafee-capability-edges.yml
     name: McAfee (Trellix) Business Capability Map
