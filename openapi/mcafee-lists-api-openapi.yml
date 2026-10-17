@@ -110,27 +110,6 @@ paths:
           description: List not found
 components:
   schemas:
-    FilterList:
-      type: object
-      properties:
-        id:
-          type: string
-          description: List identifier
-        name:
-          type: string
-          description: List name
-        type:
-          type: string
-          enum:
-          - url
-          - ip
-          - mediaType
-          - string
-          - category
-          description: Type of entries in the list
-        entryCount:
-          type: integer
-          description: Number of entries in the list
     FilterListDetail:
       type: object
       properties:
@@ -157,6 +136,27 @@ components:
         description:
           type: string
           description: Optional description for the entry
+    FilterList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: List identifier
+        name:
+          type: string
+          description: List name
+        type:
+          type: string
+          enum:
+          - url
+          - ip
+          - mediaType
+          - string
+          - category
+          description: Type of entries in the list
+        entryCount:
+          type: integer
+          description: Number of entries in the list
   parameters:
     listId:
       name: listId

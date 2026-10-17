@@ -80,15 +80,6 @@ paths:
           description: Detection not found
 components:
   schemas:
-    DetectionListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Detection'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -101,6 +92,15 @@ components:
         pageOffset:
           type: integer
           description: Current offset
+    DetectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Detection'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Detection:
       type: object
       properties:

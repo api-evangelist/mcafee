@@ -78,6 +78,12 @@ paths:
           description: Authentication failed
 components:
   schemas:
+    CommandResult:
+      type: object
+      properties:
+        result:
+          type: string
+          description: Result status message
     SystemGroup:
       type: object
       properties:
@@ -90,12 +96,6 @@ components:
         groupName:
           type: string
           description: Name of the group
-    CommandResult:
-      type: object
-      properties:
-        result:
-          type: string
-          description: Result status message
   parameters:
     outputType:
       name: :output

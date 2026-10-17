@@ -153,6 +153,32 @@ components:
         model:
           type: string
           description: Hardware or virtual model
+    PaginationMeta:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching records
+        pageLimit:
+          type: integer
+          description: Current page size limit
+        pageOffset:
+          type: integer
+          description: Current offset
+    DeviceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Device'
+    DeviceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Device:
       type: object
       properties:
@@ -197,32 +223,6 @@ components:
               items:
                 type: string
               description: Applied tags
-    PaginationMeta:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total number of matching records
-        pageLimit:
-          type: integer
-          description: Current page size limit
-        pageOffset:
-          type: integer
-          description: Current offset
-    DeviceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    DeviceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Device'
   parameters:
     pageOffset:
       name: page[offset]

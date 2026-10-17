@@ -163,15 +163,11 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    InvestigationListResponse:
+    InvestigationResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Investigation'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+          $ref: '#/components/schemas/Investigation'
     Investigation:
       type: object
       properties:
@@ -226,11 +222,15 @@ components:
         pageOffset:
           type: integer
           description: Current offset
-    InvestigationResponse:
+    InvestigationListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Investigation'
+          type: array
+          items:
+            $ref: '#/components/schemas/Investigation'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     RemediationActionResponse:
       type: object
       properties:

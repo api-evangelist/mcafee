@@ -130,16 +130,32 @@ paths:
         '404':
           description: Threat not found
 components:
+  parameters:
+    threatId:
+      name: threatId
+      in: path
+      required: true
+      description: Unique threat identifier
+      schema:
+        type: string
+    pageOffset:
+      name: page[offset]
+      in: query
+      required: false
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    pageLimit:
+      name: page[limit]
+      in: query
+      required: false
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
   schemas:
-    ThreatListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Threat'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -152,11 +168,6 @@ components:
         pageOffset:
           type: integer
           description: Current offset
-    ThreatResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Threat'
     Threat:
       type: object
       properties:
@@ -208,31 +219,20 @@ components:
             mitreAttackTechnique:
               type: string
               description: MITRE ATT&CK technique ID
-  parameters:
-    threatId:
-      name: threatId
-      in: path
-      required: true
-      description: Unique threat identifier
-      schema:
-        type: string
-    pageOffset:
-      name: page[offset]
-      in: query
-      required: false
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    pageLimit:
-      name: page[limit]
-      in: query
-      required: false
-      description: Maximum number of results to return per page
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
+    ThreatListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Threat'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    ThreatResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Threat'
   securitySchemes:
     bearerAuth:
       type: http

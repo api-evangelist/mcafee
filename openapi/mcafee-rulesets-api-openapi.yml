@@ -120,23 +120,6 @@ components:
       schema:
         type: string
   schemas:
-    RuleSetDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Rule set identifier
-        name:
-          type: string
-          description: Rule set name
-        enabled:
-          type: boolean
-          description: Whether the rule set is enabled
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rule'
-          description: Rules contained in this rule set
     Rule:
       type: object
       properties:
@@ -160,6 +143,23 @@ components:
         criteria:
           type: string
           description: Rule matching criteria expression
+    RuleSetDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        enabled:
+          type: boolean
+          description: Whether the rule set is enabled
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: Rules contained in this rule set
     RuleSet:
       type: object
       properties:
