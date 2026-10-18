@@ -39,6 +39,12 @@ specificationVersion: '0.23'
 tags:
   - Antivirus
   - Cybersecurity
+  - Endpoint Security
+  - Security
+  - Threat Intelligence
+tags_raw:
+  - Antivirus
+  - Cybersecurity
   - Endpoint Protection
   - Security
   - Threat Intelligence
