@@ -1,4 +1,4 @@
-# McAfee (Trellix) (mcafee)
+# McAfee (Trellix)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,177 +66,220 @@
 
 APIs for McAfee Enterprise security products and services. McAfee Enterprise rebranded as Trellix in 2022, but its on-premises and SaaS platforms (ePO, MVISION, ESM, Web Gateway, TIE, DXL) continue to expose REST APIs documented here for centralized security management, threat intelligence, EDR, messaging, and SIEM integration.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/mcafee/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/mcafee/refs/heads/main/apis.yml)
+**Areas:** Antivirus · Cybersecurity · Endpoint Security · Security · Threat Intelligence
 
-## Scope
+## McAfee (Trellix) on APIs.io
 
-- **Type:** Index
+Everything profiled for McAfee (Trellix) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mcafee/](https://apis.io/providers/mcafee/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (26)
 
-- Antivirus
-- Cybersecurity
-- Endpoint Protection
-- Security
-- Threat Intelligence
+- [McAfee Threat Intelligence Exchange (TIE) API](https://apis.io/apis/mcafee/mcafee-tie-api/) — Real-time threat intelligence sharing and reputation services API.
+- [McAfee Data Exchange Layer (DXL) API](https://apis.io/apis/mcafee/mcafee-dxl-api/) — Messaging fabric for real-time security data exchange and integration.
+- [McAfee (Trellix) Alarms API](https://apis.io/apis/mcafee/mcafee-alarms-api/) — Manage security alarms
+- [McAfee (Trellix) Authentication API](https://apis.io/apis/mcafee/mcafee-authentication-api/) — Session authentication and management
+- [McAfee (Trellix) Cases API](https://apis.io/apis/mcafee/mcafee-cases-api/) — Manage incident response cases
+- [McAfee (Trellix) Core API](https://apis.io/apis/mcafee/mcafee-core-api/) — Core server operations and authentication
+- [McAfee (Trellix) Data Sources API](https://apis.io/apis/mcafee/mcafee-data-sources-api/) — Manage event data sources
+- [McAfee (Trellix) Detections API](https://apis.io/apis/mcafee/mcafee-detections-api/) — EDR detection events and alerts
+- [McAfee (Trellix) Devices API](https://apis.io/apis/mcafee/mcafee-devices-api/) — Manage ESM device hierarchy
+- [McAfee (Trellix) Events API](https://apis.io/apis/mcafee/mcafee-events-api/) — Query and retrieve security events
+- [McAfee (Trellix) File Operations API](https://apis.io/apis/mcafee/mcafee-file-operations-api/) — Import and export configuration files
+- [McAfee (Trellix) Investigations API](https://apis.io/apis/mcafee/mcafee-investigations-api/) — Threat investigation workflows and actions
+- [McAfee (Trellix) Lists API](https://apis.io/apis/mcafee/mcafee-lists-api/) — Manage URL and IP lists used in filtering
+- [McAfee (Trellix) Monitoring API](https://apis.io/apis/mcafee/mcafee-monitoring-api/) — Appliance health and traffic monitoring
+- [McAfee (Trellix) Policies API](https://apis.io/apis/mcafee/mcafee-policies-api/) — Manage and assign security policies
+- [McAfee (Trellix) Policy Configuration API](https://apis.io/apis/mcafee/mcafee-policy-configuration-api/) — Manage proxy and policy settings
+- [McAfee (Trellix) Queries API](https://apis.io/apis/mcafee/mcafee-queries-api/) — Execute ePO queries and retrieve results
+- [McAfee (Trellix) Real-Time Search API](https://apis.io/apis/mcafee/mcafee-real-time-search-api/) — Real-time data collection from endpoints
+- [McAfee (Trellix) Software API](https://apis.io/apis/mcafee/mcafee-software-api/) — Manage software repositories and packages
+- [McAfee (Trellix) System Groups API](https://apis.io/apis/mcafee/mcafee-system-groups-api/) — Manage the ePO System Tree groups
+- [McAfee (Trellix) Systems API](https://apis.io/apis/mcafee/mcafee-systems-api/) — Manage endpoints and systems registered in ePO
+- [McAfee (Trellix) Tasks API](https://apis.io/apis/mcafee/mcafee-tasks-api/) — Manage client tasks and server tasks
+- [McAfee (Trellix) Threat Events API](https://apis.io/apis/mcafee/mcafee-threat-events-api/) — Retrieve threat event data from managed endpoints
+- [McAfee (Trellix) Threats API](https://apis.io/apis/mcafee/mcafee-threats-api/) — Retrieve and manage detected threats
+- [McAfee (Trellix) Watchlists API](https://apis.io/apis/mcafee/mcafee-watchlists-api/) — Manage security watchlists
+- [McAfee (Trellix) Rulesets API](https://apis.io/apis/mcafee/mcafee-rulesets-api/) — Manage web security rule sets
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-20
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### McAfee ePO API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-McAfee ePolicy Orchestrator (ePO) REST API for centralized security management, including system management, policy assignment, task scheduling, query execution, and threat event retrieval across managed endpoints.
+- [Mcafee Agentic Access](https://apis.io/agentic-access/mcafee/mcafee-agentic-access/)
 
-- **Human URL:** [https://www.trellix.com/products/epo/](https://www.trellix.com/products/epo/)
-- **Base URL:** `https://your-epo-server:8443/remote`
+#### JSON Schema (42)
 
-#### Tags
+The data models the API reads and writes.
 
-- Endpoint Management
-- Policy Orchestrator
-- Security Management
+- [ApiCommand](https://apis.io/schemas/mcafee/mcafee-apicommand/)
+- [ApplianceStatus](https://apis.io/schemas/mcafee/mcafee-appliancestatus/)
+- [Case](https://apis.io/schemas/mcafee/mcafee-case/)
+- [ClientTask](https://apis.io/schemas/mcafee/mcafee-clienttask/)
+- [CommandResult](https://apis.io/schemas/mcafee/mcafee-commandresult/)
+- [DataSource](https://apis.io/schemas/mcafee/mcafee-datasource/)
+- [Detection](https://apis.io/schemas/mcafee/mcafee-detection/)
+- [DetectionListResponse](https://apis.io/schemas/mcafee/mcafee-detectionlistresponse/)
+- [DetectionResponse](https://apis.io/schemas/mcafee/mcafee-detectionresponse/)
+- [Device](https://apis.io/schemas/mcafee/mcafee-device/)
+- [DeviceListResponse](https://apis.io/schemas/mcafee/mcafee-devicelistresponse/)
+- [DeviceResponse](https://apis.io/schemas/mcafee/mcafee-deviceresponse/)
+- [McAfee Managed Endpoint](https://apis.io/schemas/mcafee/mcafee-endpoint/)
+- [EsmDevice](https://apis.io/schemas/mcafee/mcafee-esmdevice/)
+- [FilterList](https://apis.io/schemas/mcafee/mcafee-filterlist/)
+- [FilterListDetail](https://apis.io/schemas/mcafee/mcafee-filterlistdetail/)
+- [Investigation](https://apis.io/schemas/mcafee/mcafee-investigation/)
+- [InvestigationListResponse](https://apis.io/schemas/mcafee/mcafee-investigationlistresponse/)
+- [InvestigationResponse](https://apis.io/schemas/mcafee/mcafee-investigationresponse/)
+- [ListEntry](https://apis.io/schemas/mcafee/mcafee-listentry/)
+- [LoginResponse](https://apis.io/schemas/mcafee/mcafee-loginresponse/)
+- [PaginationMeta](https://apis.io/schemas/mcafee/mcafee-paginationmeta/)
+- [Policy](https://apis.io/schemas/mcafee/mcafee-policy/)
+- [RealTimeSearchResponse](https://apis.io/schemas/mcafee/mcafee-realtimesearchresponse/)
+- [RemediationActionResponse](https://apis.io/schemas/mcafee/mcafee-remediationactionresponse/)
+- …and 17 more published on APIs.io
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide)
-- [Authentication](https://docs.trellix.com/bundle/epolicy-orchestrator-web-api-reference-guide)
-- [OpenAPI](openapi/mcafee-epo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mcafee-epo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-epo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### McAfee MVISION API
+- [Mcafee Structure](https://apis.io/json-structure/mcafee/mcafee-structure/)
 
-Cloud-native security platform API for endpoint detection and response (EDR), threat prevention, device management, and incident investigation.
+#### JSON-LD (1)
 
-- **Human URL:** [https://www.trellix.com/](https://www.trellix.com/)
-- **Base URL:** `https://api.mvision.mcafee.com`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Mcafee Context](https://apis.io/jsonld/mcafee/mcafee-context/)
 
-- Cloud Security
-- EDR
-- MVISION
-- Threat Detection
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://developer.mcafee.com/)
-- [OpenAPI](openapi/mcafee-mvision-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mcafee-mvision.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-mvision.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [McAfee (Trellix) Domain Vocabulary](https://apis.io/vocabularies/mcafee/mcafee-vocabulary/)
 
-### McAfee Threat Intelligence Exchange (TIE) API
+#### Collections (28)
 
-Real-time threat intelligence sharing and reputation services API.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://www.trellix.com/](https://www.trellix.com/)
-- **Base URL:** `https://your-tie-server/api`
+- [McAfee ePO Alarms API](https://apis.io/collections/mcafee/open-mcafee-alarms-api/)
+- [McAfee ePO Alarms Authentication API](https://apis.io/collections/mcafee/open-mcafee-authentication-api/)
+- [McAfee ePO Alarms Cases API](https://apis.io/collections/mcafee/open-mcafee-cases-api/)
+- [McAfee ePO Alarms Core API](https://apis.io/collections/mcafee/open-mcafee-core-api/)
+- [McAfee ePO Alarms Data Sources API](https://apis.io/collections/mcafee/open-mcafee-data-sources-api/)
+- [McAfee ePO Alarms Detections API](https://apis.io/collections/mcafee/open-mcafee-detections-api/)
+- [McAfee ePO Alarms Devices API](https://apis.io/collections/mcafee/open-mcafee-devices-api/)
+- [McAfee ePO API](https://apis.io/collections/mcafee/open-mcafee-epo/)
+- [McAfee ESM API](https://apis.io/collections/mcafee/open-mcafee-esm/)
+- [McAfee ePO Alarms Events API](https://apis.io/collections/mcafee/open-mcafee-events-api/)
+- [McAfee ePO Alarms File Operations API](https://apis.io/collections/mcafee/open-mcafee-file-operations-api/)
+- [McAfee ePO Alarms Investigations API](https://apis.io/collections/mcafee/open-mcafee-investigations-api/)
+- [McAfee ePO Alarms Lists API](https://apis.io/collections/mcafee/open-mcafee-lists-api/)
+- [McAfee ePO Alarms Monitoring API](https://apis.io/collections/mcafee/open-mcafee-monitoring-api/)
+- [McAfee MVISION API](https://apis.io/collections/mcafee/open-mcafee-mvision/)
+- [McAfee ePO Alarms Policies API](https://apis.io/collections/mcafee/open-mcafee-policies-api/)
+- [McAfee ePO Alarms Policy Configuration API](https://apis.io/collections/mcafee/open-mcafee-policy-configuration-api/)
+- [McAfee ePO Alarms Queries API](https://apis.io/collections/mcafee/open-mcafee-queries-api/)
+- [McAfee ePO Alarms Real-Time Search API](https://apis.io/collections/mcafee/open-mcafee-real-time-search-api/)
+- [McAfee ePO Alarms Rule Sets API](https://apis.io/collections/mcafee/open-mcafee-rule-sets-api/)
+- [McAfee ePO Alarms Software API](https://apis.io/collections/mcafee/open-mcafee-software-api/)
+- [McAfee ePO Alarms System Groups API](https://apis.io/collections/mcafee/open-mcafee-system-groups-api/)
+- [McAfee ePO Alarms Systems API](https://apis.io/collections/mcafee/open-mcafee-systems-api/)
+- [McAfee ePO Alarms Tasks API](https://apis.io/collections/mcafee/open-mcafee-tasks-api/)
+- [McAfee ePO Alarms Threat Events API](https://apis.io/collections/mcafee/open-mcafee-threat-events-api/)
+- …and 3 more published on APIs.io
 
-#### Tags
+#### Governance rules (1)
 
-- Malware Analysis
-- Reputation
-- Threat Intelligence
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [McAfee (Trellix) — jsonschema rules](https://apis.io/rules/mcafee/mcafee-jsonschema-spectral-rules/)
 
-- [Documentation](https://opendxl.github.io/opendxl-tie-client-python/)
-- [SDK](https://github.com/opendxl/opendxl-tie-client-python)
-- [Postman Collection](collections/mcafee-epo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-epo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/mcafee-esm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-esm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/mcafee-mvision.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-mvision.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/mcafee-web-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-web-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### McAfee Data Exchange Layer (DXL) API
+Authentication, trust centre, and vulnerability disclosure.
 
-Messaging fabric for real-time security data exchange and integration.
+- [Mcafee Authentication](https://apis.io/security/mcafee/mcafee-authentication/)
+- [Mcafee Domain Security](https://apis.io/security/mcafee/mcafee-domain-security/)
 
-- **Human URL:** [https://www.trellix.com/](https://www.trellix.com/)
-- **Base URL:** `https://your-dxl-broker`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Data Exchange
-- Fabric
-- Integration
-- Messaging
+- [Mcafee Plans Pricing](https://apis.io/plans/mcafee/mcafee-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://opendxl.github.io/opendxl-client-python/)
-- [Git Hub](https://github.com/opendxl)
-- [S D K -  Python](https://github.com/opendxl/opendxl-client-python)
-- [S D K -  Java Script](https://github.com/opendxl/opendxl-client-javascript)
-- [Postman Collection](collections/mcafee-epo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-epo.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/mcafee-esm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-esm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/mcafee-mvision.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-mvision.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/mcafee-web-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-web-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### McAfee Web Gateway API
+- [Mcafee Rate Limits](https://apis.io/rate-limits/mcafee/mcafee-rate-limits/)
 
-Web security gateway REST API for managing rule sets, URL filtering lists, SSL inspection settings, and monitoring proxy traffic and appliance health.
+#### FinOps (1)
 
-- **Human URL:** [https://www.trellix.com/](https://www.trellix.com/)
-- **Base URL:** `https://your-mwg-server/Konfigurator/REST`
+What the API costs to run, by operation.
 
-#### Tags
+- [Mcafee Finops](https://apis.io/finops/mcafee/mcafee-finops/)
 
-- Proxy
-- Web Gateway
-- Web Security
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://docs.trellix.com/bundle/web-gateway-product-guide)
-- [OpenAPI](openapi/mcafee-web-gateway-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mcafee-web-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-web-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### McAfee ESM API
-
-Enterprise Security Manager SIEM REST API for managing security events, alarms, watchlists, data sources, cases, and executing queries against the event database.
-
-- **Human URL:** [https://www.trellix.com/](https://www.trellix.com/)
-- **Base URL:** `https://your-esm-server/rs/esm`
-
-#### Tags
-
-- Log Management
-- Security Events
-- SIEM
-
-#### Properties
-
-- [Documentation](https://docs.trellix.com/bundle/enterprise-security-manager-api-reference-guide)
-- [OpenAPI](openapi/mcafee-esm-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mcafee-esm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mcafee-esm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/mcafee)
-- [Developer  Portal](https://developer.mcafee.com)
 - [Website](https://www.trellix.com/)
 - [Support](https://www.trellix.com/support/)
-- [Terms of Service](https://www.trellix.com/about/legal/)
-- [Privacy Policy](https://www.trellix.com/about/legal/privacy/)
-- [JSON-LD](json-ld/mcafee-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/mcafee-threat-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/mcafee-endpoint-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Terms of service](https://www.trellix.com/about/legal/)
+- [Privacy policy](https://www.trellix.com/about/legal/privacy/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 54.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 26.3 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mcafee/](https://apis.io/providers/mcafee/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for McAfee (Trellix): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mcafee/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
